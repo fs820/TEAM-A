@@ -446,16 +446,16 @@ void GameCamera(int nNumber)
 	{
 		for (int nCount = 0; nCount < CAMERA_XNUM * CAMERA_YNUM; nCount++)
 		{
-			g_camera[nCount].posV = D3DXVECTOR3(0.0f, 120.0f, START_Z - 300.0f);
-			g_camera[nCount].posR = D3DXVECTOR3(0.0f, 0.0f, START_Z);
+			g_camera[nCount].posV = D3DXVECTOR3(0.0f, 120.0f, -300.0f);
+			g_camera[nCount].posR = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 			g_camera[nCount].fDistance = sqrtf((g_camera[nCount].posR.x - g_camera[nCount].posV.x) * (g_camera[nCount].posR.x - g_camera[nCount].posV.x) + (g_camera[nCount].posR.y - g_camera[nCount].posV.y) * (g_camera[nCount].posR.y - g_camera[nCount].posV.y) + (g_camera[nCount].posR.z - g_camera[nCount].posV.z) * (g_camera[nCount].posR.z - g_camera[nCount].posV.z));
 			g_camera[nCount].fDistanceMax = CAMERA_DISTANCE_MAX;
 		}
 		return;
 	}
 
-	g_camera[nNumber].posV = D3DXVECTOR3(0.0f, 120.0f, START_Z - 300.0f);
-	g_camera[nNumber].posR = D3DXVECTOR3(0.0f, 0.0f, START_Z);
+	g_camera[nNumber].posV = D3DXVECTOR3(0.0f, 120.0f, -300.0f);
+	g_camera[nNumber].posR = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 	g_camera[nNumber].fDistance = sqrtf((g_camera[nNumber].posR.x - g_camera[nNumber].posV.x) * (g_camera[nNumber].posR.x - g_camera[nNumber].posV.x) + (g_camera[nNumber].posR.y - g_camera[nNumber].posV.y) * (g_camera[nNumber].posR.y - g_camera[nNumber].posV.y) + (g_camera[nNumber].posR.z - g_camera[nNumber].posV.z) * (g_camera[nNumber].posR.z - g_camera[nNumber].posV.z));
 	g_camera[nNumber].fDistanceMax = CAMERA_DISTANCE_MAX;
 }

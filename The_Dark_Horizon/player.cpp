@@ -643,7 +643,7 @@ void UpdatePlayer(void)
 		if (GetKeyboradTrigger(DIK_RETURN) == true || GetMouseTrigger(MOUSE_LEFT) == true || GetJoykeyTrigger(JOYKEY_X, CONTROLLER_1) == true)
 		{
 			//g_Player.motionType = MOTIONTYPE_ACTION;
-			SetBullet(g_Player.pos + g_Player.aModel[0].pos, D3DXVECTOR3(sinf(g_Player.rot.y + g_Player.aModel[0].rot.y + g_Player.aModel[2].rot.y + g_Player.aModel[3].rot.y) * cosf(g_Player.rot.x + g_Player.aModel[0].rot.x + g_Player.aModel[2].rot.x + g_Player.aModel[3].rot.x), sinf(g_Player.rot.x + g_Player.aModel[0].rot.x + g_Player.aModel[2].rot.x + g_Player.aModel[3].rot.x), cosf(g_Player.rot.y + g_Player.aModel[0].rot.y + g_Player.aModel[2].rot.y + g_Player.aModel[3].rot.y) * cosf(g_Player.rot.x + g_Player.aModel[0].rot.x + g_Player.aModel[2].rot.x + g_Player.aModel[3].rot.x)), g_Player.aModel[3].scale);
+			SetBullet(g_Player.pos + g_Player.aModel[0].pos + D3DXVECTOR3(0.0f, g_Player.aModel[2].pos.y, 0.0f), -D3DXVECTOR3(sinf(g_Player.rot.y) * cosf(g_Player.rot.x), sinf(g_Player.rot.x), cosf(g_Player.rot.y) * cosf(g_Player.rot.x)), g_Player.aModel[3].scale);
 		}
 
 		if (!IsXInputControllerConnected(CONTROLLER_1) && IsDirectInputControllerConnected(CONTROLLER_1))
@@ -745,7 +745,7 @@ void UpdatePlayer(void)
 			if (GetdJoykeyTrigger(ELEKEY_X, CONTROLLER_1) == true)
 			{
 				//g_Player.motionType = MOTIONTYPE_ACTION;
-				SetBullet(g_Player.pos + g_Player.aModel[0].pos, D3DXVECTOR3(sinf(g_Player.rot.y + g_Player.aModel[0].rot.y + g_Player.aModel[2].rot.y + g_Player.aModel[3].rot.y)* cosf(g_Player.rot.x + g_Player.aModel[0].rot.x + g_Player.aModel[2].rot.x + g_Player.aModel[3].rot.x), sinf(g_Player.rot.x + g_Player.aModel[0].rot.x + g_Player.aModel[2].rot.x + g_Player.aModel[3].rot.x), cosf(g_Player.rot.y + g_Player.aModel[0].rot.y + g_Player.aModel[2].rot.y + g_Player.aModel[3].rot.y)* cosf(g_Player.rot.x + g_Player.aModel[0].rot.x + g_Player.aModel[2].rot.x + g_Player.aModel[3].rot.x)), g_Player.aModel[3].scale);
+				SetBullet(g_Player.pos + g_Player.aModel[0].pos + D3DXVECTOR3(0.0f, g_Player.aModel[2].pos.y, 0.0f), -D3DXVECTOR3(sinf(g_Player.rot.y) * cosf(g_Player.rot.x), sinf(g_Player.rot.x), cosf(g_Player.rot.y) * cosf(g_Player.rot.x)), g_Player.aModel[3].scale);
 			}
 		}
 		else if (!strcmp(ControllerName(CONTROLLER_1), PS_CON))
@@ -763,7 +763,7 @@ void UpdatePlayer(void)
 			if (GetdJoykeyTrigger(PSKEY_SQ, CONTROLLER_1) == true)
 			{
 				//g_Player.motionType = MOTIONTYPE_ACTION;
-				SetBullet(g_Player.pos + g_Player.aModel[0].pos, D3DXVECTOR3(sinf(g_Player.rot.y + g_Player.aModel[0].rot.y + g_Player.aModel[2].rot.y + g_Player.aModel[3].rot.y)* cosf(g_Player.rot.x + g_Player.aModel[0].rot.x + g_Player.aModel[2].rot.x + g_Player.aModel[3].rot.x), sinf(g_Player.rot.x + g_Player.aModel[0].rot.x + g_Player.aModel[2].rot.x + g_Player.aModel[3].rot.x), cosf(g_Player.rot.y + g_Player.aModel[0].rot.y + g_Player.aModel[2].rot.y + g_Player.aModel[3].rot.y)* cosf(g_Player.rot.x + g_Player.aModel[0].rot.x + g_Player.aModel[2].rot.x + g_Player.aModel[3].rot.x)), g_Player.aModel[3].scale);
+				SetBullet(g_Player.pos + g_Player.aModel[0].pos + D3DXVECTOR3(0.0f, g_Player.aModel[2].pos.y, 0.0f), -D3DXVECTOR3(sinf(g_Player.rot.y) * cosf(g_Player.rot.x), sinf(g_Player.rot.x), cosf(g_Player.rot.y) * cosf(g_Player.rot.x)), g_Player.aModel[3].scale);
 			}
 		}
 		else if (!strcmp(ControllerName(CONTROLLER_1), NIN_CON))
@@ -781,7 +781,7 @@ void UpdatePlayer(void)
 			if (GetdJoykeyTrigger(NINKEY_Y, CONTROLLER_1) == true)
 			{
 				//g_Player.motionType = MOTIONTYPE_ACTION;
-				SetBullet(g_Player.pos + g_Player.aModel[0].pos, D3DXVECTOR3(sinf(g_Player.rot.y + g_Player.aModel[0].rot.y + g_Player.aModel[2].rot.y + g_Player.aModel[3].rot.y)* cosf(g_Player.rot.x + g_Player.aModel[0].rot.x + g_Player.aModel[2].rot.x + g_Player.aModel[3].rot.x), sinf(g_Player.rot.x + g_Player.aModel[0].rot.x + g_Player.aModel[2].rot.x + g_Player.aModel[3].rot.x), cosf(g_Player.rot.y + g_Player.aModel[0].rot.y + g_Player.aModel[2].rot.y + g_Player.aModel[3].rot.y)* cosf(g_Player.rot.x + g_Player.aModel[0].rot.x + g_Player.aModel[2].rot.x + g_Player.aModel[3].rot.x)), g_Player.aModel[3].scale);
+				SetBullet(g_Player.pos + g_Player.aModel[0].pos + D3DXVECTOR3(0.0f, g_Player.aModel[2].pos.y, 0.0f), -D3DXVECTOR3(sinf(g_Player.rot.y) * cosf(g_Player.rot.x), sinf(g_Player.rot.x), cosf(g_Player.rot.y) * cosf(g_Player.rot.x)), g_Player.aModel[3].scale);
 			}
 		}
 		else if (!IsXInputControllerConnected(CONTROLLER_1) && IsDirectInputControllerConnected(CONTROLLER_1))
@@ -799,7 +799,7 @@ void UpdatePlayer(void)
 			if (GetdJoykeyTrigger(DKEY_X, CONTROLLER_1) == true)
 			{
 				//g_Player.motionType = MOTIONTYPE_ACTION;
-				SetBullet(g_Player.pos + g_Player.aModel[0].pos, D3DXVECTOR3(sinf(g_Player.rot.y + g_Player.aModel[0].rot.y + g_Player.aModel[2].rot.y + g_Player.aModel[3].rot.y)* cosf(g_Player.rot.x + g_Player.aModel[0].rot.x + g_Player.aModel[2].rot.x + g_Player.aModel[3].rot.x), sinf(g_Player.rot.x + g_Player.aModel[0].rot.x + g_Player.aModel[2].rot.x + g_Player.aModel[3].rot.x), cosf(g_Player.rot.y + g_Player.aModel[0].rot.y + g_Player.aModel[2].rot.y + g_Player.aModel[3].rot.y)* cosf(g_Player.rot.x + g_Player.aModel[0].rot.x + g_Player.aModel[2].rot.x + g_Player.aModel[3].rot.x)), g_Player.aModel[3].scale);
+				SetBullet(g_Player.pos + g_Player.aModel[0].pos + D3DXVECTOR3(0.0f, g_Player.aModel[2].pos.y, 0.0f), -D3DXVECTOR3(sinf(g_Player.rot.y) * cosf(g_Player.rot.x), sinf(g_Player.rot.x), cosf(g_Player.rot.y) * cosf(g_Player.rot.x)), g_Player.aModel[3].scale);
 			}
 		}
 
@@ -848,7 +848,7 @@ void UpdatePlayer(void)
 			g_Player.pos.z = GAME_WALL;
 		}
 
-		if (sqrtf(g_Player.move.x * g_Player.move.x + g_Player.move.z * g_Player.move.z) < 1.0f && g_Player.motionType == MOTIONTYPE_MOVE)
+		if (sqrtf(g_Player.move.x * g_Player.move.x + g_Player.move.z * g_Player.move.z) < 0.1f && g_Player.motionType == MOTIONTYPE_MOVE)
 		{
 			g_Player.move.x = 0.0f;
 			g_Player.move.z = 0.0f;
@@ -918,11 +918,6 @@ void UpdatePlayer(void)
 		{
 			g_Player.rot.x += D3DX_PI * 2.0f;
 		}
-
-		//スケール制限
-		g_Player.scale.x = max(SCALE_MIN, min(SCALE_MAX, g_Player.scale.x));
-		g_Player.scale.y = max(SCALE_MIN, min(SCALE_MAX, g_Player.scale.y));
-		g_Player.scale.z = max(SCALE_MIN, min(SCALE_MAX, g_Player.scale.z));
 
 		int nCntModel;
 		//パーツ分回す
