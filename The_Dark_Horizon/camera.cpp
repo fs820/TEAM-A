@@ -8,6 +8,7 @@
 #include"main.h"
 #include"camera.h"
 #include"player.h"
+#include"editplayer.h"
 #include"input.h"
 #include"pause.h"
 
@@ -35,6 +36,7 @@ void InitCamera(void)
 		g_camera[nCount].viewport.Y = (nCount / CAMERA_XNUM) * SCREEN_HEIGHT / CAMERA_YNUM;
 		g_camera[nCount].viewport.Width = SCREEN_WIDTH / CAMERA_XNUM;
 		g_camera[nCount].viewport.Height = SCREEN_HEIGHT / CAMERA_YNUM;
+		g_camera[nCount].Master = NONE;
 	}
 }
 
@@ -159,139 +161,14 @@ void UpdateCamera(void)
 		else if (!bPause())
 		{
 			Player* pPlayer = GetPlayer();
+			EDITPLAYER* pEditPlayer = GetEditPlayer();
 			float* pStick;
 			float* pMouseMove;
 			float Oldrot = g_camera[nCount].rot.y;
-			//X
-			if (IsXInputControllerConnected(CONTROLLER_1))
-			{
-				//右スティック処理
-				pStick = GetJoyStick(STICK_RIGHT, CONTROLLER_1);
-				if (sqrtf(*pStick * *pStick + *(pStick + 1) * *(pStick + 1)) >= STICK_DED)
-				{
-					g_camera[nCount].rot.y += cosf(atan2f(*(pStick + 1), *pStick)) * CAMERA_ROT_SPEED;
-					g_camera[nCount].rot.x += sinf(atan2f(*(pStick + 1), *pStick)) * CAMERA_ROT_SPEED;
-				}
-			}
-			//d
-			else if (IsDirectInputControllerConnected(CONTROLLER_1))
-			{
-				//右スティック処理
-				pStick = GetdJoyStick(STICK_RIGHT, CONTROLLER_1);
-				if (sqrtf(*pStick * *pStick + *(pStick + 1) * *(pStick + 1)) >= STICK_DED)
-				{
-					g_camera[nCount].rot.y += cosf(atan2f(*(pStick + 1), *pStick)) * CAMERA_ROT_SPEED;
-					g_camera[nCount].rot.x += sinf(-atan2f(*(pStick + 1), *pStick)) * CAMERA_ROT_SPEED;
-				}
-			}
 
-			pMouseMove = GetMouseMove();
-			if (sqrtf(*pMouseMove * *pMouseMove + *(pMouseMove + 1) * *(pMouseMove + 1)) >= STICK_DED)
+			switch (g_camera[nCount].Master)
 			{
-				g_camera[nCount].rot.y += cosf(atan2f(*(pMouseMove + 1), *pMouseMove)) * CAMERA_ROT_SPEED;
-				g_camera[nCount].rot.x += sinf(-atan2f(*(pMouseMove + 1), *pMouseMove)) * CAMERA_ROT_SPEED;
-			}
-
-			if (GetKeyboradPress(DIK_DOWN))
-			{
-				g_camera[nCount].rot.x -= CAMERA_ROT_SPEED;
-			}
-
-			if (GetKeyboradPress(DIK_UP))
-			{
-				g_camera[nCount].rot.x += CAMERA_ROT_SPEED;
-			}
-
-			if (GetKeyboradPress(DIK_LEFT))
-			{
-				g_camera[nCount].rot.y -= CAMERA_ROT_SPEED;
-			}
-
-			if (GetKeyboradPress(DIK_RIGHT))
-			{
-				g_camera[nCount].rot.y += CAMERA_ROT_SPEED;
-			}
-
-			if (pPlayer->move.x == 0.0f && pPlayer->move.z == 0.0f && Oldrot == g_camera[nCount].rot.y)
-			{
-				static int nCnt = 0;
-				float rot = g_camera[nCount].rot.y;
-				nCnt++;
-				if (nCnt % 300 < 50)
-				{
-					rot = pPlayer->Destrot.y - D3DX_PI;
-				}
-				//正規化
-				if (rot - g_camera[nCount].rot.y > D3DX_PI)
-				{
-					rot = g_camera[nCount].rot.y + ((rot - g_camera[nCount].rot.y) - D3DX_PI * 2.0f);
-				}
-				else if (rot - g_camera[nCount].rot.y < -D3DX_PI)
-				{
-					rot = g_camera[nCount].rot.y + ((rot - g_camera[nCount].rot.y) + D3DX_PI * 2.0f);
-				}
-
-				g_camera[nCount].rot.y += (rot - g_camera[nCount].rot.y) * CAMERA_INA;
-			}
-
-			if (!GetKeyboradPress(DIK_R) && !GetMousePress(MOUSE_B1))
-			{
-				//スケール制限
-				g_camera[nCount].rot.x = max(-D3DX_PI * CAMERA_ROTX - D3DX_PI * CAMERA_ROTX, min(D3DX_PI * CAMERA_ROTX - D3DX_PI * CAMERA_ROTX - D3DX_PI * CAMERA_ROTX_GRA, g_camera[nCount].rot.x));
-			}
-
-			//正規化
-			if (g_camera[nCount].rot.x > D3DX_PI)
-			{
-				g_camera[nCount].rot.x -= D3DX_PI * 2.0f;
-			}
-			else if (g_camera[nCount].rot.x < -D3DX_PI)
-			{
-				g_camera[nCount].rot.x += D3DX_PI * 2.0f;
-			}
-
-			//正規化
-			if (g_camera[nCount].rot.y > D3DX_PI)
-			{
-				g_camera[nCount].rot.y -= D3DX_PI * 2.0f;
-			}
-			else if (g_camera[nCount].rot.y < -D3DX_PI)
-			{
-				g_camera[nCount].rot.y += D3DX_PI * 2.0f;
-			}
-
-			if (GetKeyboradPress(DIK_R) || GetMousePress(MOUSE_B1))
-			{
-				//スケール制限
-				g_camera[nCount].rot.x = max(-D3DX_PI * CAMERA_ROTX - D3DX_PI * CAMERA_ROTX * 0.5f, min(D3DX_PI * CAMERA_ROTX - D3DX_PI * CAMERA_ROTX * 0.5f, g_camera[nCount].rot.x));
-				g_camera[nCount].posV = pPlayer->pos;
-				g_camera[nCount].posV.y += pPlayer->aModel[0].pos.y + pPlayer->aModel[1].pos.y;
-				g_camera[nCount].posR.x = g_camera[nCount].posV.x + sinf(g_camera[nCount].rot.y) * cosf(g_camera[nCount].rot.x) * g_camera[nCount].fDistance;
-				g_camera[nCount].posR.y = g_camera[nCount].posV.y + sinf(g_camera[nCount].rot.x) * g_camera[nCount].fDistance;
-				g_camera[nCount].posR.z = g_camera[nCount].posV.z + cosf(g_camera[nCount].rot.y) * cosf(g_camera[nCount].rot.x) * g_camera[nCount].fDistance;
-			}
-			else
-			{
-				Player* pPlayer = GetPlayer();
-				g_camera[nCount].posRDest.x = pPlayer->pos.x + sinf(atan2f(pPlayer->move.z, pPlayer->move.x)) * SPEED;
-				g_camera[nCount].posRDest.y = pPlayer->pos.y + cosf(g_camera[nCount].rot.x) * SPEED;
-				g_camera[nCount].posRDest.z = pPlayer->pos.z + cosf(atan2f(pPlayer->move.z, pPlayer->move.x)) * SPEED;
-				g_camera[nCount].posVDest.x = pPlayer->pos.x + sinf(g_camera[nCount].rot.y - D3DX_PI) * cosf(g_camera[nCount].rot.x) * g_camera[nCount].fDistance;
-				g_camera[nCount].posVDest.y = pPlayer->pos.y + sinf(g_camera[nCount].rot.x - D3DX_PI) * g_camera[nCount].fDistance;
-				g_camera[nCount].posVDest.z = pPlayer->pos.z + cosf(g_camera[nCount].rot.y - D3DX_PI) * cosf(g_camera[nCount].rot.x) * g_camera[nCount].fDistance;
-
-				g_camera[nCount].posR.x += (g_camera[nCount].posRDest.x - g_camera[nCount].posR.x) * CAMERA_INA;
-				g_camera[nCount].posR.y += (g_camera[nCount].posRDest.y - g_camera[nCount].posR.y) * CAMERA_INA;
-				g_camera[nCount].posR.z += (g_camera[nCount].posRDest.z - g_camera[nCount].posR.z) * CAMERA_INA;
-				g_camera[nCount].posV.x += (g_camera[nCount].posVDest.x - g_camera[nCount].posV.x) * CAMERA_INA;
-				g_camera[nCount].posV.y += (g_camera[nCount].posVDest.y - g_camera[nCount].posV.y) * CAMERA_INA;
-				g_camera[nCount].posV.z += (g_camera[nCount].posVDest.z - g_camera[nCount].posV.z) * CAMERA_INA;
-			}
-
-			if (GetKeyboradPress(DIK_P) || GetMousePress(MOUSE_B2) == true || GetJoykeyPress(JOYKEY_X, CONTROLLER_1) == true)
-			{
-				float* pStick;
-				float* pMouseMove;
+			case PLAYER:
 				//X
 				if (IsXInputControllerConnected(CONTROLLER_1))
 				{
@@ -299,8 +176,8 @@ void UpdateCamera(void)
 					pStick = GetJoyStick(STICK_RIGHT, CONTROLLER_1);
 					if (sqrtf(*pStick * *pStick + *(pStick + 1) * *(pStick + 1)) >= STICK_DED)
 					{
-						g_camera[nCount].posV.x += sinf(g_camera[nCount].rot.y - D3DX_PI * 0.5f + atan2f(*(pStick + 1), -*pStick)) * CAMERA_SPEED;
-						g_camera[nCount].posV.z += cosf(g_camera[nCount].rot.y - D3DX_PI * 0.5f + atan2f(*(pStick + 1), -*pStick)) * CAMERA_SPEED;
+						g_camera[nCount].rot.y += cosf(atan2f(*(pStick + 1), *pStick)) * CAMERA_ROT_SPEED;
+						g_camera[nCount].rot.x += sinf(atan2f(*(pStick + 1), *pStick)) * CAMERA_ROT_SPEED;
 					}
 				}
 				//d
@@ -310,55 +187,387 @@ void UpdateCamera(void)
 					pStick = GetdJoyStick(STICK_RIGHT, CONTROLLER_1);
 					if (sqrtf(*pStick * *pStick + *(pStick + 1) * *(pStick + 1)) >= STICK_DED)
 					{
-						g_camera[nCount].posV.x += sinf(g_camera[nCount].rot.y - D3DX_PI * 0.5f + atan2f(-*(pStick + 1), -*pStick)) * CAMERA_SPEED;
-						g_camera[nCount].posV.z += cosf(g_camera[nCount].rot.y - D3DX_PI * 0.5f + atan2f(-*(pStick + 1), -*pStick)) * CAMERA_SPEED;
+						g_camera[nCount].rot.y += cosf(atan2f(*(pStick + 1), *pStick)) * CAMERA_ROT_SPEED;
+						g_camera[nCount].rot.x += sinf(-atan2f(*(pStick + 1), *pStick)) * CAMERA_ROT_SPEED;
 					}
 				}
 
 				pMouseMove = GetMouseMove();
 				if (sqrtf(*pMouseMove * *pMouseMove + *(pMouseMove + 1) * *(pMouseMove + 1)) >= STICK_DED)
 				{
-					g_camera[nCount].posV.x -= sinf(g_camera[nCount].rot.y - D3DX_PI * 0.5f + atan2f(*(pMouseMove + 1), *pMouseMove)) * CAMERA_SPEED;
-					g_camera[nCount].posV.z -= cosf(g_camera[nCount].rot.y - D3DX_PI * 0.5f + atan2f(*(pMouseMove + 1), *pMouseMove)) * CAMERA_SPEED;
+					g_camera[nCount].rot.y += cosf(atan2f(*(pMouseMove + 1), *pMouseMove)) * CAMERA_ROT_SPEED;
+					g_camera[nCount].rot.x += sinf(-atan2f(*(pMouseMove + 1), *pMouseMove)) * CAMERA_ROT_SPEED;
 				}
 
-				if (GetKeyboradPress(DIK_LEFT) || GetJoykeyPress(JOYKEY_LEFT, CONTROLLER_1))
+				if (GetKeyboradPress(DIK_DOWN))
 				{
-					g_camera[nCount].posV.x += sinf(g_camera[nCount].rot.y - D3DX_PI * 0.5f) * CAMERA_SPEED;
-					g_camera[nCount].posV.z += cosf(g_camera[nCount].rot.y - D3DX_PI * 0.5f) * CAMERA_SPEED;
+					g_camera[nCount].rot.x -= CAMERA_ROT_SPEED;
 				}
 
-				if (GetKeyboradPress(DIK_RIGHT) || GetJoykeyPress(JOYKEY_RIGHT, CONTROLLER_1))
+				if (GetKeyboradPress(DIK_UP))
 				{
-					g_camera[nCount].posV.x -= sinf(g_camera[nCount].rot.y - D3DX_PI * 0.5f) * CAMERA_SPEED;
-					g_camera[nCount].posV.z -= cosf(g_camera[nCount].rot.y - D3DX_PI * 0.5f) * CAMERA_SPEED;
+					g_camera[nCount].rot.x += CAMERA_ROT_SPEED;
 				}
 
-				if (GetKeyboradPress(DIK_DOWN) || GetJoykeyPress(JOYKEY_DOWN, CONTROLLER_1))
+				if (GetKeyboradPress(DIK_LEFT))
 				{
-					g_camera[nCount].posV.x += sinf(g_camera[nCount].rot.y - D3DX_PI) * CAMERA_SPEED;
-					g_camera[nCount].posV.z += cosf(g_camera[nCount].rot.y - D3DX_PI) * CAMERA_SPEED;
+					g_camera[nCount].rot.y -= CAMERA_ROT_SPEED;
 				}
 
-				if (GetKeyboradPress(DIK_UP) || GetJoykeyPress(JOYKEY_UP, CONTROLLER_1))
+				if (GetKeyboradPress(DIK_RIGHT))
 				{
-					g_camera[nCount].posV.x -= sinf(g_camera[nCount].rot.y - D3DX_PI) * CAMERA_SPEED;
-					g_camera[nCount].posV.z -= cosf(g_camera[nCount].rot.y - D3DX_PI) * CAMERA_SPEED;
+					g_camera[nCount].rot.y += CAMERA_ROT_SPEED;
 				}
 
-				if (GetKeyboradPress(DIK_RSHIFT) || GetJoykeyPress(JOYKEY_X, CONTROLLER_1))
+				if (pPlayer->move.x == 0.0f && pPlayer->move.z == 0.0f && Oldrot == g_camera[nCount].rot.y)
 				{
-					g_camera[nCount].posV.y += CAMERA_SPEED;
+					static int nCnt = 0;
+					float rot = g_camera[nCount].rot.y;
+					nCnt++;
+					if (nCnt % 300 < 50)
+					{
+						rot = pPlayer->Destrot.y - D3DX_PI;
+					}
+					//正規化
+					if (rot - g_camera[nCount].rot.y > D3DX_PI)
+					{
+						rot = g_camera[nCount].rot.y + ((rot - g_camera[nCount].rot.y) - D3DX_PI * 2.0f);
+					}
+					else if (rot - g_camera[nCount].rot.y < -D3DX_PI)
+					{
+						rot = g_camera[nCount].rot.y + ((rot - g_camera[nCount].rot.y) + D3DX_PI * 2.0f);
+					}
+
+					g_camera[nCount].rot.y += (rot - g_camera[nCount].rot.y) * CAMERA_INA;
 				}
 
-				if (GetKeyboradPress(DIK_RCONTROL) || GetJoykeyPress(JOYKEY_X, CONTROLLER_1))
+				if (!GetKeyboradPress(DIK_R) && !GetMousePress(MOUSE_B1))
 				{
-					g_camera[nCount].posV.y -= CAMERA_SPEED;
+					//スケール制限
+					g_camera[nCount].rot.x = max(-D3DX_PI * CAMERA_ROTX - D3DX_PI * CAMERA_ROTX, min(D3DX_PI * CAMERA_ROTX - D3DX_PI * CAMERA_ROTX - D3DX_PI * CAMERA_ROTX_GRA, g_camera[nCount].rot.x));
 				}
 
-				g_camera[nCount].posR.x = g_camera[nCount].posV.x + sinf(g_camera[nCount].rot.y) * cosf(g_camera[nCount].rot.x) * g_camera[nCount].fDistance;
-				g_camera[nCount].posR.y = g_camera[nCount].posV.y + sinf(g_camera[nCount].rot.x) * g_camera[nCount].fDistance;
-				g_camera[nCount].posR.z = g_camera[nCount].posV.z + cosf(g_camera[nCount].rot.y) * cosf(g_camera[nCount].rot.x) * g_camera[nCount].fDistance;
+				//正規化
+				if (g_camera[nCount].rot.x > D3DX_PI)
+				{
+					g_camera[nCount].rot.x -= D3DX_PI * 2.0f;
+				}
+				else if (g_camera[nCount].rot.x < -D3DX_PI)
+				{
+					g_camera[nCount].rot.x += D3DX_PI * 2.0f;
+				}
+
+				//正規化
+				if (g_camera[nCount].rot.y > D3DX_PI)
+				{
+					g_camera[nCount].rot.y -= D3DX_PI * 2.0f;
+				}
+				else if (g_camera[nCount].rot.y < -D3DX_PI)
+				{
+					g_camera[nCount].rot.y += D3DX_PI * 2.0f;
+				}
+
+				if (GetKeyboradPress(DIK_R) || GetMousePress(MOUSE_B1))
+				{
+					//スケール制限
+					g_camera[nCount].rot.x = max(-D3DX_PI * CAMERA_ROTX - D3DX_PI * CAMERA_ROTX * 0.5f, min(D3DX_PI * CAMERA_ROTX - D3DX_PI * CAMERA_ROTX * 0.5f, g_camera[nCount].rot.x));
+					g_camera[nCount].posV = pPlayer->pos;
+					g_camera[nCount].posV.y += pPlayer->aModel[0].pos.y + pPlayer->aModel[1].pos.y;
+					g_camera[nCount].posR.x = g_camera[nCount].posV.x + sinf(g_camera[nCount].rot.y) * cosf(g_camera[nCount].rot.x) * g_camera[nCount].fDistance;
+					g_camera[nCount].posR.y = g_camera[nCount].posV.y + sinf(g_camera[nCount].rot.x) * g_camera[nCount].fDistance;
+					g_camera[nCount].posR.z = g_camera[nCount].posV.z + cosf(g_camera[nCount].rot.y) * cosf(g_camera[nCount].rot.x) * g_camera[nCount].fDistance;
+				}
+				else
+				{
+					Player* pPlayer = GetPlayer();
+					g_camera[nCount].posRDest.x = pPlayer->pos.x + sinf(atan2f(pPlayer->move.z, pPlayer->move.x)) * SPEED;
+					g_camera[nCount].posRDest.y = pPlayer->pos.y + cosf(g_camera[nCount].rot.x) * SPEED;
+					g_camera[nCount].posRDest.z = pPlayer->pos.z + cosf(atan2f(pPlayer->move.z, pPlayer->move.x)) * SPEED;
+					g_camera[nCount].posVDest.x = pPlayer->pos.x + sinf(g_camera[nCount].rot.y - D3DX_PI) * cosf(g_camera[nCount].rot.x) * g_camera[nCount].fDistance;
+					g_camera[nCount].posVDest.y = pPlayer->pos.y + sinf(g_camera[nCount].rot.x - D3DX_PI) * g_camera[nCount].fDistance;
+					g_camera[nCount].posVDest.z = pPlayer->pos.z + cosf(g_camera[nCount].rot.y - D3DX_PI) * cosf(g_camera[nCount].rot.x) * g_camera[nCount].fDistance;
+
+					g_camera[nCount].posR.x += (g_camera[nCount].posRDest.x - g_camera[nCount].posR.x) * CAMERA_INA;
+					g_camera[nCount].posR.y += (g_camera[nCount].posRDest.y - g_camera[nCount].posR.y) * CAMERA_INA;
+					g_camera[nCount].posR.z += (g_camera[nCount].posRDest.z - g_camera[nCount].posR.z) * CAMERA_INA;
+					g_camera[nCount].posV.x += (g_camera[nCount].posVDest.x - g_camera[nCount].posV.x) * CAMERA_INA;
+					g_camera[nCount].posV.y += (g_camera[nCount].posVDest.y - g_camera[nCount].posV.y) * CAMERA_INA;
+					g_camera[nCount].posV.z += (g_camera[nCount].posVDest.z - g_camera[nCount].posV.z) * CAMERA_INA;
+				}
+
+				if (GetKeyboradPress(DIK_P) || GetMousePress(MOUSE_B2) == true || GetJoykeyPress(JOYKEY_X, CONTROLLER_1) == true)
+				{
+					float* pStick;
+					float* pMouseMove;
+					//X
+					if (IsXInputControllerConnected(CONTROLLER_1))
+					{
+						//右スティック処理
+						pStick = GetJoyStick(STICK_RIGHT, CONTROLLER_1);
+						if (sqrtf(*pStick * *pStick + *(pStick + 1) * *(pStick + 1)) >= STICK_DED)
+						{
+							g_camera[nCount].posV.x += sinf(g_camera[nCount].rot.y - D3DX_PI * 0.5f + atan2f(*(pStick + 1), -*pStick)) * CAMERA_SPEED;
+							g_camera[nCount].posV.z += cosf(g_camera[nCount].rot.y - D3DX_PI * 0.5f + atan2f(*(pStick + 1), -*pStick)) * CAMERA_SPEED;
+						}
+					}
+					//d
+					else if (IsDirectInputControllerConnected(CONTROLLER_1))
+					{
+						//右スティック処理
+						pStick = GetdJoyStick(STICK_RIGHT, CONTROLLER_1);
+						if (sqrtf(*pStick * *pStick + *(pStick + 1) * *(pStick + 1)) >= STICK_DED)
+						{
+							g_camera[nCount].posV.x += sinf(g_camera[nCount].rot.y - D3DX_PI * 0.5f + atan2f(-*(pStick + 1), -*pStick)) * CAMERA_SPEED;
+							g_camera[nCount].posV.z += cosf(g_camera[nCount].rot.y - D3DX_PI * 0.5f + atan2f(-*(pStick + 1), -*pStick)) * CAMERA_SPEED;
+						}
+					}
+
+					pMouseMove = GetMouseMove();
+					if (sqrtf(*pMouseMove * *pMouseMove + *(pMouseMove + 1) * *(pMouseMove + 1)) >= STICK_DED)
+					{
+						g_camera[nCount].posV.x -= sinf(g_camera[nCount].rot.y - D3DX_PI * 0.5f + atan2f(*(pMouseMove + 1), *pMouseMove)) * CAMERA_SPEED;
+						g_camera[nCount].posV.z -= cosf(g_camera[nCount].rot.y - D3DX_PI * 0.5f + atan2f(*(pMouseMove + 1), *pMouseMove)) * CAMERA_SPEED;
+					}
+
+					if (GetKeyboradPress(DIK_LEFT) || GetJoykeyPress(JOYKEY_LEFT, CONTROLLER_1))
+					{
+						g_camera[nCount].posV.x += sinf(g_camera[nCount].rot.y - D3DX_PI * 0.5f) * CAMERA_SPEED;
+						g_camera[nCount].posV.z += cosf(g_camera[nCount].rot.y - D3DX_PI * 0.5f) * CAMERA_SPEED;
+					}
+
+					if (GetKeyboradPress(DIK_RIGHT) || GetJoykeyPress(JOYKEY_RIGHT, CONTROLLER_1))
+					{
+						g_camera[nCount].posV.x -= sinf(g_camera[nCount].rot.y - D3DX_PI * 0.5f) * CAMERA_SPEED;
+						g_camera[nCount].posV.z -= cosf(g_camera[nCount].rot.y - D3DX_PI * 0.5f) * CAMERA_SPEED;
+					}
+
+					if (GetKeyboradPress(DIK_DOWN) || GetJoykeyPress(JOYKEY_DOWN, CONTROLLER_1))
+					{
+						g_camera[nCount].posV.x += sinf(g_camera[nCount].rot.y - D3DX_PI) * CAMERA_SPEED;
+						g_camera[nCount].posV.z += cosf(g_camera[nCount].rot.y - D3DX_PI) * CAMERA_SPEED;
+					}
+
+					if (GetKeyboradPress(DIK_UP) || GetJoykeyPress(JOYKEY_UP, CONTROLLER_1))
+					{
+						g_camera[nCount].posV.x -= sinf(g_camera[nCount].rot.y - D3DX_PI) * CAMERA_SPEED;
+						g_camera[nCount].posV.z -= cosf(g_camera[nCount].rot.y - D3DX_PI) * CAMERA_SPEED;
+					}
+
+					if (GetKeyboradPress(DIK_RSHIFT) || GetJoykeyPress(JOYKEY_X, CONTROLLER_1))
+					{
+						g_camera[nCount].posV.y += CAMERA_SPEED;
+					}
+
+					if (GetKeyboradPress(DIK_RCONTROL) || GetJoykeyPress(JOYKEY_X, CONTROLLER_1))
+					{
+						g_camera[nCount].posV.y -= CAMERA_SPEED;
+					}
+
+					g_camera[nCount].posR.x = g_camera[nCount].posV.x + sinf(g_camera[nCount].rot.y) * cosf(g_camera[nCount].rot.x) * g_camera[nCount].fDistance;
+					g_camera[nCount].posR.y = g_camera[nCount].posV.y + sinf(g_camera[nCount].rot.x) * g_camera[nCount].fDistance;
+					g_camera[nCount].posR.z = g_camera[nCount].posV.z + cosf(g_camera[nCount].rot.y) * cosf(g_camera[nCount].rot.x) * g_camera[nCount].fDistance;
+				}
+				break;
+			case EDIT:
+				//X
+				if (IsXInputControllerConnected(CONTROLLER_1))
+				{
+					//右スティック処理
+					pStick = GetJoyStick(STICK_RIGHT, CONTROLLER_1);
+					if (sqrtf(*pStick * *pStick + *(pStick + 1) * *(pStick + 1)) >= STICK_DED)
+					{
+						g_camera[nCount].rot.y += cosf(atan2f(*(pStick + 1), *pStick)) * CAMERA_ROT_SPEED;
+						g_camera[nCount].rot.x += sinf(atan2f(*(pStick + 1), *pStick)) * CAMERA_ROT_SPEED;
+					}
+				}
+				//d
+				else if (IsDirectInputControllerConnected(CONTROLLER_1))
+				{
+					//右スティック処理
+					pStick = GetdJoyStick(STICK_RIGHT, CONTROLLER_1);
+					if (sqrtf(*pStick * *pStick + *(pStick + 1) * *(pStick + 1)) >= STICK_DED)
+					{
+						g_camera[nCount].rot.y += cosf(atan2f(*(pStick + 1), *pStick)) * CAMERA_ROT_SPEED;
+						g_camera[nCount].rot.x += sinf(-atan2f(*(pStick + 1), *pStick)) * CAMERA_ROT_SPEED;
+					}
+				}
+
+				pMouseMove = GetMouseMove();
+				if (sqrtf(*pMouseMove * *pMouseMove + *(pMouseMove + 1) * *(pMouseMove + 1)) >= STICK_DED)
+				{
+					g_camera[nCount].rot.y += cosf(atan2f(*(pMouseMove + 1), *pMouseMove)) * CAMERA_ROT_SPEED;
+					g_camera[nCount].rot.x += sinf(-atan2f(*(pMouseMove + 1), *pMouseMove)) * CAMERA_ROT_SPEED;
+				}
+
+				if (GetKeyboradPress(DIK_DOWN))
+				{
+					g_camera[nCount].rot.x -= CAMERA_ROT_SPEED;
+				}
+
+				if (GetKeyboradPress(DIK_UP))
+				{
+					g_camera[nCount].rot.x += CAMERA_ROT_SPEED;
+				}
+
+				if (GetKeyboradPress(DIK_LEFT))
+				{
+					g_camera[nCount].rot.y -= CAMERA_ROT_SPEED;
+				}
+
+				if (GetKeyboradPress(DIK_RIGHT))
+				{
+					g_camera[nCount].rot.y += CAMERA_ROT_SPEED;
+				}
+
+				if (pEditPlayer->move.x == 0.0f && pEditPlayer->move.z == 0.0f && Oldrot == g_camera[nCount].rot.y)
+				{
+					static int nCnt = 0;
+					float rot = g_camera[nCount].rot.y;
+					nCnt++;
+					if (nCnt % 300 < 50)
+					{
+						rot = pEditPlayer->rot.y - D3DX_PI;
+					}
+					//正規化
+					if (rot - g_camera[nCount].rot.y > D3DX_PI)
+					{
+						rot = g_camera[nCount].rot.y + ((rot - g_camera[nCount].rot.y) - D3DX_PI * 2.0f);
+					}
+					else if (rot - g_camera[nCount].rot.y < -D3DX_PI)
+					{
+						rot = g_camera[nCount].rot.y + ((rot - g_camera[nCount].rot.y) + D3DX_PI * 2.0f);
+					}
+
+					g_camera[nCount].rot.y += (rot - g_camera[nCount].rot.y) * CAMERA_INA;
+				}
+
+				if (!GetKeyboradPress(DIK_R) && !GetMousePress(MOUSE_B1))
+				{
+					//スケール制限
+					g_camera[nCount].rot.x = max(-D3DX_PI * CAMERA_ROTX - D3DX_PI * CAMERA_ROTX, min(D3DX_PI * CAMERA_ROTX - D3DX_PI * CAMERA_ROTX - D3DX_PI * CAMERA_ROTX_GRA, g_camera[nCount].rot.x));
+				}
+
+				//正規化
+				if (g_camera[nCount].rot.x > D3DX_PI)
+				{
+					g_camera[nCount].rot.x -= D3DX_PI * 2.0f;
+				}
+				else if (g_camera[nCount].rot.x < -D3DX_PI)
+				{
+					g_camera[nCount].rot.x += D3DX_PI * 2.0f;
+				}
+
+				//正規化
+				if (g_camera[nCount].rot.y > D3DX_PI)
+				{
+					g_camera[nCount].rot.y -= D3DX_PI * 2.0f;
+				}
+				else if (g_camera[nCount].rot.y < -D3DX_PI)
+				{
+					g_camera[nCount].rot.y += D3DX_PI * 2.0f;
+				}
+
+				if (GetKeyboradPress(DIK_R) || GetMousePress(MOUSE_B1))
+				{
+					//スケール制限
+					g_camera[nCount].rot.x = max(-D3DX_PI * CAMERA_ROTX - D3DX_PI * CAMERA_ROTX * 0.5f, min(D3DX_PI * CAMERA_ROTX - D3DX_PI * CAMERA_ROTX * 0.5f, g_camera[nCount].rot.x));
+					g_camera[nCount].posV = pEditPlayer->pos;
+					g_camera[nCount].posV.y += pEditPlayer->pos.y;
+					g_camera[nCount].posR.x = g_camera[nCount].posV.x + sinf(g_camera[nCount].rot.y) * cosf(g_camera[nCount].rot.x) * g_camera[nCount].fDistance;
+					g_camera[nCount].posR.y = g_camera[nCount].posV.y + sinf(g_camera[nCount].rot.x) * g_camera[nCount].fDistance;
+					g_camera[nCount].posR.z = g_camera[nCount].posV.z + cosf(g_camera[nCount].rot.y) * cosf(g_camera[nCount].rot.x) * g_camera[nCount].fDistance;
+				}
+				else
+				{
+					EDITPLAYER* pEditPlayer = GetEditPlayer();
+					g_camera[nCount].posRDest.x = pEditPlayer->pos.x + sinf(atan2f(pEditPlayer->move.z, pEditPlayer->move.x)) * SPEED;
+					g_camera[nCount].posRDest.y = pEditPlayer->pos.y + cosf(g_camera[nCount].rot.x) * SPEED;
+					g_camera[nCount].posRDest.z = pEditPlayer->pos.z + cosf(atan2f(pEditPlayer->move.z, pEditPlayer->move.x)) * SPEED;
+					g_camera[nCount].posVDest.x = pEditPlayer->pos.x + sinf(g_camera[nCount].rot.y - D3DX_PI) * cosf(g_camera[nCount].rot.x) * g_camera[nCount].fDistance;
+					g_camera[nCount].posVDest.y = pEditPlayer->pos.y + sinf(g_camera[nCount].rot.x - D3DX_PI) * g_camera[nCount].fDistance;
+					g_camera[nCount].posVDest.z = pEditPlayer->pos.z + cosf(g_camera[nCount].rot.y - D3DX_PI) * cosf(g_camera[nCount].rot.x) * g_camera[nCount].fDistance;
+
+					g_camera[nCount].posR.x += (g_camera[nCount].posRDest.x - g_camera[nCount].posR.x) * CAMERA_INA;
+					g_camera[nCount].posR.y += (g_camera[nCount].posRDest.y - g_camera[nCount].posR.y) * CAMERA_INA;
+					g_camera[nCount].posR.z += (g_camera[nCount].posRDest.z - g_camera[nCount].posR.z) * CAMERA_INA;
+					g_camera[nCount].posV.x += (g_camera[nCount].posVDest.x - g_camera[nCount].posV.x) * CAMERA_INA;
+					g_camera[nCount].posV.y += (g_camera[nCount].posVDest.y - g_camera[nCount].posV.y) * CAMERA_INA;
+					g_camera[nCount].posV.z += (g_camera[nCount].posVDest.z - g_camera[nCount].posV.z) * CAMERA_INA;
+				}
+
+				if (GetKeyboradPress(DIK_P) || GetMousePress(MOUSE_B2) == true || GetJoykeyPress(JOYKEY_X, CONTROLLER_1) == true)
+				{
+					float* pStick;
+					float* pMouseMove;
+					//X
+					if (IsXInputControllerConnected(CONTROLLER_1))
+					{
+						//右スティック処理
+						pStick = GetJoyStick(STICK_RIGHT, CONTROLLER_1);
+						if (sqrtf(*pStick * *pStick + *(pStick + 1) * *(pStick + 1)) >= STICK_DED)
+						{
+							g_camera[nCount].posV.x += sinf(g_camera[nCount].rot.y - D3DX_PI * 0.5f + atan2f(*(pStick + 1), -*pStick)) * CAMERA_SPEED;
+							g_camera[nCount].posV.z += cosf(g_camera[nCount].rot.y - D3DX_PI * 0.5f + atan2f(*(pStick + 1), -*pStick)) * CAMERA_SPEED;
+						}
+					}
+					//d
+					else if (IsDirectInputControllerConnected(CONTROLLER_1))
+					{
+						//右スティック処理
+						pStick = GetdJoyStick(STICK_RIGHT, CONTROLLER_1);
+						if (sqrtf(*pStick * *pStick + *(pStick + 1) * *(pStick + 1)) >= STICK_DED)
+						{
+							g_camera[nCount].posV.x += sinf(g_camera[nCount].rot.y - D3DX_PI * 0.5f + atan2f(-*(pStick + 1), -*pStick)) * CAMERA_SPEED;
+							g_camera[nCount].posV.z += cosf(g_camera[nCount].rot.y - D3DX_PI * 0.5f + atan2f(-*(pStick + 1), -*pStick)) * CAMERA_SPEED;
+						}
+					}
+
+					pMouseMove = GetMouseMove();
+					if (sqrtf(*pMouseMove * *pMouseMove + *(pMouseMove + 1) * *(pMouseMove + 1)) >= STICK_DED)
+					{
+						g_camera[nCount].posV.x -= sinf(g_camera[nCount].rot.y - D3DX_PI * 0.5f + atan2f(*(pMouseMove + 1), *pMouseMove)) * CAMERA_SPEED;
+						g_camera[nCount].posV.z -= cosf(g_camera[nCount].rot.y - D3DX_PI * 0.5f + atan2f(*(pMouseMove + 1), *pMouseMove)) * CAMERA_SPEED;
+					}
+
+					if (GetKeyboradPress(DIK_LEFT) || GetJoykeyPress(JOYKEY_LEFT, CONTROLLER_1))
+					{
+						g_camera[nCount].posV.x += sinf(g_camera[nCount].rot.y - D3DX_PI * 0.5f) * CAMERA_SPEED;
+						g_camera[nCount].posV.z += cosf(g_camera[nCount].rot.y - D3DX_PI * 0.5f) * CAMERA_SPEED;
+					}
+
+					if (GetKeyboradPress(DIK_RIGHT) || GetJoykeyPress(JOYKEY_RIGHT, CONTROLLER_1))
+					{
+						g_camera[nCount].posV.x -= sinf(g_camera[nCount].rot.y - D3DX_PI * 0.5f) * CAMERA_SPEED;
+						g_camera[nCount].posV.z -= cosf(g_camera[nCount].rot.y - D3DX_PI * 0.5f) * CAMERA_SPEED;
+					}
+
+					if (GetKeyboradPress(DIK_DOWN) || GetJoykeyPress(JOYKEY_DOWN, CONTROLLER_1))
+					{
+						g_camera[nCount].posV.x += sinf(g_camera[nCount].rot.y - D3DX_PI) * CAMERA_SPEED;
+						g_camera[nCount].posV.z += cosf(g_camera[nCount].rot.y - D3DX_PI) * CAMERA_SPEED;
+					}
+
+					if (GetKeyboradPress(DIK_UP) || GetJoykeyPress(JOYKEY_UP, CONTROLLER_1))
+					{
+						g_camera[nCount].posV.x -= sinf(g_camera[nCount].rot.y - D3DX_PI) * CAMERA_SPEED;
+						g_camera[nCount].posV.z -= cosf(g_camera[nCount].rot.y - D3DX_PI) * CAMERA_SPEED;
+					}
+
+					if (GetKeyboradPress(DIK_RSHIFT) || GetJoykeyPress(JOYKEY_X, CONTROLLER_1))
+					{
+						g_camera[nCount].posV.y += CAMERA_SPEED;
+					}
+
+					if (GetKeyboradPress(DIK_RCONTROL) || GetJoykeyPress(JOYKEY_X, CONTROLLER_1))
+					{
+						g_camera[nCount].posV.y -= CAMERA_SPEED;
+					}
+
+					g_camera[nCount].posR.x = g_camera[nCount].posV.x + sinf(g_camera[nCount].rot.y) * cosf(g_camera[nCount].rot.x) * g_camera[nCount].fDistance;
+					g_camera[nCount].posR.y = g_camera[nCount].posV.y + sinf(g_camera[nCount].rot.x) * g_camera[nCount].fDistance;
+					g_camera[nCount].posR.z = g_camera[nCount].posV.z + cosf(g_camera[nCount].rot.y) * cosf(g_camera[nCount].rot.x) * g_camera[nCount].fDistance;
+				}
+				break;
 			}
 		}
 	}
@@ -458,4 +667,21 @@ void GameCamera(int nNumber)
 	g_camera[nNumber].posR = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 	g_camera[nNumber].fDistance = sqrtf((g_camera[nNumber].posR.x - g_camera[nNumber].posV.x) * (g_camera[nNumber].posR.x - g_camera[nNumber].posV.x) + (g_camera[nNumber].posR.y - g_camera[nNumber].posV.y) * (g_camera[nNumber].posR.y - g_camera[nNumber].posV.y) + (g_camera[nNumber].posR.z - g_camera[nNumber].posV.z) * (g_camera[nNumber].posR.z - g_camera[nNumber].posV.z));
 	g_camera[nNumber].fDistanceMax = CAMERA_DISTANCE_MAX;
+}
+
+//-------------------------------
+//カメラのマスターを変更
+//-------------------------------
+void MasterCamera(int Number,MASTER Master)
+{
+	if (Number == CAMERA_XNUM * CAMERA_YNUM)
+	{
+		for (int nCount = 0; nCount < CAMERA_XNUM * CAMERA_YNUM; nCount++)
+		{
+			g_camera[nCount].Master = Master;
+		}
+		return;
+	}
+
+	g_camera[Number].Master = Master;
 }

@@ -42,8 +42,13 @@ void InitRank(void)
 {
 	InitShadow();
 	InitStage();
+<<<<<<< HEAD
 	InitMeshField();
 	InitCylinder();
+=======
+	InitMeshfield();
+	//InitCylinder();
+>>>>>>> c5f2858db81c527e54fa4367318dd3e0f788a54f
 	InitSphere();
 	InitMeshWall();
 	InitBillboard();
@@ -251,8 +256,13 @@ void UninitRank(void)
 
 	UninitShadow();
 	UninitStage();
+<<<<<<< HEAD
 	UninitMeshField();
 	UninitCylinder();
+=======
+	UninitMeshfield();
+	//UninitCylinder();
+>>>>>>> c5f2858db81c527e54fa4367318dd3e0f788a54f
 	UninitSphere();
 	UninitMeshWall();
 	UninitBillboard();
@@ -383,8 +393,13 @@ void UpdateRank(void)
 
 		UpdateShadow();
 		UpdateStage();
+<<<<<<< HEAD
 		UpdateMeshField();
 		UpdateCylinder();
+=======
+		UpdateMeshfield();
+		//UpdateCylinder();
+>>>>>>> c5f2858db81c527e54fa4367318dd3e0f788a54f
 		UpdateSphere();
 		UpdateMeshWall();
 		UpdateBillboard();
@@ -400,7 +415,7 @@ void DrawRank(void)
 
 	DrawMeshField();
 	DrawSphere();
-	DrawCylinder();
+	//DrawCylinder();
 	DrawShadow();
 	DrawStage();
 	DrawBillboard();

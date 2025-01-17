@@ -26,6 +26,14 @@
 #define CAMERA_MIN (10.0f)//‹–ì‚ÌÅ¬
 #define CAMERA_MAX (10000.0f)//‹–ì‚ÌÅ‘å
 
+typedef enum
+{
+	NONE = 0,
+	PLAYER,
+	EDIT,
+	MAX
+}MASTER;
+
 //ƒJƒƒ‰\‘¢‘Ì
 typedef struct
 {
@@ -41,6 +49,7 @@ typedef struct
 	float fDistanceMin;
 	float fDistanceMax;
 	D3DVIEWPORT9 viewport;
+	MASTER Master;
 }Camera;
 
 void InitCamera(void);//‰Šú‰»ˆ—
@@ -50,5 +59,6 @@ void SetCamera(int nNumber);//•`‰æˆ—
 Camera* GetCamera(void);
 void ViewCamera(int nNumber);
 void GameCamera(int nNumber);
+void MasterCamera(int Number, MASTER Master);
 
 #endif _CAMERA_H_

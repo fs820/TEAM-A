@@ -8,6 +8,7 @@
 #include"game.h"
 #include"input.h"
 #include"player.h"
+#include"editplayer.h"
 #include"bullet.h"
 #include"effect.h"
 #include"particle.h"
@@ -35,6 +36,7 @@ int g_nCounterGameState = 0;
 int g_GameTime = 0;
 bool g_bSnow = false;
 bool g_bClear = false;
+bool g_Edit = false;
 //--------------------
 //初期化処理
 //--------------------
@@ -43,11 +45,21 @@ void InitGame(void)
 	InitModel();
 	InitShadow();
 	InitStage();
+<<<<<<< HEAD
 	InitMeshField();
 	InitCylinder();
+=======
+	InitMeshfield();
+	//InitCylinder();
+>>>>>>> c5f2858db81c527e54fa4367318dd3e0f788a54f
 	InitSphere();
 	InitMeshWall();
 	InitPlayer();//プレイヤー
+#ifdef _DEBUG
+
+	InitEditPlayer();
+
+#endif
 	InitBullet();
 	InitEffect();
 	InitParticle();
@@ -64,6 +76,7 @@ void InitGame(void)
 
 	//カメラ
 	GameCamera(CAMERA_XNUM * CAMERA_YNUM);
+	MasterCamera(CAMERA_XNUM * CAMERA_YNUM, PLAYER);
 
 	D3DXVECTOR3 posScore;//スコアの位置
 	g_gameState = GAMESTATE_NORMAL;
@@ -88,9 +101,18 @@ void UninitGame(void)
 	UninitBullet();
 	UninitBillboard();
 	UninitMeshWall();
-	UninitCylinder();
+	//UninitCylinder();
 	UninitSphere();
+<<<<<<< HEAD
 	UninitMeshField();
+=======
+	UninitMeshfield();
+#ifdef _DEBUG
+
+	UninitEditPlayer();
+
+#endif
+>>>>>>> c5f2858db81c527e54fa4367318dd3e0f788a54f
 	UninitPlayer();//プレイヤー
 	UninitStage();
 	UninitShadow();
@@ -195,10 +217,39 @@ void UpdateGame(void)
 		UpdateModel();
 		UpdateShadow();
 		UpdateStage();
-		UpdatePlayer();//プレイヤー
+		if (!g_Edit)
+		{
+			UpdatePlayer();//プレイヤー
+		}
+#ifdef _DEBUG
+
+		if (GetKeyboradTrigger(DIK_F6))
+		{
+			g_Edit = !g_Edit;
+			if (g_Edit)
+			{
+				MasterCamera(CAMERA_XNUM* CAMERA_YNUM, EDIT);
+			}
+			else
+			{
+				MasterCamera(CAMERA_XNUM* CAMERA_YNUM, PLAYER);
+			}
+		}
+
+		if (g_Edit)
+		{
+			UpdateEditPlayer();
+		}
+
+#endif
 		UpdateMeshWall();
+<<<<<<< HEAD
 		UpdateMeshField();
 		UpdateCylinder();
+=======
+		UpdateMeshfield();
+		//UpdateCylinder();
+>>>>>>> c5f2858db81c527e54fa4367318dd3e0f788a54f
 		UpdateSphere();
 		UpdateBillboard();
 		UpdateBullet();
@@ -215,15 +266,31 @@ void DrawGame(void)
 {
 	DrawModel();
 	DrawSphere();
+<<<<<<< HEAD
 	DrawMeshField();
 	DrawCylinder();
+=======
+	DrawMeshfield();
+	//DrawCylinder();
+>>>>>>> c5f2858db81c527e54fa4367318dd3e0f788a54f
 	DrawShadow();
 	DrawStage();
 	DrawMeshWall();
 	DrawBillboard();
 	DrawEffect();
 	DrawBullet();
-	DrawPlayer();//プレイヤー
+	if (!g_Edit)
+	{
+		DrawPlayer();//プレイヤー
+	}
+#ifdef _DEBUG
+
+	if (g_Edit)
+	{
+		DrawEditPlayer();
+	}
+
+#endif
 	DrawAlphaMeshWall();
 	DrawTime();
 	DrawUi();
