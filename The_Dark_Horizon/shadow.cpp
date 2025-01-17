@@ -1,223 +1,297 @@
-//----------------------------------------
-//
-//ポリゴン表示処理[shadow.cpp]
-//Author fuma sato
-//
-//----------------------------------------
+#include "shadow.h"
+#include"meshfield.h"
 
-#include"shadow.h"
+// グローバル変数宣言
+LPDIRECT3DVERTEXBUFFER9 g_pVtxBuffShadow = NULL;	// 頂点バッファへのポインタ
+LPDIRECT3DTEXTURE9 g_pVtxTexturShadow = NULL;		// テクスチャのポインタ
+Shadow g_aShadow[MAX_SHADOW];						// 影の情報
 
-//グローバル変数宣言
-LPDIRECT3DVERTEXBUFFER9 g_pVtxBuffShadow = NULL;//バッファのポインタ
-LPDIRECT3DTEXTURE9 g_pTextureShadow = NULL;
-Shadow g_aShadow[SHADOW_MAX];
-
-//----------------------
-//ポリゴンの初期化処理
-//----------------------
+//**************************************
+// 影の初期化
+//**************************************
 void InitShadow(void)
 {
-	LPDIRECT3DDEVICE9 pDevice;//デバイスへポインタ
-	VERTEX_3D* pVtx;//頂点情報ポインタ
+	LPDIRECT3DDEVICE9 pDevice = GetDevice();
 
-	//デバイスの取得
-	pDevice = GetDevice();
-
-	pDevice->CreateVertexBuffer
-	(
-		sizeof(VERTEX_3D) * VT_MAX,
+	// 頂点バッファの生成
+	pDevice->CreateVertexBuffer(sizeof(VERTEX_3D) * 4 * MAX_SHADOW,
 		D3DUSAGE_WRITEONLY,
 		FVF_VERTEX_3D,
 		D3DPOOL_MANAGED,
-		&g_pVtxBuffShadow,
-		NULL
-	);
+		&g_pVtxBuffShadow, NULL);
 
-	//テクスチャの読み込み
-	D3DXCreateTextureFromFile
-	(
-		pDevice,
-		SHADOW_TEX,
-		&g_pTextureShadow
-	);
+	VERTEX_3D* pVtx = NULL;
 
-	int nCntShadow;
-	for (nCntShadow = 0; nCntShadow < SHADOW_MAX; nCntShadow++)
-	{
-		g_aShadow[nCntShadow].pos = D3DXVECTOR3(0.0f, 0.1f, 0.0f);
-		g_aShadow[nCntShadow].rot = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
-		g_aShadow[nCntShadow].scale = D3DXVECTOR3(1.0f, 1.0f, 1.0f);
-		g_aShadow[nCntShadow].bUse = false;
-	}
+	// テクスチャの読み込み
+	D3DXCreateTextureFromFile(pDevice,
+		"data\\TEXTURE\\shadow000.jpg",
+		&g_pVtxTexturShadow);
 
-	//1つ目
-
+	// 頂点バッファをロック
 	g_pVtxBuffShadow->Lock(0, 0, (void**)&pVtx, 0);
 
-	//座標設定
-	pVtx[0].pos = D3DXVECTOR3(-SHADOW_WIDTH * 0.5f, SHADOW_HEIGHT * 0.5f, SHADOW_Z * 0.5f);
-	pVtx[1].pos = D3DXVECTOR3(SHADOW_WIDTH * 0.5f, SHADOW_HEIGHT * 0.5f, SHADOW_Z * 0.5f);
-	pVtx[2].pos = D3DXVECTOR3(-SHADOW_WIDTH * 0.5f, -SHADOW_HEIGHT * 0.5f, -SHADOW_Z * 0.5f);
-	pVtx[3].pos = D3DXVECTOR3(SHADOW_WIDTH * 0.5f, -SHADOW_HEIGHT * 0.5f, -SHADOW_Z * 0.5f);
+	for (int nCntShadow = 0; nCntShadow < MAX_SHADOW; nCntShadow++)
+	{
+		g_aShadow[nCntShadow].pos = D3DXVECTOR3(0.0f,0.0f,0.0f);
+		g_aShadow[nCntShadow].rot = D3DXVECTOR3(0.0f,0.0f,0.0f);
+		g_aShadow[nCntShadow].col = D3DXCOLOR(1.0f, 1.0f, 1.0, 1.0f);
+		g_aShadow[nCntShadow].branding = false;
+		g_aShadow[nCntShadow].bUse = false;
 
-	//nor
-	pVtx[0].nor = D3DXVECTOR3(0.0f, 1.0f, 0.0f);
-	pVtx[1].nor = D3DXVECTOR3(0.0f, 1.0f, 0.0f);
-	pVtx[2].nor = D3DXVECTOR3(0.0f, 1.0f, 0.0f);
-	pVtx[3].nor = D3DXVECTOR3(0.0f, 1.0f, 0.0f);
+		// 頂点座標の設定
+		pVtx[0].pos.x = 0.0f;
+		pVtx[0].pos.y = 0.0f;
+		pVtx[0].pos.z = 0.0f;
 
-	//カラー
-	pVtx[0].col = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
-	pVtx[1].col = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
-	pVtx[2].col = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
-	pVtx[3].col = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
+		pVtx[1].pos.x = 0.0f;
+		pVtx[1].pos.y = 0.0f;
+		pVtx[1].pos.z = 0.0f;
 
-	//テクスチャ
-	pVtx[0].tex = D3DXVECTOR2(0.0f, 0.0f);
-	pVtx[1].tex = D3DXVECTOR2(1.0f, 0.0f);
-	pVtx[2].tex = D3DXVECTOR2(0.0f, 1.0f);
-	pVtx[3].tex = D3DXVECTOR2(1.0f, 1.0f);
+		pVtx[2].pos.x = 0.0f;
+		pVtx[2].pos.y = 0.0f;
+		pVtx[2].pos.z = 0.0f;
 
+		pVtx[3].pos.x = 0.0f;
+		pVtx[3].pos.y = 0.0f;
+		pVtx[3].pos.z = 0.0f;
+
+		// 各頂点の法線の設定(＊ベクトルの大きさは1にする必要がある)
+		pVtx[0].nor = D3DXVECTOR3(1.0f, 1.0f, 0.0f);
+		pVtx[1].nor = D3DXVECTOR3(0.0f, 1.0f, 0.0f);
+		pVtx[2].nor = D3DXVECTOR3(0.0f, 1.0f, 0.0f);
+		pVtx[3].nor = D3DXVECTOR3(0.0f, 1.0f, 0.0f);
+
+		// 頂点カラーの設定
+		pVtx[0].col = g_aShadow[nCntShadow].col;
+		pVtx[1].col = g_aShadow[nCntShadow].col;
+		pVtx[2].col = g_aShadow[nCntShadow].col;
+		pVtx[3].col = g_aShadow[nCntShadow].col;
+
+		// テクスチャ座標の設定
+		pVtx[0].tex = D3DXVECTOR2(0.0f, 0.0f);
+		pVtx[1].tex = D3DXVECTOR2(1.0f, 0.0f);
+		pVtx[2].tex = D3DXVECTOR2(0.0f, 1.0f);
+		pVtx[3].tex = D3DXVECTOR2(1.0f, 1.0f);
+
+		pVtx += 4;
+	}
+
+	// 頂点バッファをアンロック
 	g_pVtxBuffShadow->Unlock();
 }
 
-//-------------------
-//ポリゴン終了処理
-//-------------------
+//**************************************************************************************
+// 影の破棄
+//**************************************************************************************
 void UninitShadow(void)
 {
-	//テクスチャの破棄
-	if (g_pTextureShadow != NULL)
-	{
-		g_pTextureShadow->Release();
-		g_pTextureShadow = NULL;
-	}
-	//頂点バッファの破棄
+	// 頂点バッファの解放
 	if (g_pVtxBuffShadow != NULL)
 	{
 		g_pVtxBuffShadow->Release();
 		g_pVtxBuffShadow = NULL;
 	}
+
+	// テクスチャの破棄
+	if (g_pVtxTexturShadow != NULL)
+	{
+		g_pVtxTexturShadow->Release();
+		g_pVtxTexturShadow = NULL;
+	}
 }
 
-//-------------------
-//ポリゴン更新処理
-//-------------------
+//**************************************************************************************
+// 影の更新
+//**************************************************************************************
 void UpdateShadow(void)
 {
 
 }
 
-//-------------------
-//ポリゴン描画処理
-//-------------------
+//**************************************************************************************
+// 影の描画
+//**************************************************************************************
 void DrawShadow(void)
 {
-	LPDIRECT3DDEVICE9 pDevice;//デバイスへポインタ
-	D3DXMATRIX mtxScale, mtxRot, mtxTrans;//計算マトリックス
+	// デバイスの取得
+	LPDIRECT3DDEVICE9 pDevice = GetDevice();
 
-	//デバイスの取得
-	pDevice = GetDevice();
+	// 計算用マトリックス
+	D3DXMATRIX mtxRot, mtxTrans;
 
-	//アルファテストオン
-	pDevice->SetRenderState(D3DRS_ALPHATESTENABLE, TRUE);
-	pDevice->SetRenderState(D3DRS_ALPHAREF, 0);
-	pDevice->SetRenderState(D3DRS_ALPHAFUNC, D3DCMP_GREATER);
-	//Zテストオフ
-	pDevice->SetRenderState(D3DRS_ZFUNC, D3DCMP_ALWAYS);
-	pDevice->SetRenderState(D3DRS_ZWRITEENABLE, FALSE);
-
-	pDevice->SetRenderState(D3DRS_BLENDOP,D3DBLENDOP_REVSUBTRACT);
+	// 減算合成の設定
+	pDevice->SetRenderState(D3DRS_BLENDOP, D3DBLENDOP_REVSUBTRACT);
 	pDevice->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
 	pDevice->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_ONE);
 
-	int nCntShadow;
-	for (nCntShadow = 0; nCntShadow < SHADOW_MAX; nCntShadow++)
+	// アルファテストを有効
+	pDevice->SetRenderState(D3DRS_ALPHATESTENABLE, TRUE);
+	pDevice->SetRenderState(D3DRS_ALPHAREF, 1);
+	pDevice->SetRenderState(D3DRS_ALPHAFUNC, D3DCMP_GREATER);
+
+	for (int nCntShadow = 0; nCntShadow < MAX_SHADOW; nCntShadow++)
 	{
-		if (g_aShadow[nCntShadow].bUse)
+		if (g_aShadow[nCntShadow].bUse == true && g_aShadow[nCntShadow].branding == true)
 		{
-			//マトリックス初期化
+			// ワールドマトリックスの初期化
 			D3DXMatrixIdentity(&g_aShadow[nCntShadow].mtxWorld);
 
-			//大きさの反映
-			D3DXMatrixScaling(&mtxScale, g_aShadow[nCntShadow].scale.x, g_aShadow[nCntShadow].scale.y, g_aShadow[nCntShadow].scale.z);
-			D3DXMatrixMultiply(&g_aShadow[nCntShadow].mtxWorld, &g_aShadow[nCntShadow].mtxWorld, &mtxScale);
-
-			//向きの反映
+			// 向きを反映
 			D3DXMatrixRotationYawPitchRoll(&mtxRot, g_aShadow[nCntShadow].rot.y, g_aShadow[nCntShadow].rot.x, g_aShadow[nCntShadow].rot.z);
 			D3DXMatrixMultiply(&g_aShadow[nCntShadow].mtxWorld, &g_aShadow[nCntShadow].mtxWorld, &mtxRot);
 
-			//位置の計算
+			// 位置を反映
 			D3DXMatrixTranslation(&mtxTrans, g_aShadow[nCntShadow].pos.x, g_aShadow[nCntShadow].pos.y, g_aShadow[nCntShadow].pos.z);
 			D3DXMatrixMultiply(&g_aShadow[nCntShadow].mtxWorld, &g_aShadow[nCntShadow].mtxWorld, &mtxTrans);
 
-			//ワールドマトリックスの設定
+			// ワールドマトリックスの設定
 			pDevice->SetTransform(D3DTS_WORLD, &g_aShadow[nCntShadow].mtxWorld);
 
-			//頂点バッファ
+			// 頂点バッファをデバイスのデータストリームに設定
 			pDevice->SetStreamSource(0, g_pVtxBuffShadow, 0, sizeof(VERTEX_3D));
 
-			//頂点フォーマットの設定
+			// テクスチャの設定
+			pDevice->SetTexture(0, g_pVtxTexturShadow);
+
+			// 頂点フォーマットの設定
 			pDevice->SetFVF(FVF_VERTEX_3D);
 
-			//テクスチャの設定
-			pDevice->SetTexture(0, g_pTextureShadow);
-
-			//ポリゴンの描画
-			pDevice->DrawPrimitive
-			(
-				D3DPT_TRIANGLESTRIP,//タイプ
-				0,//始まりの番号
-				2//ポリゴンの個数
-			);
+			// 影の描画
+			pDevice->DrawPrimitive(D3DPT_TRIANGLESTRIP,
+				4 * nCntShadow,
+				2);
 		}
 	}
 
+	// アルファテストを無効に戻す
+	pDevice->SetRenderState(D3DRS_ALPHATESTENABLE, FALSE);
+
+	// 設定をを元に戻す
 	pDevice->SetRenderState(D3DRS_BLENDOP, D3DBLENDOP_ADD);
 	pDevice->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
 	pDevice->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);
-	//Zテストオン
-	pDevice->SetRenderState(D3DRS_ZFUNC, D3DCMP_LESSEQUAL);
-	pDevice->SetRenderState(D3DRS_ZWRITEENABLE, TRUE);
-	//アルファテストオン
-	pDevice->SetRenderState(D3DRS_ALPHATESTENABLE, FALSE);
 }
 
-//--------------------------------------------
-//設定
-//--------------------------------------------
-int SetShadow(D3DXVECTOR3 pos, D3DXVECTOR3 rot)
+//**************************************************************************************
+// 影の設定
+//**************************************************************************************
+int SetShadow(D3DXVECTOR3 pos, D3DXVECTOR3 rot,float fWidth)
 {
-	int nCntShadow;
-	for (nCntShadow = 0; nCntShadow < SHADOW_MAX; nCntShadow++)
+	int nCntShadow = 0;
+
+	VERTEX_3D* pVtx = NULL;
+
+	// 頂点バッファをロック
+	g_pVtxBuffShadow->Lock(0, 0, (void**)&pVtx, 0);
+
+	for (nCntShadow = 0; nCntShadow < MAX_SHADOW; nCntShadow++)
 	{
-		if (!g_aShadow[nCntShadow].bUse)
+		if (g_aShadow[nCntShadow].bUse == false)
 		{
-			g_aShadow[nCntShadow].pos.x = pos.x;
-			g_aShadow[nCntShadow].pos.z = pos.z;
-			g_aShadow[nCntShadow].rot.y = rot.y;
-			g_aShadow[nCntShadow].scale = D3DXVECTOR3(1.0f, 1.0f, 1.0f);
+			g_aShadow[nCntShadow].pos = pos;
+			g_aShadow[nCntShadow].rot = rot;
 			g_aShadow[nCntShadow].bUse = true;
+			g_aShadow[nCntShadow].fWidth = fWidth;
+
+			// 頂点座標の設定
+			pVtx[0].pos.x = -fWidth;
+			pVtx[0].pos.y = pos.y;
+			pVtx[0].pos.z = fWidth;
+
+			pVtx[1].pos.x = fWidth;
+			pVtx[1].pos.y = pos.y;
+			pVtx[1].pos.z = fWidth;
+
+			pVtx[2].pos.x = -fWidth;
+			pVtx[2].pos.y = pos.y;
+			pVtx[2].pos.z = -fWidth;
+
+			pVtx[3].pos.x = fWidth;
+			pVtx[3].pos.y = pos.y;
+			pVtx[3].pos.z = -fWidth;
+
 			break;
 		}
+
+		pVtx += 4;
 	}
+
+	// 頂点バッファをアンロック
+	g_pVtxBuffShadow->Unlock();
+
 	return nCntShadow;
 }
 
-//------------------
-//位置の更新
-//------------------
-void SetPositionShadow(int nIdxShadow, D3DXVECTOR3 pos, D3DXVECTOR3 scale, float fSize)
+//**************************************************************************************
+// 影の位置の更新処理
+//**************************************************************************************
+void SetPositionShadow(int nIdxShadow, D3DXVECTOR3 pos)
 {
+	VERTEX_3D* pVtx = NULL;
+	D3DXVECTOR3 move = D3DXVECTOR3(0.0f,0.0f,0.0f);
+	D3DXCOLOR col = g_aShadow[nIdxShadow].col;
+	float fMaguA;
+	float fMaguB;
+
+	// 頂点バッファをロック
+	g_pVtxBuffShadow->Lock(0, 0, (void**)&pVtx, 0);
+
+	pVtx += 4 * nIdxShadow;
+
 	g_aShadow[nIdxShadow].pos.x = pos.x;
+	g_aShadow[nIdxShadow].pos.y -= 30.0f;
 	g_aShadow[nIdxShadow].pos.z = pos.z;
-	g_aShadow[nIdxShadow].scale = scale * fSize * pos.y * SHADOW_INA;
+
+	g_aShadow[nIdxShadow].branding = false;	// 乗ってない
+
+	if (CollisionMeshField(&g_aShadow[nIdxShadow].pos, &pos, &move))
+	{
+		g_aShadow[nIdxShadow].branding = true;	// 乗ってる
+		fMaguA = pos.y / g_aShadow[nIdxShadow].pos.y * 0.9f;
+		fMaguB = g_aShadow[nIdxShadow].pos.y / pos.y;
+
+		// 頂点座標の設定
+		pVtx[0].pos.x = -g_aShadow[nIdxShadow].fWidth * fMaguA;
+		pVtx[0].pos.y = 0.1f;
+		pVtx[0].pos.z = g_aShadow[nIdxShadow].fWidth * fMaguA;
+
+		pVtx[1].pos.x = g_aShadow[nIdxShadow].fWidth * fMaguA;
+		pVtx[1].pos.y = 0.1f;
+		pVtx[1].pos.z = g_aShadow[nIdxShadow].fWidth * fMaguA;
+
+		pVtx[2].pos.x = -g_aShadow[nIdxShadow].fWidth * fMaguA;
+		pVtx[2].pos.y = 0.1f;
+		pVtx[2].pos.z = -g_aShadow[nIdxShadow].fWidth * fMaguA;
+
+		pVtx[3].pos.x = g_aShadow[nIdxShadow].fWidth * fMaguA;
+		pVtx[3].pos.y = 0.1f;
+		pVtx[3].pos.z = -g_aShadow[nIdxShadow].fWidth * fMaguA;
+
+		col.r = g_aShadow[nIdxShadow].col.r * fMaguB;
+		col.g = g_aShadow[nIdxShadow].col.g * fMaguB;
+		col.b = g_aShadow[nIdxShadow].col.b * fMaguB;
+		col.a = g_aShadow[nIdxShadow].col.a * fMaguB;
+
+		if (col.a <= 0.1f)
+		{
+			col.a = 0.0f;
+		}
+
+		// 頂点カラーの設定
+		pVtx[0].col = col;
+		pVtx[1].col = col;
+		pVtx[2].col = col;
+		pVtx[3].col = col;
+	}
+
+	// 頂点バッファをアンロック
+	g_pVtxBuffShadow->Unlock();
 }
 
-//------------------------------
-//影を消す
-//------------------------------
-void NullShadow(int nIdxShadow)
+//**************************************************************************************
+// 影の位置の更新処理
+//**************************************************************************************
+void EndShadow(int nIdxShadow)
 {
 	g_aShadow[nIdxShadow].bUse = false;
 }

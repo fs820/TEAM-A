@@ -1,38 +1,32 @@
-//---------------------------------------
-//
-//ポリゴン表示処理の定義・宣言[shadow.h]
-//Author fuma sato
-//
-//---------------------------------------
-
 #ifndef _SHADOW_H_
 #define _SHADOW_H_
 
-#include"main.h"
-#include"game.h"
+#include "main.h"
 
-#define SHADOW_TEX "data\\TEXTURE\\shadow000.jpg"
-#define SHADOW_MAX (512)
-#define SHADOW_WIDTH (100.0f)
-#define SHADOW_HEIGHT (0.0f)
-#define SHADOW_Z (100.0f)
-#define SHADOW_INA (0.0001f)
+// マクロ定義
+#define MAX_SHADOW (256)	// 影の最大数
 
+// 影構造体
 typedef struct
 {
-	D3DXVECTOR3 pos;
-	D3DXVECTOR3 rot;
-	D3DXVECTOR3 scale;
-	D3DXMATRIX mtxWorld;
-	bool bUse;
+	D3DXVECTOR3 pos;		// 位置
+	D3DXVECTOR3 posEX;		// 位置EX
+	D3DXVECTOR3 rot;		// 向き
+	D3DXCOLOR col;			// 色
+	D3DXMATRIX mtxWorld;	// マトリックス
+	bool bUse;				// 使用するかどうか
+	bool branding;			// 乗ってるかどうか
+	float fWidth;			// 幅
 }Shadow;
 
-void InitShadow(void);//ポリゴンの初期化処理
-void UninitShadow(void);//ポリゴンの終了処理
-void UpdateShadow(void);//ポリゴンの更新処理
-void DrawShadow(void);//ポリゴンの描画処理
-int SetShadow(D3DXVECTOR3 pos, D3DXVECTOR3 rot);
-void SetPositionShadow(int nIdxShadow, D3DXVECTOR3 pos, D3DXVECTOR3 scale, float fSize);
-void NullShadow(int nIdxShadow);
+// プロトタイプ宣言
+void InitShadow(void);
+void UninitShadow(void);
+void UpdateShadow(void);
+void DrawShadow(void);
 
-#endif _POLYGON_H_
+int SetShadow(D3DXVECTOR3 pos, D3DXVECTOR3 rot, float fWidth);
+void SetPositionShadow(int nIdxShadow, D3DXVECTOR3 pos);
+void EndShadow(int nIdxShadow);
+
+#endif // !_SHADOW_H_

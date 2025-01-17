@@ -464,7 +464,7 @@ void InitPlayer(void)
 		g_Player.aModel[nCnt].posDef = g_Player.aModel[nCnt].pos;
 	}
 
-	g_Player.nIdxShadow = SetShadow(g_Player.pos, g_Player.rot);
+	g_Player.nIdxShadow = SetShadow(g_Player.pos, g_Player.rot, 100.0f);
 }
 
 //-------------------
@@ -952,7 +952,7 @@ void UpdatePlayer(void)
 			{
 				g_Player.state = PLAYERSTATE_DIE;
 			}
-			SetPositionShadow(g_Player.nIdxShadow, g_Player.pos, g_Player.scale, 200.0f);
+			SetPositionShadow(g_Player.nIdxShadow, g_Player.pos);
 			break;
 		case PLAYERSTATE_DIE:
 			g_Player.Destrot.x = D3DX_PI * 0.5f;
@@ -960,7 +960,7 @@ void UpdatePlayer(void)
 			nCnt++;
 			if (nCnt >= 20)
 			{
-				NullShadow(g_Player.nIdxShadow);
+				EndShadow(g_Player.nIdxShadow);
 				SetParticle(g_Player.pos, g_Player.scale);
 				g_Player.state = PLAYERSTATE_APPEAR;
 			}

@@ -112,7 +112,7 @@ void UpdateBillboard(void)
 	{
 		if (g_aBillboard[nCntBillboard].bUse)
 		{
-			SetPositionShadow(g_aBillboard[nCntBillboard].nIdxShadow, g_aBillboard[nCntBillboard].pos, D3DXVECTOR3(1.0f, 1.0f, 1.0f), BILLBOARD_HEIGHT);
+			SetPositionShadow(g_aBillboard[nCntBillboard].nIdxShadow, g_aBillboard[nCntBillboard].pos);
 		}
 	}
 }
@@ -208,7 +208,7 @@ void SetBillboard(D3DXVECTOR3 pos, D3DXVECTOR3 scale)
 			g_aBillboard[nCntBillboard].pos = pos;
 			g_aBillboard[nCntBillboard].scale = scale;
 			g_aBillboard[nCntBillboard].bUse = true;
-			g_aBillboard[nCntBillboard].nIdxShadow = SetShadow(g_aBillboard[nCntBillboard].pos, D3DXVECTOR3(0.0f, 0.0f, 0.0f));
+			g_aBillboard[nCntBillboard].nIdxShadow = SetShadow(g_aBillboard[nCntBillboard].pos, D3DXVECTOR3(0.0f, 0.0f, 0.0f), BILLBOARD_WIDTH);
 			break;
 		}
 	}

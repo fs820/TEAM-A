@@ -140,10 +140,10 @@ void UpdateBullet(void)
 			if (g_aBullet[nCntBullet].nLife < 0)
 			{
 				g_aBullet[nCntBullet].bUse = false;
-				NullShadow(g_aBullet[nCntBullet].nIdxShadow);
+				EndShadow(g_aBullet[nCntBullet].nIdxShadow);
 				SetParticle(g_aBullet[nCntBullet].pos, g_aBullet[nCntBullet].scale);
 			}
-			SetPositionShadow(g_aBullet[nCntBullet].nIdxShadow, g_aBullet[nCntBullet].pos, g_aBullet[nCntBullet].scale, BULLET_HEIGHT);
+			SetPositionShadow(g_aBullet[nCntBullet].nIdxShadow, g_aBullet[nCntBullet].pos);
 		}
 	}
 }
@@ -240,7 +240,7 @@ void SetBullet(D3DXVECTOR3 pos, D3DXVECTOR3 dir, D3DXVECTOR3 scale)
 			g_aBullet[nCntBullet].scale = scale;
 			g_aBullet[nCntBullet].nLife = BULEET_LIFE;
 			g_aBullet[nCntBullet].bUse = true;
-			g_aBullet[nCntBullet].nIdxShadow = SetShadow(g_aBullet[nCntBullet].pos, g_aBullet[nCntBullet].dir);
+			g_aBullet[nCntBullet].nIdxShadow = SetShadow(g_aBullet[nCntBullet].pos, g_aBullet[nCntBullet].dir, BULLET_WIDTH);
 			break;
 		}
 	}

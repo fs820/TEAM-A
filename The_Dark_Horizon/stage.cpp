@@ -86,7 +86,14 @@ void UninitStage(void)
 //-------------------
 void UpdateStage(void)
 {
-
+	int nCntStage;
+	for (nCntStage = 0; nCntStage < STAGE_MAX; nCntStage++)
+	{
+		if (g_aStage[nCntStage].bUse)
+		{
+			SetPositionShadow(g_aStage[nCntStage].nIdxShadow, g_aStage[nCntStage].pos);
+		}
+	}
 }
 
 //-------------------
@@ -244,7 +251,7 @@ void SetStage(char* name, D3DXVECTOR3 pos, D3DXVECTOR3 rot, D3DXVECTOR3 scale)
 			g_aStage[nCntStage].fLength = sqrtf((g_aStage[nCntStage].vtxMax.x - g_aStage[nCntStage].vtxMin.x) * (g_aStage[nCntStage].vtxMax.x - g_aStage[nCntStage].vtxMin.x) + (g_aStage[nCntStage].vtxMax.z - g_aStage[nCntStage].vtxMin.z) * (g_aStage[nCntStage].vtxMax.z - g_aStage[nCntStage].vtxMin.z)) / 2.0f;
 			g_aStage[nCntStage].fAngle = atan2f((g_aStage[nCntStage].vtxMax.x - g_aStage[nCntStage].vtxMin.x), (g_aStage[nCntStage].vtxMax.z - g_aStage[nCntStage].vtxMin.z));//Šp“x
 
-			g_aStage[nCntStage].nIdxShadow = SetShadow(g_aStage[nCntStage].pos, g_aStage[nCntStage].rot);
+			g_aStage[nCntStage].nIdxShadow = SetShadow(g_aStage[nCntStage].pos, g_aStage[nCntStage].rot, g_aStage[nCntStage].fLength);
 			g_aStage[nCntStage].bUse = true;
 			break;
 		}
