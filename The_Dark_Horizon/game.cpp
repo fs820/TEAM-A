@@ -45,13 +45,8 @@ void InitGame(void)
 	InitModel();
 	InitShadow();
 	InitStage();
-<<<<<<< HEAD
-	InitMeshField();
-	InitCylinder();
-=======
 	InitMeshfield();
 	//InitCylinder();
->>>>>>> c5f2858db81c527e54fa4367318dd3e0f788a54f
 	InitSphere();
 	InitMeshWall();
 	InitPlayer();//プレイヤー
@@ -103,16 +98,12 @@ void UninitGame(void)
 	UninitMeshWall();
 	//UninitCylinder();
 	UninitSphere();
-<<<<<<< HEAD
-	UninitMeshField();
-=======
 	UninitMeshfield();
 #ifdef _DEBUG
 
 	UninitEditPlayer();
 
 #endif
->>>>>>> c5f2858db81c527e54fa4367318dd3e0f788a54f
 	UninitPlayer();//プレイヤー
 	UninitStage();
 	UninitShadow();
@@ -243,13 +234,8 @@ void UpdateGame(void)
 
 #endif
 		UpdateMeshWall();
-<<<<<<< HEAD
-		UpdateMeshField();
-		UpdateCylinder();
-=======
 		UpdateMeshfield();
 		//UpdateCylinder();
->>>>>>> c5f2858db81c527e54fa4367318dd3e0f788a54f
 		UpdateSphere();
 		UpdateBillboard();
 		UpdateBullet();
@@ -266,13 +252,8 @@ void DrawGame(void)
 {
 	DrawModel();
 	DrawSphere();
-<<<<<<< HEAD
-	DrawMeshField();
-	DrawCylinder();
-=======
 	DrawMeshfield();
 	//DrawCylinder();
->>>>>>> c5f2858db81c527e54fa4367318dd3e0f788a54f
 	DrawShadow();
 	DrawStage();
 	DrawMeshWall();

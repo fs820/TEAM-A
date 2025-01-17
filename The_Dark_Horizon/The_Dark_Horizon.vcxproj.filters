@@ -102,7 +102,7 @@
     <ClCompile Include="editplayer.cpp">
       <Filter>ソース ファイル\tetsuji</Filter>
     </ClCompile>
-    <ClCompile Include="meshfieldGround.cpp">
+    <ClCompile Include="meshfield.cpp">
       <Filter>ソース ファイル\tetsuji</Filter>
     </ClCompile>
   </ItemGroup>
@@ -191,7 +191,7 @@
     <ClInclude Include="editplayer.h">
       <Filter>ヘッダー ファイル\tetsuji</Filter>
     </ClInclude>
-    <ClInclude Include="meshfieldGround.h">
+    <ClInclude Include="meshfield.h">
       <Filter>ヘッダー ファイル\tetsuji</Filter>
     </ClInclude>
   </ItemGroup>

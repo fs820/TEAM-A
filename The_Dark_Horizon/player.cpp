@@ -13,6 +13,7 @@
 #include"bullet.h"
 #include"file.h"
 #include"particle.h"
+#include"meshfield.h"
 
 //ƒOƒ[ƒoƒ‹•Ï”éŒ¾
 Player g_Player;
@@ -826,11 +827,8 @@ void UpdatePlayer(void)
 
 		g_Player.bJump = !CollisionStage(&g_Player.pStage);
 
-<<<<<<< HEAD
-=======
 		g_Player.bJump = !CollisionMeshField(&g_Player.pos, &g_Player.posOld, &g_Player.move);
 
->>>>>>> c5f2858db81c527e54fa4367318dd3e0f788a54f
 		if (g_Player.pStage != NULL)
 		{
 			g_Player.pos += g_Player.pStage->move;

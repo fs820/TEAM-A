@@ -63,13 +63,8 @@ void InitTitle(void)
 {
 	InitShadow();
 	InitStage();
-<<<<<<< HEAD
-	InitMeshField();
-	InitCylinder();
-=======
 	InitMeshfield();
 	//InitCylinder();
->>>>>>> c5f2858db81c527e54fa4367318dd3e0f788a54f
 	InitSphere();
 	InitMeshWall();
 	InitBillboard();
@@ -241,13 +236,8 @@ void UninitTitle(void)
 
 	UninitShadow();
 	UninitStage();
-<<<<<<< HEAD
-	UninitMeshField();
-	UninitCylinder();
-=======
 	UninitMeshfield();
 	//UninitCylinder();
->>>>>>> c5f2858db81c527e54fa4367318dd3e0f788a54f
 	UninitSphere();
 	UninitMeshWall();
 	UninitBillboard();
@@ -1487,13 +1477,8 @@ void UpdateTitle(void)
 
 	UpdateShadow();
 	UpdateStage();
-<<<<<<< HEAD
-	UpdateMeshField();
-	UpdateCylinder();
-=======
 	UpdateMeshfield();
 	//UpdateCylinder();
->>>>>>> c5f2858db81c527e54fa4367318dd3e0f788a54f
 	UpdateSphere();
 	UpdateMeshWall();
 	UpdateBillboard();
@@ -1506,7 +1491,7 @@ void DrawTitle(void)
 {
 	LPDIRECT3DDEVICE9 pDevice;//デバイスへポインタ
 
-	DrawMeshField();
+	DrawMeshfield();
 	DrawSphere();
 	//DrawCylinder();
 	DrawShadow();
