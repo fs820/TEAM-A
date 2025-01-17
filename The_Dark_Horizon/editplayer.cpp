@@ -158,18 +158,18 @@ void EditPlayerManager()
 	Camera* pCamera = GetCamera();				// カメラの取得
 
 	// カメラに対して移動する処理--------------------------------------------------------------
-	if (GetKeyboradRepeat(DIK_LSHIFT) || GetJoykeyRepeat(JOYKEY_LB, CONTROLLER_1))
+	if (GetKeyboradPress(DIK_LSHIFT) || GetJoykeyPress(JOYKEY_LB, CONTROLLER_1))
 	{// Lシフト長押し
 		// コマンド処理
-		if (GetKeyboradRepeat(DIK_W))
+		if (GetKeyboradPress(DIK_W))
 		{// 移動量上昇
 			g_editPlayer.movement += 0.1f;
 		}
-		else if (GetKeyboradRepeat(DIK_S))
+		else if (GetKeyboradPress(DIK_S))
 		{// 移動減少
 			g_editPlayer.movement -= 0.1f;
 		}
-		else if (GetKeyboradRepeat(DIK_A))
+		else if (GetKeyboradPress(DIK_A))
 		{// 移動ゼロ
 			g_editPlayer.movement = 0.0f;
 		}
@@ -187,20 +187,20 @@ void EditPlayerManager()
 			g_editPlayer.graviment = 0.0f;
 		}
 
-		if (GetKeyboradRepeat(DIK_Z))
+		if (GetKeyboradPress(DIK_Z))
 		{// 重力上昇
 			g_editPlayer.jumpment += 0.1f;
 		}
-		else if (GetKeyboradRepeat(DIK_X))
+		else if (GetKeyboradPress(DIK_X))
 		{// 重力減少
 			g_editPlayer.jumpment -= 0.1f;
 		}
-		else if (GetKeyboradRepeat(DIK_C))
+		else if (GetKeyboradPress(DIK_C))
 		{// 重力ゼロ
 			g_editPlayer.jumpment = 0.0f;
 		}
 
-		if (GetJoykeyRepeat(JOYKEY_L3, CONTROLLER_1))
+		if (GetJoykeyPress(JOYKEY_L3, CONTROLLER_1))
 		{// 上移動
 			g_editPlayer.move.y += g_editPlayer.movement;
 		}
@@ -217,33 +217,33 @@ void EditPlayerManager()
 		float fMoveX = 0.0f;
 		float fMoveZ = 0.0f;
 
-		if (GetKeyboradRepeat(DIK_W))
+		if (GetKeyboradPress(DIK_W))
 		{// 前移動
 			bMove = true;
 			fMoveZ = 1.0f;
 		}
-		else if (GetKeyboradRepeat(DIK_S))
+		else if (GetKeyboradPress(DIK_S))
 		{// 手前移動
 			bMove = true;
 			fMoveZ = -1.0f;
 		}
 
-		if (GetKeyboradRepeat(DIK_A))
+		if (GetKeyboradPress(DIK_A))
 		{// 左移動
 			bMove = true;
 			fMoveX = -1.0f;
 		}
-		else if (GetKeyboradRepeat(DIK_D))
+		else if (GetKeyboradPress(DIK_D))
 		{// 右移動
 			bMove = true;
 			fMoveX = 1.0f;
 		}
 
-		if (GetKeyboradRepeat(DIK_Q))
+		if (GetKeyboradPress(DIK_Q))
 		{// 上移動
 			g_editPlayer.move.y += g_editPlayer.movement;
 		}
-		else if (GetKeyboradRepeat(DIK_E) || GetJoykeyRepeat(JOYKEY_L3, CONTROLLER_1))
+		else if (GetKeyboradPress(DIK_E) || GetJoykeyPress(JOYKEY_L3, CONTROLLER_1))
 		{// 下移動
 			g_editPlayer.move.y -= g_editPlayer.movement;
 		}
@@ -253,11 +253,11 @@ void EditPlayerManager()
 			g_editPlayer.move.y += g_editPlayer.jumpment;
 		}
 
-		if (GetKeyboradRepeat(DIK_RSHIFT) || GetJoykeyRepeat(JOYKEY_RB,CONTROLLER_1))
+		if (GetKeyboradPress(DIK_RSHIFT) || GetJoykeyPress(JOYKEY_RB,CONTROLLER_1))
 		{// 押している間
 			VertexMoveMeshField(g_editPlayer.pos, g_editPlayer.move, 50.0f);
 		}
-		else if (GetKeyboradRelease(DIK_RSHIFT) || GetJoykeyRelease(JOYKEY_RB, CONTROLLER_1))
+		if (GetKeyboradRelease(DIK_RSHIFT) || GetJoykeyRelease(JOYKEY_RB, CONTROLLER_1))
 		{// 離したら
 			// 法線再設定
 			ResetNorVectolMeshField();

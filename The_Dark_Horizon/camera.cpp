@@ -36,6 +36,8 @@ void InitCamera(void)
 		g_camera[nCount].viewport.Y = (nCount / CAMERA_XNUM) * SCREEN_HEIGHT / CAMERA_YNUM;
 		g_camera[nCount].viewport.Width = SCREEN_WIDTH / CAMERA_XNUM;
 		g_camera[nCount].viewport.Height = SCREEN_HEIGHT / CAMERA_YNUM;
+		g_camera[nCount].viewport.MinZ = 0.0f;
+		g_camera[nCount].viewport.MaxZ = 1.0f;
 		g_camera[nCount].Master = NONE;
 	}
 }
