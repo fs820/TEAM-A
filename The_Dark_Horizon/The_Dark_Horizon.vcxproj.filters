@@ -13,6 +13,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="ソース ファイル\tetsuji">
+      <UniqueIdentifier>{ea5c38a1-c70c-4c1c-bb50-7252faa04312}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\tetsuji">
+      <UniqueIdentifier>{e40522a2-cd8d-4859-b148-127bd7be4359}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="billboard.cpp">
@@ -46,9 +52,6 @@
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="meshfield.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="meshwall.cpp">
@@ -96,6 +99,12 @@
     <ClCompile Include="ui.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="editplayer.cpp">
+      <Filter>ソース ファイル\tetsuji</Filter>
+    </ClCompile>
+    <ClCompile Include="meshfieldGround.cpp">
+      <Filter>ソース ファイル\tetsuji</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="billboard.h">
@@ -129,9 +138,6 @@
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="main.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="meshfield.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="meshwall.h">
@@ -181,6 +187,12 @@
     </ClInclude>
     <ClInclude Include="ui.h">
       <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="editplayer.h">
+      <Filter>ヘッダー ファイル\tetsuji</Filter>
+    </ClInclude>
+    <ClInclude Include="meshfieldGround.h">
+      <Filter>ヘッダー ファイル\tetsuji</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
