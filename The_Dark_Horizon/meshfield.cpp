@@ -4,7 +4,7 @@
 // Aouther Tetsuji Yamamoto
 // 
 //***********************************************
-#include "meshfieldGround.h"
+#include "meshfield.h"
 
 // グローバル変数宣言
 LPDIRECT3DVERTEXBUFFER9 g_pVtxBuffMeshfield = NULL;	// 頂点バッファへのポインタ
@@ -191,7 +191,7 @@ void InitMeshfield(void)
 	// 頂点バッファをアンロック
 	g_pVtxBuffMeshfield->Unlock();
 
-	SetMeshFieldGround(D3DXVECTOR3(0.0f, 0.0f, 0.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f));
+	SetMeshField(D3DXVECTOR3(0.0f, 0.0f, 0.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f));
 }
 
 //**************************************

@@ -37,7 +37,7 @@ void UninitMeshfield(void);
 void UpdateMeshfield(void);
 void DrawMeshfield(void);
 
-void SetMeshFieldGround(D3DXVECTOR3 pos, D3DXVECTOR3 rot);
+void SetMeshField(D3DXVECTOR3 pos, D3DXVECTOR3 rot);
 bool CollisionMeshField(D3DXVECTOR3* pPos, D3DXVECTOR3* pPosOld, D3DXVECTOR3* pMove);
 void VertexMoveMeshField(D3DXVECTOR3 pos, D3DXVECTOR3 move, float fRadius);
 void ResetNorVectolMeshField();

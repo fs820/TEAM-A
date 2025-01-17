@@ -42,7 +42,7 @@ void InitRank(void)
 {
 	InitShadow();
 	InitStage();
-	InitMeshField();
+	InitMeshfield();
 	InitCylinder();
 	InitSphere();
 	InitMeshWall();
@@ -251,7 +251,7 @@ void UninitRank(void)
 
 	UninitShadow();
 	UninitStage();
-	UninitMeshField();
+	UninitMeshfield();
 	UninitCylinder();
 	UninitSphere();
 	UninitMeshWall();
@@ -383,7 +383,7 @@ void UpdateRank(void)
 
 		UpdateShadow();
 		UpdateStage();
-		UpdateMeshField();
+		UpdateMeshfield();
 		UpdateCylinder();
 		UpdateSphere();
 		UpdateMeshWall();
@@ -398,7 +398,7 @@ void DrawRank(void)
 {
 	LPDIRECT3DDEVICE9 pDevice;//デバイスへポインタ
 
-	DrawMeshField();
+	DrawMeshfield();
 	DrawSphere();
 	DrawCylinder();
 	DrawShadow();

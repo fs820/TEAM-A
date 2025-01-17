@@ -36,7 +36,7 @@ void InitResult(void)
 {
 	InitShadow();
 	InitStage();
-	InitMeshField();
+	InitMeshfield();
 	InitCylinder();
 	InitSphere();
 	InitMeshWall();
@@ -146,7 +146,7 @@ void UninitResult(void)
 
 	UninitShadow();
 	UninitStage();
-	UninitMeshField();
+	UninitMeshfield();
 	UninitCylinder();
 	UninitSphere();
 	UninitMeshWall();
@@ -279,7 +279,7 @@ void UpdateResult(void)
 
 	UpdateShadow();
 	UpdateStage();
-	UpdateMeshField();
+	UpdateMeshfield();
 	UpdateCylinder();
 	UpdateSphere();
 	UpdateMeshWall();
@@ -293,7 +293,7 @@ void DrawResult(void)
 {
 	LPDIRECT3DDEVICE9 pDevice;//デバイスへポインタ
 
-	DrawMeshField();
+	DrawMeshfield();
 	DrawSphere();
 	DrawCylinder();
 	DrawShadow();

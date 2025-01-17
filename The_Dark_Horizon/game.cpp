@@ -43,7 +43,7 @@ void InitGame(void)
 	InitModel();
 	InitShadow();
 	InitStage();
-	InitMeshField();
+	InitMeshfield();
 	InitCylinder();
 	InitSphere();
 	InitMeshWall();
@@ -90,7 +90,7 @@ void UninitGame(void)
 	UninitMeshWall();
 	UninitCylinder();
 	UninitSphere();
-	UninitMeshField();
+	UninitMeshfield();
 	UninitPlayer();//プレイヤー
 	UninitStage();
 	UninitShadow();
@@ -197,7 +197,7 @@ void UpdateGame(void)
 		UpdateStage();
 		UpdatePlayer();//プレイヤー
 		UpdateMeshWall();
-		UpdateMeshField();
+		UpdateMeshfield();
 		UpdateCylinder();
 		UpdateSphere();
 		UpdateBillboard();
@@ -215,7 +215,7 @@ void DrawGame(void)
 {
 	DrawModel();
 	DrawSphere();
-	DrawMeshField();
+	DrawMeshfield();
 	DrawCylinder();
 	DrawShadow();
 	DrawStage();
