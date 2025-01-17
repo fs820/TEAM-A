@@ -37,7 +37,7 @@ void InitResult(void)
 	InitShadow();
 	InitStage();
 	InitMeshfield();
-	InitCylinder();
+	//InitCylinder();
 	InitSphere();
 	InitMeshWall();
 	InitBillboard();
@@ -147,7 +147,7 @@ void UninitResult(void)
 	UninitShadow();
 	UninitStage();
 	UninitMeshfield();
-	UninitCylinder();
+	//UninitCylinder();
 	UninitSphere();
 	UninitMeshWall();
 	UninitBillboard();
@@ -280,7 +280,7 @@ void UpdateResult(void)
 	UpdateShadow();
 	UpdateStage();
 	UpdateMeshfield();
-	UpdateCylinder();
+	//UpdateCylinder();
 	UpdateSphere();
 	UpdateMeshWall();
 	UpdateBillboard();
@@ -295,7 +295,7 @@ void DrawResult(void)
 
 	DrawMeshfield();
 	DrawSphere();
-	DrawCylinder();
+	//DrawCylinder();
 	DrawShadow();
 	DrawStage();
 	DrawBillboard();

@@ -31,7 +31,7 @@ void InitEditPlayer()
 	g_editPlayer.bDisp = true;								// ‰f‚·‚©‚Ç‚¤‚©
 
 	// Xƒtƒ@ƒCƒ‹‚Ì“Ç‚İ‚İ
-	D3DXLoadMeshFromX("date\\tetsuji\\model\\Player_UFO_001.x",
+	D3DXLoadMeshFromX("data\\tetsuji\\model\\Player_UFO_001.x",
 		D3DXMESH_SYSTEMMEM,
 		pDevice,
 		NULL,

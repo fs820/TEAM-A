@@ -827,14 +827,7 @@ void UpdatePlayer(void)
 
 		g_Player.bJump = !CollisionStage(&g_Player.pStage);
 
-		g_Player.bJump = CollisionMeshField(&g_Player.pos, &g_Player.posOld, &g_Player.move);
-
-		//Debug
-		if (g_Player.pos.y <= 0.0f)
-		{
-			g_Player.pos.y = 0.0f;
-			g_Player.move.y = 0.0f;
-		}
+		g_Player.bJump = !CollisionMeshField(&g_Player.pos, &g_Player.posOld, &g_Player.move);
 
 		if (g_Player.pStage != NULL)
 		{

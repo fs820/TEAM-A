@@ -8,6 +8,7 @@
 #include"game.h"
 #include"input.h"
 #include"player.h"
+#include"editplayer.h"
 #include"bullet.h"
 #include"effect.h"
 #include"particle.h"
@@ -35,6 +36,7 @@ int g_nCounterGameState = 0;
 int g_GameTime = 0;
 bool g_bSnow = false;
 bool g_bClear = false;
+bool g_Edit = false;
 //--------------------
 //初期化処理
 //--------------------
@@ -44,10 +46,15 @@ void InitGame(void)
 	InitShadow();
 	InitStage();
 	InitMeshfield();
-	InitCylinder();
+	//InitCylinder();
 	InitSphere();
 	InitMeshWall();
 	InitPlayer();//プレイヤー
+#ifdef _DEBUG
+
+	InitEditPlayer();
+
+#endif
 	InitBullet();
 	InitEffect();
 	InitParticle();
@@ -88,9 +95,14 @@ void UninitGame(void)
 	UninitBullet();
 	UninitBillboard();
 	UninitMeshWall();
-	UninitCylinder();
+	//UninitCylinder();
 	UninitSphere();
 	UninitMeshfield();
+#ifdef _DEBUG
+
+	UninitEditPlayer();
+
+#endif
 	UninitPlayer();//プレイヤー
 	UninitStage();
 	UninitShadow();
@@ -195,10 +207,26 @@ void UpdateGame(void)
 		UpdateModel();
 		UpdateShadow();
 		UpdateStage();
-		UpdatePlayer();//プレイヤー
+		if (!g_Edit)
+		{
+			UpdatePlayer();//プレイヤー
+		}
+#ifdef _DEBUG
+
+		if (GetKeyboradTrigger(DIK_F6))
+		{
+			g_Edit = !g_Edit;
+		}
+
+		if (g_Edit)
+		{
+			UpdateEditPlayer();
+		}
+
+#endif
 		UpdateMeshWall();
 		UpdateMeshfield();
-		UpdateCylinder();
+		//UpdateCylinder();
 		UpdateSphere();
 		UpdateBillboard();
 		UpdateBullet();
@@ -216,14 +244,25 @@ void DrawGame(void)
 	DrawModel();
 	DrawSphere();
 	DrawMeshfield();
-	DrawCylinder();
+	//DrawCylinder();
 	DrawShadow();
 	DrawStage();
 	DrawMeshWall();
 	DrawBillboard();
 	DrawEffect();
 	DrawBullet();
-	DrawPlayer();//プレイヤー
+	if (!g_Edit)
+	{
+		DrawPlayer();//プレイヤー
+	}
+#ifdef _DEBUG
+
+	if (g_Edit)
+	{
+		DrawEditPlayer();
+	}
+
+#endif
 	DrawAlphaMeshWall();
 	DrawTime();
 	DrawUi();
