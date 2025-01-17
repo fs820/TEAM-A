@@ -58,6 +58,15 @@ static MOTION_INFO g_Motion[] =
 			 {
 			   0.0f,0.0f,0.0f,0.0f,0.0f,0.0f
 			 },
+			 {
+			   0.0f,0.0f,0.0f,0.0f,0.0f,0.0f
+			 },
+			 {
+			   0.0f,0.0f,0.0f,0.0f,0.0f,0.0f
+			 },
+			 {
+			   0.0f,0.0f,0.0f,0.0f,0.0f,0.0f
+			 }
 		  }
 	   },
 	   {
@@ -96,6 +105,15 @@ static MOTION_INFO g_Motion[] =
 			 {
 			   0.0f,0.0f,0.0f,0.03f,0.0f,0.0f
 			 },
+			 {
+			   0.0f,0.0f,0.0f,0.03f,0.0f,0.0f
+			 },
+			 {
+			   0.0f,0.0f,0.0f,0.03f,0.0f,0.0f
+			 },
+			 {
+			   0.0f,0.0f,0.0f,0.03f,0.0f,0.0f
+			 }
 		  }
 	   }
 	}
@@ -112,11 +130,11 @@ void InitPlayer(void)
 	//デバイスの取得
 	pDevice = GetDevice();
 
-	g_Player.pos = D3DXVECTOR3(START_X, 0.1f, START_Z);
+	g_Player.pos = D3DXVECTOR3(0.0f, 0.1f, 0.0f);
 	g_Player.posOld = D3DXVECTOR3(0.0f, 0.1f, 0.0f);
 	g_Player.move = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
-	g_Player.rot = D3DXVECTOR3(0.0f, D3DX_PI, 0.0f);
-	g_Player.Destrot = D3DXVECTOR3(0.0f, D3DX_PI, 0.0f);
+	g_Player.rot = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
+	g_Player.Destrot = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 	g_Player.scale = D3DXVECTOR3(1.0f, 1.0f, 1.0f);
 	g_Player.bJump = false;
 	g_Player.nLife = PLAYER_LIFE;
@@ -164,7 +182,7 @@ void InitPlayer(void)
 	//Xファイル読み込み
 	D3DXLoadMeshFromX
 	(
-		PLAYER_RIGHTARM_NAME,
+		PLAYER_RIGHTUPPERARM_NAME,
 		D3DXMESH_SYSTEMMEM,
 		pDevice,
 		NULL,
@@ -177,7 +195,7 @@ void InitPlayer(void)
 	//Xファイル読み込み
 	D3DXLoadMeshFromX
 	(
-		PLAYER_RIGHTHAND_NAME,
+		PLAYER_RIGHTARM_NAME,
 		D3DXMESH_SYSTEMMEM,
 		pDevice,
 		NULL,
@@ -190,7 +208,7 @@ void InitPlayer(void)
 	//Xファイル読み込み
 	D3DXLoadMeshFromX
 	(
-		PLAYER_LEFTARM_NAME,
+		PLAYER_RIGHTHAND_NAME,
 		D3DXMESH_SYSTEMMEM,
 		pDevice,
 		NULL,
@@ -203,7 +221,7 @@ void InitPlayer(void)
 	//Xファイル読み込み
 	D3DXLoadMeshFromX
 	(
-		PLAYER_LEFTHAND_NAME,
+		PLAYER_LEFTUPPERARM_NAME,
 		D3DXMESH_SYSTEMMEM,
 		pDevice,
 		NULL,
@@ -216,7 +234,7 @@ void InitPlayer(void)
 	//Xファイル読み込み
 	D3DXLoadMeshFromX
 	(
-		PLAYER_RIGHTLEG_NAME,
+		PLAYER_LEFTARM_NAME,
 		D3DXMESH_SYSTEMMEM,
 		pDevice,
 		NULL,
@@ -229,7 +247,7 @@ void InitPlayer(void)
 	//Xファイル読み込み
 	D3DXLoadMeshFromX
 	(
-		PLAYER_RIGHTFOOT_NAME,
+		PLAYER_LEFTHAND_NAME,
 		D3DXMESH_SYSTEMMEM,
 		pDevice,
 		NULL,
@@ -242,7 +260,7 @@ void InitPlayer(void)
 	//Xファイル読み込み
 	D3DXLoadMeshFromX
 	(
-		PLAYER_LEFTLEG_NAME,
+		PLAYER_RIGHTLEG_NAME,
 		D3DXMESH_SYSTEMMEM,
 		pDevice,
 		NULL,
@@ -255,7 +273,7 @@ void InitPlayer(void)
 	//Xファイル読み込み
 	D3DXLoadMeshFromX
 	(
-		PLAYER_LEFTFOOT_NAME,
+		PLAYER_RIGHTFOOT_NAME,
 		D3DXMESH_SYSTEMMEM,
 		pDevice,
 		NULL,
@@ -268,7 +286,7 @@ void InitPlayer(void)
 	//Xファイル読み込み
 	D3DXLoadMeshFromX
 	(
-		PLAYER_SWORD_NAME,
+		PLAYER_RIGHTFEET_NAME,
 		D3DXMESH_SYSTEMMEM,
 		pDevice,
 		NULL,
@@ -276,6 +294,45 @@ void InitPlayer(void)
 		NULL,
 		&g_Player.aModel[10].dwNumMat,
 		&g_Player.aModel[10].pMesh
+	);
+
+	//Xファイル読み込み
+	D3DXLoadMeshFromX
+	(
+		PLAYER_LEFTLEG_NAME,
+		D3DXMESH_SYSTEMMEM,
+		pDevice,
+		NULL,
+		&g_Player.aModel[11].pBuffMat,
+		NULL,
+		&g_Player.aModel[11].dwNumMat,
+		&g_Player.aModel[11].pMesh
+	);
+
+	//Xファイル読み込み
+	D3DXLoadMeshFromX
+	(
+		PLAYER_LEFTFOOT_NAME,
+		D3DXMESH_SYSTEMMEM,
+		pDevice,
+		NULL,
+		&g_Player.aModel[12].pBuffMat,
+		NULL,
+		&g_Player.aModel[12].dwNumMat,
+		&g_Player.aModel[12].pMesh
+	);
+
+	//Xファイル読み込み
+	D3DXLoadMeshFromX
+	(
+		PLAYER_LEFTFEET_NAME,
+		D3DXMESH_SYSTEMMEM,
+		pDevice,
+		NULL,
+		&g_Player.aModel[13].pBuffMat,
+		NULL,
+		&g_Player.aModel[13].dwNumMat,
+		&g_Player.aModel[13].pMesh
 	);
 
 	g_Player.nNumModel = NUM_MODEL;
@@ -345,7 +402,7 @@ void InitPlayer(void)
 	}
 
 	g_Player.aModel[0].nIdxModelParent = -1;
-	g_Player.aModel[0].pos = D3DXVECTOR3(0.0f, 10.0f, 0.0f);
+	g_Player.aModel[0].pos = D3DXVECTOR3(0.0f, 15.0f, 0.0f);
 	g_Player.aModel[0].rot = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 	g_Player.aModel[0].scale = D3DXVECTOR3(1.0f, 1.0f, 1.0f);
 	g_Player.aModel[1].nIdxModelParent = 0;
@@ -353,41 +410,53 @@ void InitPlayer(void)
 	g_Player.aModel[1].rot = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 	g_Player.aModel[1].scale = D3DXVECTOR3(1.0f, 1.0f, 1.0f);
 	g_Player.aModel[2].nIdxModelParent = 0;
-	g_Player.aModel[2].pos = D3DXVECTOR3(-7.5f, 12.0f, 0.0f);
+	g_Player.aModel[2].pos = D3DXVECTOR3(-16.0f, 12.0f, 0.0f);
 	g_Player.aModel[2].rot = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 	g_Player.aModel[2].scale = D3DXVECTOR3(1.0f, 1.0f, 1.0f);
 	g_Player.aModel[3].nIdxModelParent = 2;
-	g_Player.aModel[3].pos = D3DXVECTOR3(-10.0f, 0.0f, 0.0f);
+	g_Player.aModel[3].pos = D3DXVECTOR3(-8.0f, 0.0f, 0.0f);
 	g_Player.aModel[3].rot = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 	g_Player.aModel[3].scale = D3DXVECTOR3(1.0f, 1.0f, 1.0f);
-	g_Player.aModel[4].nIdxModelParent = 0;
-	g_Player.aModel[4].pos = D3DXVECTOR3(7.5f, 12.0f, 0.0f);
+	g_Player.aModel[4].nIdxModelParent = 3;
+	g_Player.aModel[4].pos = D3DXVECTOR3(-8.0f, 0.0f, 0.0f);
 	g_Player.aModel[4].rot = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 	g_Player.aModel[4].scale = D3DXVECTOR3(1.0f, 1.0f, 1.0f);
-	g_Player.aModel[5].nIdxModelParent = 4;
-	g_Player.aModel[5].pos = D3DXVECTOR3(10.0f, 0.0f, 0.0f);
+	g_Player.aModel[5].nIdxModelParent = 0;
+	g_Player.aModel[5].pos = D3DXVECTOR3(16.0f, 12.0f, 0.0f);
 	g_Player.aModel[5].rot = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 	g_Player.aModel[5].scale = D3DXVECTOR3(1.0f, 1.0f, 1.0f);
-	g_Player.aModel[6].nIdxModelParent = 0;
-	g_Player.aModel[6].pos = D3DXVECTOR3(-5.0f, 0.0f, 0.0f);
+	g_Player.aModel[6].nIdxModelParent = 5;
+	g_Player.aModel[6].pos = D3DXVECTOR3(8.0f, 0.0f, 0.0f);
 	g_Player.aModel[6].rot = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 	g_Player.aModel[6].scale = D3DXVECTOR3(1.0f, 1.0f, 1.0f);
 	g_Player.aModel[7].nIdxModelParent = 6;
-	g_Player.aModel[7].pos = D3DXVECTOR3(0.0f, -6.0f, 0.0f);
+	g_Player.aModel[7].pos = D3DXVECTOR3(8.0f, 0.0f, 0.0f);
 	g_Player.aModel[7].rot = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 	g_Player.aModel[7].scale = D3DXVECTOR3(1.0f, 1.0f, 1.0f);
 	g_Player.aModel[8].nIdxModelParent = 0;
-	g_Player.aModel[8].pos = D3DXVECTOR3(5.0f, 0.0f, 0.0f);
+	g_Player.aModel[8].pos = D3DXVECTOR3(-5.0f, 0.0f, 0.0f);
 	g_Player.aModel[8].rot = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 	g_Player.aModel[8].scale = D3DXVECTOR3(1.0f, 1.0f, 1.0f);
 	g_Player.aModel[9].nIdxModelParent = 8;
 	g_Player.aModel[9].pos = D3DXVECTOR3(0.0f, -6.0f, 0.0f);
 	g_Player.aModel[9].rot = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 	g_Player.aModel[9].scale = D3DXVECTOR3(1.0f, 1.0f, 1.0f);
-	g_Player.aModel[10].nIdxModelParent = 3;
-	g_Player.aModel[10].pos = D3DXVECTOR3(-3.0f, 0.0f, 0.0f);
+	g_Player.aModel[10].nIdxModelParent = 9;
+	g_Player.aModel[10].pos = D3DXVECTOR3(0.0f, -6.0f, 0.0f);
 	g_Player.aModel[10].rot = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 	g_Player.aModel[10].scale = D3DXVECTOR3(1.0f, 1.0f, 1.0f);
+	g_Player.aModel[11].nIdxModelParent = 0;
+	g_Player.aModel[11].pos = D3DXVECTOR3(5.0f, 0.0f, 0.0f);
+	g_Player.aModel[11].rot = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
+	g_Player.aModel[11].scale = D3DXVECTOR3(1.0f, 1.0f, 1.0f);
+	g_Player.aModel[12].nIdxModelParent = 11;
+	g_Player.aModel[12].pos = D3DXVECTOR3(0.0f, -6.0f, 0.0f);
+	g_Player.aModel[12].rot = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
+	g_Player.aModel[12].scale = D3DXVECTOR3(1.0f, 1.0f, 1.0f);
+	g_Player.aModel[13].nIdxModelParent = 12;
+	g_Player.aModel[13].pos = D3DXVECTOR3(0.0f, -6.0f, 0.0f);
+	g_Player.aModel[13].rot = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
+	g_Player.aModel[13].scale = D3DXVECTOR3(1.0f, 1.0f, 1.0f);
 
 	for (int nCnt = 0; nCnt < MAX_MODEL; nCnt++)
 	{
@@ -867,7 +936,7 @@ void UpdatePlayer(void)
 			g_Player.aModel[nCntModel].vtxMin.z = g_Player.aModel[nCntModel].vtxMinDef.z * g_Player.scale.z;
 		}
 
-		UpdateMotion();
+		//UpdateMotion();
 
 		//モーション用
 		//if (g_Player.motionType == MOTIONTYPE_ACTION && g_Player.nKey == 3 && g_Player.nCounterMotion == 11)

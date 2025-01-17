@@ -21,10 +21,10 @@ void InitCamera(void)
 	for (int nCount = 0; nCount < CAMERA_XNUM * CAMERA_YNUM; nCount++)
 	{
 		//ƒJƒƒ‰Ý’è
-		g_camera[nCount].posV = D3DXVECTOR3(0.0f, 120.0f, START_Z - 300.0f);
-		g_camera[nCount].posVDest = D3DXVECTOR3(0.0f, 120.0f, START_Z - 300.0f);
-		g_camera[nCount].posR = D3DXVECTOR3(0.0f, 0.0f, START_Z);
-		g_camera[nCount].posRDest = D3DXVECTOR3(0.0f, 0.0f, START_Z);
+		g_camera[nCount].posV = D3DXVECTOR3(0.0f, 120.0f, 0.0f - 300.0f);
+		g_camera[nCount].posVDest = D3DXVECTOR3(0.0f, 120.0f, -300.0f);
+		g_camera[nCount].posR = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
+		g_camera[nCount].posRDest = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 		g_camera[nCount].posU = D3DXVECTOR3(0.0f, 1.0f, 0.0f);
 
 		g_camera[nCount].rot = D3DXVECTOR3(-atan2f(120.0f, 300.0f), 0.0f, 0.0f);
