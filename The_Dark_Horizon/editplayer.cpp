@@ -6,6 +6,8 @@
 //*********************************************************************************************
 #include "editplayer.h"
 #include "camera.h"
+#include"input.h"
+#include"meshfield.h"
 
 // グローバル変数宣言
 EDITPLAYER g_editPlayer;	// エディットプレイヤー情報
@@ -29,7 +31,7 @@ void InitEditPlayer()
 	g_editPlayer.bDisp = true;								// 映すかどうか
 
 	// Xファイルの読み込み
-	D3DXLoadMeshFromX("date\\model\\Player_UFO_001.x",
+	D3DXLoadMeshFromX("date\\tetsuji\\model\\Player_UFO_001.x",
 		D3DXMESH_SYSTEMMEM,
 		pDevice,
 		NULL,
@@ -153,156 +155,153 @@ void DrawEditPlayer()
 //*********************************************************************************************
 void EditPlayerManager()
 {
-	//Camera* pCamera = GetCamera();				// カメラの取得
-	//XINPUT_STATE* pJoypad = GetJoypadState();	// パッドの取得
+	Camera* pCamera = GetCamera();				// カメラの取得
 
-	//// カメラに対して移動する処理--------------------------------------------------------------
-	//if (KeyboardRepeat(DIK_LSHIFT) || GetJoypadRepeat(JOYKEY_L1))
-	//{// Lシフト長押し
-	//	// コマンド処理
-	//	if (KeyboardRepeat(DIK_W))
-	//	{// 移動量上昇
-	//		g_editPlayer.movement += 0.1f;
-	//	}
-	//	else if (KeyboardRepeat(DIK_S))
-	//	{// 移動減少
-	//		g_editPlayer.movement -= 0.1f;
-	//	}
-	//	else if (KeyboardRepeat(DIK_A))
-	//	{// 移動ゼロ
-	//		g_editPlayer.movement = 0.0f;
-	//	}
+	// カメラに対して移動する処理--------------------------------------------------------------
+	if (GetKeyboradRepeat(DIK_LSHIFT) || GetJoykeyRepeat(JOYKEY_LB, CONTROLLER_1))
+	{// Lシフト長押し
+		// コマンド処理
+		if (GetKeyboradRepeat(DIK_W))
+		{// 移動量上昇
+			g_editPlayer.movement += 0.1f;
+		}
+		else if (GetKeyboradRepeat(DIK_S))
+		{// 移動減少
+			g_editPlayer.movement -= 0.1f;
+		}
+		else if (GetKeyboradRepeat(DIK_A))
+		{// 移動ゼロ
+			g_editPlayer.movement = 0.0f;
+		}
 
-	//	if (KeyboardTrigger(DIK_Q))
-	//	{// 重力上昇
-	//		g_editPlayer.graviment += 0.1f;
-	//	}
-	//	else if (KeyboardTrigger(DIK_E))
-	//	{// 重力減少
-	//		g_editPlayer.graviment -= 0.1f;
-	//	}
-	//	else if (KeyboardTrigger(DIK_D))
-	//	{// 重力ゼロ
-	//		g_editPlayer.graviment = 0.0f;
-	//	}
+		if (GetKeyboradTrigger(DIK_Q))
+		{// 重力上昇
+			g_editPlayer.graviment += 0.1f;
+		}
+		else if (GetKeyboradTrigger(DIK_E))
+		{// 重力減少
+			g_editPlayer.graviment -= 0.1f;
+		}
+		else if (GetKeyboradTrigger(DIK_D))
+		{// 重力ゼロ
+			g_editPlayer.graviment = 0.0f;
+		}
 
-	//	if (KeyboardRepeat(DIK_Z))
-	//	{// 重力上昇
-	//		g_editPlayer.jumpment += 0.1f;
-	//	}
-	//	else if (KeyboardRepeat(DIK_X))
-	//	{// 重力減少
-	//		g_editPlayer.jumpment -= 0.1f;
-	//	}
-	//	else if (KeyboardRepeat(DIK_C))
-	//	{// 重力ゼロ
-	//		g_editPlayer.jumpment = 0.0f;
-	//	}
+		if (GetKeyboradRepeat(DIK_Z))
+		{// 重力上昇
+			g_editPlayer.jumpment += 0.1f;
+		}
+		else if (GetKeyboradRepeat(DIK_X))
+		{// 重力減少
+			g_editPlayer.jumpment -= 0.1f;
+		}
+		else if (GetKeyboradRepeat(DIK_C))
+		{// 重力ゼロ
+			g_editPlayer.jumpment = 0.0f;
+		}
 
-	//	if (GetJoypadRepeat(JOYKEY_LSTICK_BUTTON))
-	//	{// 上移動
-	//		g_editPlayer.move.y += g_editPlayer.movement;
-	//	}
+		if (GetJoykeyRepeat(JOYKEY_L3, CONTROLLER_1))
+		{// 上移動
+			g_editPlayer.move.y += g_editPlayer.movement;
+		}
 
-	//	if (KeyboardTrigger(DIK_SPACE))
-	//	{// 位置リセット,位置は注視点
-	//		g_editPlayer.pos = pCamera->posR;
-	//	}
+		if (GetKeyboradTrigger(DIK_SPACE))
+		{// 位置リセット,位置は注視点
+			g_editPlayer.pos = pCamera->posR;
+		}
 
-	//}
-	//else
-	//{
-	//	bool bMove = false;
-	//	float fMoveX = 0.0f;
-	//	float fMoveZ = 0.0f;
+	}
+	else
+	{
+		bool bMove = false;
+		float fMoveX = 0.0f;
+		float fMoveZ = 0.0f;
 
-	//	if (KeyboardRepeat(DIK_W))
-	//	{// 前移動
-	//		bMove = true;
-	//		fMoveZ = 1.0f;
-	//	}
-	//	else if (KeyboardRepeat(DIK_S))
-	//	{// 手前移動
-	//		bMove = true;
-	//		fMoveZ = -1.0f;
-	//	}
+		if (GetKeyboradRepeat(DIK_W))
+		{// 前移動
+			bMove = true;
+			fMoveZ = 1.0f;
+		}
+		else if (GetKeyboradRepeat(DIK_S))
+		{// 手前移動
+			bMove = true;
+			fMoveZ = -1.0f;
+		}
 
-	//	if (KeyboardRepeat(DIK_A))
-	//	{// 左移動
-	//		bMove = true;
-	//		fMoveX = -1.0f;
-	//	}
-	//	else if (KeyboardRepeat(DIK_D))
-	//	{// 右移動
-	//		bMove = true;
-	//		fMoveX = 1.0f;
-	//	}
+		if (GetKeyboradRepeat(DIK_A))
+		{// 左移動
+			bMove = true;
+			fMoveX = -1.0f;
+		}
+		else if (GetKeyboradRepeat(DIK_D))
+		{// 右移動
+			bMove = true;
+			fMoveX = 1.0f;
+		}
 
-	//	if (KeyboardRepeat(DIK_Q))
-	//	{// 上移動
-	//		g_editPlayer.move.y += g_editPlayer.movement;
-	//	}
-	//	else if (KeyboardRepeat(DIK_E) || GetJoypadRepeat(JOYKEY_LSTICK_BUTTON))
-	//	{// 下移動
-	//		g_editPlayer.move.y -= g_editPlayer.movement;
-	//	}
+		if (GetKeyboradRepeat(DIK_Q))
+		{// 上移動
+			g_editPlayer.move.y += g_editPlayer.movement;
+		}
+		else if (GetKeyboradRepeat(DIK_E) || GetJoykeyRepeat(JOYKEY_L3, CONTROLLER_1))
+		{// 下移動
+			g_editPlayer.move.y -= g_editPlayer.movement;
+		}
 
-	//	if (KeyboardTrigger(DIK_SPACE))
-	//	{// ジャンプ
-	//		g_editPlayer.move.y += g_editPlayer.jumpment;
-	//	}
+		if (GetKeyboradTrigger(DIK_SPACE))
+		{// ジャンプ
+			g_editPlayer.move.y += g_editPlayer.jumpment;
+		}
 
-	//	if (KeyboardRepeat(DIK_RSHIFT) || GetJoypadRepeat(JOYKEY_R1))
-	//	{// 押している間
-	//		VertexMoveMeshField(g_editPlayer.pos, g_editPlayer.move, 50.0f);
-	//	}
-	//	else if (KeyboardRelease(DIK_RSHIFT) || GetJoypadRelease(JOYKEY_R1))
-	//	{// 離したら
-	//		// 法線再設定
-	//		ResetNorVectolMeshField();
-	//	}
+		if (GetKeyboradRepeat(DIK_RSHIFT) || GetJoykeyRepeat(JOYKEY_RB,CONTROLLER_1))
+		{// 押している間
+			VertexMoveMeshField(g_editPlayer.pos, g_editPlayer.move, 50.0f);
+		}
+		else if (GetKeyboradRelease(DIK_RSHIFT) || GetJoykeyRelease(JOYKEY_RB, CONTROLLER_1))
+		{// 離したら
+			// 法線再設定
+			ResetNorVectolMeshField();
+		}
 
-	//	if (GetJoyStickL())
-	//	{// Lスティックでの移動
-	//		float fSticRot = pCamera->rot.y + atan2f((float)pJoypad->Gamepad.sThumbLX, (float)pJoypad->Gamepad.sThumbLY);	// スティックを角度へ変換
+		// Lスティックでの移動
+		float fSticRot = pCamera->rot.y + atan2f(*GetJoyStick(STICK_LEFT, CONTROLLER_1), *(GetJoyStick(STICK_LEFT, CONTROLLER_1) + 1));	// スティックを角度へ変換
 
-	//		float fMoveMax = sqrtf((32767.0f * 32767.0f) + (32767.0f * 32767.0f));
-	//		float fMoveNow = sqrtf((pJoypad->Gamepad.sThumbLX * pJoypad->Gamepad.sThumbLX) + (pJoypad->Gamepad.sThumbLY * pJoypad->Gamepad.sThumbLY));
-	//		float fMove = g_editPlayer.movement * (fMoveNow / fMoveMax);
+		float fMoveMax = sqrtf((32767.0f * 32767.0f) + (32767.0f * 32767.0f));
+		float fMoveNow = sqrtf((*GetJoyStick(STICK_LEFT, CONTROLLER_1) * *GetJoyStick(STICK_LEFT, CONTROLLER_1)) + (*(GetJoyStick(STICK_LEFT, CONTROLLER_1) + 1) * *(GetJoyStick(STICK_LEFT, CONTROLLER_1) + 1)));
+		float fMove = g_editPlayer.movement * (fMoveNow / fMoveMax);
 
-	//		g_editPlayer.move.x += sinf(fSticRot) * fMove;
-	//		g_editPlayer.move.z += cosf(fSticRot) * fMove;
-	//	}
+		g_editPlayer.move.x += sinf(fSticRot) * fMove;
+		g_editPlayer.move.z += cosf(fSticRot) * fMove;
 
-	//	if (bMove)
-	//	{// 動きます！
-	//		float fKeyRot = pCamera->rot.y + atan2f(fMoveX, fMoveZ);	// 角度へ変換
-	//		g_editPlayer.move.x += sinf(fKeyRot) * g_editPlayer.movement;
-	//		g_editPlayer.move.z += cosf(fKeyRot) * g_editPlayer.movement;
-	//	}
-	//}
+		if (bMove)
+		{// 動きます！
+			float fKeyRot = pCamera->rot.y + atan2f(fMoveX, fMoveZ);	// 角度へ変換
+			g_editPlayer.move.x += sinf(fKeyRot) * g_editPlayer.movement;
+			g_editPlayer.move.z += cosf(fKeyRot) * g_editPlayer.movement;
+		}
+	}
 
-	//// エディプレイヤーが目的の方向へ向く処理
-	//g_editPlayer.rot.y = atan2f(g_editPlayer.move.x, g_editPlayer.move.z) + D3DX_PI;
+	// エディプレイヤーが目的の方向へ向く処理
+	g_editPlayer.rot.y = atan2f(g_editPlayer.move.x, g_editPlayer.move.z) + D3DX_PI;
 
-	//// 重力
-	//g_editPlayer.move.y += g_editPlayer.graviment;
+	// 重力
+	g_editPlayer.move.y += g_editPlayer.graviment;
 
-	//// 位置の更新
-	//g_editPlayer.pos += g_editPlayer.move;
+	// 位置の更新
+	g_editPlayer.pos += g_editPlayer.move;
 
-	//CollisionMeshField(&g_editPlayer.pos, &g_editPlayer.posOld, &g_editPlayer.move);
+	CollisionMeshField(&g_editPlayer.pos, &g_editPlayer.posOld, &g_editPlayer.move);
 
-	//if (g_editPlayer.pos.y <= -10.0f)
-	//{// エディプレイヤーの限界高度以下になったら
-	//	g_editPlayer.pos.y = -10.0f;
-	//	g_editPlayer.move.y = 0.0f;
-	//}
+	if (g_editPlayer.pos.y <= -10.0f)
+	{// エディプレイヤーの限界高度以下になったら
+		g_editPlayer.pos.y = -10.0f;
+		g_editPlayer.move.y = 0.0f;
+	}
 
-	//// 慣性
-	//g_editPlayer.move.x += (-g_editPlayer.move.x) * 0.3f;
-	//g_editPlayer.move.y += (-g_editPlayer.move.y) * 0.3f;
-	//g_editPlayer.move.z += (-g_editPlayer.move.z) * 0.3f;
+	// 慣性
+	g_editPlayer.move.x += (-g_editPlayer.move.x) * 0.3f;
+	g_editPlayer.move.y += (-g_editPlayer.move.y) * 0.3f;
+	g_editPlayer.move.z += (-g_editPlayer.move.z) * 0.3f;
 }
 
 //*********************************************************************************************
