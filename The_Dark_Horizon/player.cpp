@@ -868,7 +868,7 @@ void UpdatePlayer(void)
 			g_Player.aModel[nCntModel].vtxMin.z = g_Player.aModel[nCntModel].vtxMinDef.z * g_Player.scale.z;
 		}
 
-		//UpdateMotion();
+		UpdateMotion();
 
 		if (g_Player.motionType == MOTIONTYPE_ACTION && g_Player.nKey == 3 && g_Player.nCounterMotion == 11)
 		{

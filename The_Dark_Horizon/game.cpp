@@ -164,7 +164,7 @@ void UpdateGame(void)
 		switch (g_gameState)
 		{
 		case GAMESTATE_NORMAL:
-			g_GameTime++;
+			//g_GameTime++;
 			SetTime(TIME_LIMIT - g_GameTime / FRAME, true);
 			if (g_GameTime / FRAME >= TIME_LIMIT)
 			{
