@@ -9,6 +9,7 @@
   <Author>山本　哲司</Author>
   <LastAuthor>山本　哲司</LastAuthor>
   <Created>2025-01-17T00:18:23Z</Created>
+  <LastSaved>2025-01-17T00:44:02Z</LastSaved>
   <Version>16.00</Version>
  </DocumentProperties>
  <OfficeDocumentSettings xmlns="urn:schemas-microsoft-com:office:office">
@@ -19,6 +20,7 @@
   <WindowWidth>18530</WindowWidth>
   <WindowTopX>32767</WindowTopX>
   <WindowTopY>32767</WindowTopY>
+  <ActiveSheet>1</ActiveSheet>
   <ProtectStructure>False</ProtectStructure>
   <ProtectWindows>False</ProtectWindows>
  </ExcelWorkbook>
@@ -32,8 +34,73 @@
    <NumberFormat/>
    <Protection/>
   </Style>
+  <Style ss:ID="s70">
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+  </Style>
+  <Style ss:ID="s71">
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <Font ss:FontName="ＭＳ Ｐゴシック" x:CharSet="128" x:Family="Modern" ss:Size="11"
+    ss:Color="#000000"/>
+  </Style>
+  <Style ss:ID="s72">
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <Interior ss:Color="#D86DCD" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="s73">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Center"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <Font ss:FontName="ＭＳ Ｐゴシック" x:CharSet="128" x:Family="Modern" ss:Size="11"
+    ss:Color="#000000"/>
+  </Style>
+  <Style ss:ID="s74">
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <Interior ss:Color="#A6C9EC" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="s75">
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <Interior ss:Color="#47D359" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="s76">
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <Interior ss:Color="#F1A983" ss:Pattern="Solid"/>
+  </Style>
  </Styles>
- <Worksheet ss:Name="Sheet1">
+ <Worksheet ss:Name="scene">
   <Table ss:ExpandedColumnCount="1" ss:ExpandedRowCount="1" x:FullColumns="1"
    x:FullRows="1" ss:DefaultColumnWidth="52" ss:DefaultRowHeight="18">
   </Table>
@@ -43,7 +110,182 @@
     <Footer x:Margin="0.3"/>
     <PageMargins x:Bottom="0.75" x:Left="0.7" x:Right="0.7" x:Top="0.75"/>
    </PageSetup>
+   <ProtectObjects>False</ProtectObjects>
+   <ProtectScenarios>False</ProtectScenarios>
+  </WorksheetOptions>
+ </Worksheet>
+ <Worksheet ss:Name="player">
+  <Table ss:ExpandedColumnCount="2" ss:ExpandedRowCount="28" x:FullColumns="1"
+   x:FullRows="1" ss:StyleID="s70" ss:DefaultColumnWidth="52"
+   ss:DefaultRowHeight="18">
+   <Column ss:StyleID="s70" ss:AutoFitWidth="0" ss:Width="110"/>
+   <Row>
+    <Cell><Data ss:Type="String">player</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><PhoneticText xmlns="urn:schemas-microsoft-com:office:excel">ヒツヨウ</PhoneticText><Data
+      ss:Type="String">必要なもの</Data></Cell>
+    <Cell ss:StyleID="s71"><Data ss:Type="String">できた？</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s72"><Data ss:Type="String">model</Data></Cell>
+    <Cell ss:StyleID="s71"/>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s72"><PhoneticText
+      xmlns="urn:schemas-microsoft-com:office:excel">アタマ</PhoneticText><Data
+      ss:Type="String">頭</Data></Cell>
+    <Cell ss:StyleID="s73"><Data ss:Type="String">✕</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s72"><PhoneticText
+      xmlns="urn:schemas-microsoft-com:office:excel">ドウタイ</PhoneticText><Data
+      ss:Type="String">胴体</Data></Cell>
+    <Cell ss:StyleID="s73"><Data ss:Type="String">✕</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s72"><PhoneticText
+      xmlns="urn:schemas-microsoft-com:office:excel">ミギジョウワン</PhoneticText><Data
+      ss:Type="String">右上腕</Data></Cell>
+    <Cell ss:StyleID="s73"><Data ss:Type="String">✕</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s72"><PhoneticText
+      xmlns="urn:schemas-microsoft-com:office:excel">ミギゼンワン</PhoneticText><Data
+      ss:Type="String">右前腕</Data></Cell>
+    <Cell ss:StyleID="s73"><Data ss:Type="String">✕</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s72"><PhoneticText
+      xmlns="urn:schemas-microsoft-com:office:excel">ミギテ</PhoneticText><Data
+      ss:Type="String">右手</Data></Cell>
+    <Cell ss:StyleID="s73"><Data ss:Type="String">✕</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s72"><PhoneticText
+      xmlns="urn:schemas-microsoft-com:office:excel">ヒダリジョウワン</PhoneticText><Data
+      ss:Type="String">左上腕</Data></Cell>
+    <Cell ss:StyleID="s73"><Data ss:Type="String">✕</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s72"><PhoneticText
+      xmlns="urn:schemas-microsoft-com:office:excel">ヒダリゼンワン</PhoneticText><Data
+      ss:Type="String">左前腕</Data></Cell>
+    <Cell ss:StyleID="s73"><Data ss:Type="String">✕</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s72"><PhoneticText
+      xmlns="urn:schemas-microsoft-com:office:excel">ヒダリテ</PhoneticText><Data
+      ss:Type="String">左手</Data></Cell>
+    <Cell ss:StyleID="s73"><Data ss:Type="String">✕</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s72"><PhoneticText
+      xmlns="urn:schemas-microsoft-com:office:excel">ミギダイタイ</PhoneticText><Data
+      ss:Type="String">右大腿</Data></Cell>
+    <Cell ss:StyleID="s73"><Data ss:Type="String">✕</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s72"><PhoneticText
+      xmlns="urn:schemas-microsoft-com:office:excel">ミギカタイ</PhoneticText><Data
+      ss:Type="String">右下腿</Data></Cell>
+    <Cell ss:StyleID="s73"><Data ss:Type="String">✕</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s72"><PhoneticText
+      xmlns="urn:schemas-microsoft-com:office:excel">ミギアシ</PhoneticText><Data
+      ss:Type="String">右足</Data></Cell>
+    <Cell ss:StyleID="s73"><Data ss:Type="String">✕</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s72"><PhoneticText
+      xmlns="urn:schemas-microsoft-com:office:excel">ヒダリダイタイ</PhoneticText><Data
+      ss:Type="String">左大腿</Data></Cell>
+    <Cell ss:StyleID="s73"><Data ss:Type="String">✕</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s72"><PhoneticText
+      xmlns="urn:schemas-microsoft-com:office:excel">ヒダリカタイ</PhoneticText><Data
+      ss:Type="String">左下腿</Data></Cell>
+    <Cell ss:StyleID="s73"><Data ss:Type="String">✕</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s72"><PhoneticText
+      xmlns="urn:schemas-microsoft-com:office:excel">ヒダリアシ</PhoneticText><Data
+      ss:Type="String">左足</Data></Cell>
+    <Cell ss:StyleID="s73"><Data ss:Type="String">✕</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s74"><Data ss:Type="String">motion</Data></Cell>
+    <Cell ss:StyleID="s73"/>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s74"><PhoneticText
+      xmlns="urn:schemas-microsoft-com:office:excel">タイキ</PhoneticText><Data
+      ss:Type="String">待機</Data></Cell>
+    <Cell ss:StyleID="s73"><Data ss:Type="String">✕</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s74"><PhoneticText
+      xmlns="urn:schemas-microsoft-com:office:excel">イドウ</PhoneticText><Data
+      ss:Type="String">移動</Data></Cell>
+    <Cell ss:StyleID="s73"><Data ss:Type="String">✕</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s74"><PhoneticText
+      xmlns="urn:schemas-microsoft-com:office:excel">コウゲキ</PhoneticText><Data
+      ss:Type="String">攻撃</Data></Cell>
+    <Cell ss:StyleID="s73"><Data ss:Type="String">✕</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s74"><Data ss:Type="String">チャージ</Data></Cell>
+    <Cell ss:StyleID="s73"><Data ss:Type="String">✕</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s75"><Data ss:Type="String">UI</Data></Cell>
+    <Cell ss:StyleID="s73"/>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s75"><PhoneticText
+      xmlns="urn:schemas-microsoft-com:office:excel">タイリョク</PhoneticText><Data
+      ss:Type="String">体力ゲージ</Data></Cell>
+    <Cell ss:StyleID="s73"><Data ss:Type="String">✕</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s75"><PhoneticText
+      xmlns="urn:schemas-microsoft-com:office:excel">サンソ</PhoneticText><Data
+      ss:Type="String">酸素ゲージ</Data></Cell>
+    <Cell ss:StyleID="s73"><Data ss:Type="String">✕</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s75"><Data ss:Type="String">ダメージ</Data></Cell>
+    <Cell ss:StyleID="s73"><Data ss:Type="String">✕</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s76"><Data ss:Type="String">sound</Data></Cell>
+    <Cell ss:StyleID="s73"/>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s76"><PhoneticText
+      xmlns="urn:schemas-microsoft-com:office:excel">アシオト</PhoneticText><Data
+      ss:Type="String">足音</Data></Cell>
+    <Cell ss:StyleID="s73"><Data ss:Type="String">✕</Data></Cell>
+   </Row>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+   <PageSetup>
+    <Header x:Margin="0.3"/>
+    <Footer x:Margin="0.3"/>
+    <PageMargins x:Bottom="0.75" x:Left="0.7" x:Right="0.7" x:Top="0.75"/>
+   </PageSetup>
    <Selected/>
+   <Panes>
+    <Pane>
+     <Number>3</Number>
+     <ActiveRow>22</ActiveRow>
+     <ActiveCol>4</ActiveCol>
+    </Pane>
+   </Panes>
    <ProtectObjects>False</ProtectObjects>
    <ProtectScenarios>False</ProtectScenarios>
   </WorksheetOptions>
