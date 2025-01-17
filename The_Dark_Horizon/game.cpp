@@ -71,6 +71,7 @@ void InitGame(void)
 
 	//カメラ
 	GameCamera(CAMERA_XNUM * CAMERA_YNUM);
+	MasterCamera(CAMERA_XNUM * CAMERA_YNUM, PLAYER);
 
 	D3DXVECTOR3 posScore;//スコアの位置
 	g_gameState = GAMESTATE_NORMAL;
@@ -216,6 +217,14 @@ void UpdateGame(void)
 		if (GetKeyboradTrigger(DIK_F6))
 		{
 			g_Edit = !g_Edit;
+			if (g_Edit)
+			{
+				MasterCamera(CAMERA_XNUM* CAMERA_YNUM, EDIT);
+			}
+			else
+			{
+				MasterCamera(CAMERA_XNUM* CAMERA_YNUM, PLAYER);
+			}
 		}
 
 		if (g_Edit)
