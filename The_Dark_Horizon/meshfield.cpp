@@ -5,6 +5,7 @@
 // 
 //***********************************************
 #include "meshfield.h"
+#include"input.h"
 
 // グローバル変数宣言
 LPDIRECT3DVERTEXBUFFER9 g_pVtxBuffMeshfield = NULL;	// 頂点バッファへのポインタ
@@ -47,7 +48,7 @@ void InitMeshfield(void)
 
 	// テクスチャの読み込み
 	D3DXCreateTextureFromFile(pDevice,
-		"date\\texture\\field002.jpg",
+		"data\\tetsuji\\texture\\field002.jpg",
 		&g_pVtxTexturMeshfield);
 
 	// 各種変数の初期化--------------------------------------------------------------------------------
@@ -226,16 +227,16 @@ void UninitMeshfield(void)
 //**************************************
 void UpdateMeshfield(void)
 {
-	//if (KeyboardTrigger(DIK_F1))
-	//{
-	//	// 頂点情報を保存する
-	//	SaveInfoMeshField();
-	//}
-	//else if (KeyboardTrigger(DIK_F2))
-	//{
-	//	// 頂点情報を取得する
-	//	LoadInfoMeshField();
-	//}
+	if (GetKeyboradTrigger(DIK_F1))
+	{
+		// 頂点情報を保存する
+		SaveInfoMeshField();
+	}
+	else if (GetKeyboradTrigger(DIK_F2))
+	{
+		// 頂点情報を取得する
+		LoadInfoMeshField();
+	}
 }
 
 //**************************************
@@ -534,7 +535,7 @@ void ResetNorVectolMeshField()
 void SaveInfoMeshField()
 {
 	// ファイルを開く
-	FILE* pFile = fopen("date\\text\\MeshField\\MeshField_Info.txt", "w");
+	FILE* pFile = fopen("data\\tetsuji\\text\\MeshField\\MeshField_Info.txt", "w");
 	VERTEX_3D* pVtx = NULL;	// 頂点情報へのポインタ
 	WORD* pIdx = NULL;		// インデック情報へのポインタ
 
@@ -651,7 +652,7 @@ void LoadInfoMeshField()
 	int nCntMeshField = -1;	// メッシュフィールドを数えるウ変数
 
 	// ファイルを開く
-	FILE* pFile = fopen("date\\text\\MeshField\\MeshField_Info.txt", "r");
+	FILE* pFile = fopen("data\\tetsuji\\text\\MeshField\\MeshField_Info.txt", "r");
 	VERTEX_3D* pVtx = NULL;	// 頂点情報へのポインタ
 	WORD* pIdx = NULL;		// インデック情報へのポインタ
 

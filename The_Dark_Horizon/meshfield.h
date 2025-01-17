@@ -10,8 +10,8 @@ typedef enum
 	MESHFIELD_TYPE_MAX
 }MESHFIELD_TYPE;
 
-#define MESHFIELD_WIDTH (300)		// メッシュフィールドの高さ
-#define MESHFIELD_DEPTH (300)		// メッシュフィールドの奥行
+#define MESHFIELD_WIDTH (6000)		// メッシュフィールドの高さ
+#define MESHFIELD_DEPTH (6000)		// メッシュフィールドの奥行
 #define MESHFIELD_DIVISION_X (40)																						// 横
 #define MESHFIELD_DIVISION_Z (40)																						// 縦
 #define MESHFIELD_PLYGON_HID (4 * (MESHFIELD_DIVISION_Z - 1))															// 縮退ポリゴン
