@@ -126,13 +126,13 @@ void InitResult(void)
 	g_pVtxBuffResult->Unlock();//プレイヤーバッファのアンロック
 	if (GetClear())
 	{
-		PlaySound(SOUND_LABEL_BEST);
-		PlaySound(SOUND_LABEL_BGM5);
+		//PlaySound(SOUND_LABEL_BEST);
+		//PlaySound(SOUND_LABEL_BGM5);
 	}
 	else
 	{
-		PlaySound(SOUND_LABEL_NORANKIN);
-		PlaySound(SOUND_LABEL_BGM4);
+		//PlaySound(SOUND_LABEL_NORANKIN);
+		//PlaySound(SOUND_LABEL_BGM4);
 	}
 }
 
@@ -181,9 +181,9 @@ void UpdateResult(void)
 		fade = GetFade();
 		if (fade == FADE_NONE)
 		{
-			//サウンド
-			StopSound(SOUND_LABEL_BGM5);
-			StopSound(SOUND_LABEL_BGM4);
+			////サウンド
+			//StopSound(SOUND_LABEL_BGM5);
+			//StopSound(SOUND_LABEL_BGM4);
 			//切替
 			SetFade(MODE_RANK);
 		}
@@ -200,9 +200,9 @@ void UpdateResult(void)
 				fade = GetFade();
 				if (fade == FADE_NONE)
 				{
-					//サウンド
-					StopSound(SOUND_LABEL_BGM5);
-					StopSound(SOUND_LABEL_BGM4);
+					////サウンド
+					//StopSound(SOUND_LABEL_BGM5);
+					//StopSound(SOUND_LABEL_BGM4);
 					//切替
 					SetFade(MODE_RANK);
 				}
@@ -217,9 +217,9 @@ void UpdateResult(void)
 				fade = GetFade();
 				if (fade == FADE_NONE)
 				{
-					//サウンド
-					StopSound(SOUND_LABEL_BGM5);
-					StopSound(SOUND_LABEL_BGM4);
+					////サウンド
+					//StopSound(SOUND_LABEL_BGM5);
+					//StopSound(SOUND_LABEL_BGM4);
 					//切替
 					SetFade(MODE_RANK);
 				}
@@ -234,9 +234,9 @@ void UpdateResult(void)
 				fade = GetFade();
 				if (fade == FADE_NONE)
 				{
-					//サウンド
-					StopSound(SOUND_LABEL_BGM5);
-					StopSound(SOUND_LABEL_BGM4);
+					////サウンド
+					//StopSound(SOUND_LABEL_BGM5);
+					//StopSound(SOUND_LABEL_BGM4);
 					//切替
 					SetFade(MODE_RANK);
 				}
@@ -251,9 +251,9 @@ void UpdateResult(void)
 				fade = GetFade();
 				if (fade == FADE_NONE)
 				{
-					//サウンド
-					StopSound(SOUND_LABEL_BGM5);
-					StopSound(SOUND_LABEL_BGM4);
+					////サウンド
+					//StopSound(SOUND_LABEL_BGM5);
+					//StopSound(SOUND_LABEL_BGM4);
 					//切替
 					SetFade(MODE_RANK);
 				}
@@ -267,9 +267,9 @@ void UpdateResult(void)
 		fade = GetFade();
 		if (fade == FADE_NONE)
 		{
-			//サウンド
-			StopSound(SOUND_LABEL_BGM5);
-			StopSound(SOUND_LABEL_BGM4);
+			////サウンド
+			//StopSound(SOUND_LABEL_BGM5);
+			//StopSound(SOUND_LABEL_BGM4);
 			//切替
 			SetFade(MODE_RANK);
 		}

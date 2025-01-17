@@ -188,7 +188,7 @@ void UpdatePause(void)
 				if (fade == FADE_NONE)
 				{
 					//サウンド
-					StopSound(SOUND_LABEL_BGM4);
+					StopSound(g_Sound);
 					//切替
 					SetFade(MODE_GAME);
 					g_bPause = !g_bPause;
@@ -199,7 +199,7 @@ void UpdatePause(void)
 				if (fade == FADE_NONE)
 				{
 					//サウンド
-					StopSound(SOUND_LABEL_BGM4);
+					StopSound(g_Sound);
 					//切替
 					SetFade(MODE_TITLE);
 					g_bPause = !g_bPause;
@@ -210,7 +210,7 @@ void UpdatePause(void)
 				if (fade == FADE_NONE)
 				{
 					//サウンド
-					StopSound(SOUND_LABEL_BGM4);
+					StopSound(g_Sound);
 					//切替
 					HWND hWnd;
 					hWnd = GethWnd();
@@ -329,7 +329,7 @@ void UpdatePause(void)
 						if (fade == FADE_NONE)
 						{
 							//サウンド
-							StopSound(SOUND_LABEL_BGM4);
+							StopSound(g_Sound);
 							//切替
 							SetFade(MODE_GAME);
 							g_bPause = !g_bPause;
@@ -340,7 +340,7 @@ void UpdatePause(void)
 						if (fade == FADE_NONE)
 						{
 							//サウンド
-							StopSound(SOUND_LABEL_BGM4);
+							StopSound(g_Sound);
 							//切替
 							SetFade(MODE_TITLE);
 							g_bPause = !g_bPause;
@@ -351,7 +351,7 @@ void UpdatePause(void)
 						if (fade == FADE_NONE)
 						{
 							//サウンド
-							StopSound(SOUND_LABEL_BGM4);
+							StopSound(g_Sound);
 							//切替
 							HWND hWnd;
 							hWnd = GethWnd();
@@ -470,7 +470,7 @@ void UpdatePause(void)
 						if (fade == FADE_NONE)
 						{
 							//サウンド
-							StopSound(SOUND_LABEL_BGM4);
+							StopSound(g_Sound);
 							//切替
 							SetFade(MODE_GAME);
 							g_bPause = !g_bPause;
@@ -481,7 +481,7 @@ void UpdatePause(void)
 						if (fade == FADE_NONE)
 						{
 							//サウンド
-							StopSound(SOUND_LABEL_BGM4);
+							StopSound(g_Sound);
 							//切替
 							SetFade(MODE_TITLE);
 							g_bPause = !g_bPause;
@@ -492,7 +492,7 @@ void UpdatePause(void)
 						if (fade == FADE_NONE)
 						{
 							//サウンド
-							StopSound(SOUND_LABEL_BGM4);
+							StopSound(g_Sound);
 							//切替
 							HWND hWnd;
 							hWnd = GethWnd();
@@ -608,7 +608,7 @@ void UpdatePause(void)
 							if (fade == FADE_NONE)
 							{
 								//サウンド
-								StopSound(SOUND_LABEL_BGM4);
+								StopSound(g_Sound);
 								//切替
 								SetFade(MODE_GAME);
 								g_bPause = !g_bPause;
@@ -619,7 +619,7 @@ void UpdatePause(void)
 							if (fade == FADE_NONE)
 							{
 								//サウンド
-								StopSound(SOUND_LABEL_BGM4);
+								StopSound(g_Sound);
 								//切替
 								SetFade(MODE_TITLE);
 								g_bPause = !g_bPause;
@@ -630,7 +630,7 @@ void UpdatePause(void)
 							if (fade == FADE_NONE)
 							{
 								//サウンド
-								StopSound(SOUND_LABEL_BGM4);
+								StopSound(g_Sound);
 								//切替
 								HWND hWnd;
 								hWnd = GethWnd();
@@ -747,7 +747,7 @@ void UpdatePause(void)
 							if (fade == FADE_NONE)
 							{
 								//サウンド
-								StopSound(SOUND_LABEL_BGM4);
+								StopSound(g_Sound);
 								//切替
 								SetFade(MODE_GAME);
 								g_bPause = !g_bPause;
@@ -758,7 +758,7 @@ void UpdatePause(void)
 							if (fade == FADE_NONE)
 							{
 								//サウンド
-								StopSound(SOUND_LABEL_BGM4);
+								StopSound(g_Sound);
 								//切替
 								SetFade(MODE_TITLE);
 								g_bPause = !g_bPause;
@@ -769,7 +769,7 @@ void UpdatePause(void)
 							if (fade == FADE_NONE)
 							{
 								//サウンド
-								StopSound(SOUND_LABEL_BGM4);
+								StopSound(g_Sound);
 								//切替
 								HWND hWnd;
 								hWnd = GethWnd();

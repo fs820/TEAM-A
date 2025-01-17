@@ -223,21 +223,21 @@ void InitRank(void)
 	pVtx += VT_MAX;
 
 	g_pVtxBuffRank->Unlock();//プレイヤーバッファのアンロック
-	PlaySound(SOUND_LABEL_BGM6);
+	//PlaySound(SOUND_LABEL_BGM6);
 	if (g_bRankin)
 	{
 		if (g_nNewDataRank==0)
 		{
-			PlaySound(SOUND_LABEL_BEST);
+			//PlaySound(SOUND_LABEL_BEST);
 		}
 		else
 		{
-			PlaySound(SOUND_LABEL_RANKIN);
+			//PlaySound(SOUND_LABEL_RANKIN);
 		}
 	}
 	else
 	{
-		PlaySound(SOUND_LABEL_NORANKIN);
+		//PlaySound(SOUND_LABEL_NORANKIN);
 	}
 }
 
@@ -290,8 +290,8 @@ void UpdateRank(void)
 		fade = GetFade();
 		if (fade == FADE_NONE)
 		{
-			//サウンド
-			StopSound(SOUND_LABEL_BGM6);
+			////サウンド
+			//StopSound(SOUND_LABEL_BGM6);
 			//切替
 			SetFade(MODE_TITLE);
 		}
@@ -304,7 +304,7 @@ void UpdateRank(void)
 		fade = GetFade();
 		if (fade == FADE_NONE)
 		{
-			Pause(SOUND_LABEL_BGM6);
+			Pause(SOUND_LABEL_BGM);
 		}
 	}
 	for (int i = 0; i < ControllerNum(CONTYPE_D); i++)
@@ -313,7 +313,7 @@ void UpdateRank(void)
 		{
 			if (GetdJoykeyTrigger(ELEKEY_A, (CONTROLLER)i) || GetdJoykeyTrigger(ELEKEY_START, (CONTROLLER)i))
 			{
-				Pause(SOUND_LABEL_BGM6);
+				Pause(SOUND_LABEL_BGM);
 			}
 		}
 		else if (!strcmp(ControllerName((CONTROLLER)i), PS_CON))
@@ -325,7 +325,7 @@ void UpdateRank(void)
 				fade = GetFade();
 				if (fade == FADE_NONE)
 				{
-					Pause(SOUND_LABEL_BGM6);
+					Pause(SOUND_LABEL_BGM);
 				}
 			}
 		}
@@ -338,7 +338,7 @@ void UpdateRank(void)
 				fade = GetFade();
 				if (fade == FADE_NONE)
 				{
-					Pause(SOUND_LABEL_BGM6);
+					Pause(SOUND_LABEL_BGM);
 				}
 			}
 		}
@@ -346,7 +346,7 @@ void UpdateRank(void)
 		{
 			if (GetdJoykeyTrigger(DKEY_A, (CONTROLLER)i) || GetdJoykeyTrigger(DKEY_START, (CONTROLLER)i))
 			{
-				Pause(SOUND_LABEL_BGM6);
+				Pause(SOUND_LABEL_BGM);
 			}
 		}
 	}

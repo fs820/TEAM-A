@@ -71,8 +71,6 @@ void InitGame(void)
 	g_GameTime = 0;
 	g_bSnow = false;
 	g_bClear = false;
-
-	PlaySound(SOUND_LABEL_BGM);
 }
 
 //------------------
@@ -185,8 +183,8 @@ void UpdateGame(void)
 				fade = GetFade();
 				if (fade == FADE_NONE)
 				{
-					//サウンド
-					StopSound(SOUND_LABEL_BGM4);
+					////サウンド
+					//StopSound(SOUND_LABEL_BGM4);
 					//切替
 					SetFade(MODE_RESULT);
 				}

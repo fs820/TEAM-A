@@ -34,31 +34,6 @@ DWORD g_aSizeAudio[SOUND_LABEL_MAX] = {};					// オーディオデータサイズ
 SOUNDINFO g_aSoundInfo[SOUND_LABEL_MAX] =
 {
 	{"data/BGM/野良猫は宇宙を目指した.wav", -1}, //BGM1
-	{"data/BGM/きらめきを探して.wav", -1},       //BGM2
-	{"data/BGM/なんでしょう？.wav", -1},         //BGM3
-	{"data/BGM/Morning.wav", -1},                //BGM4
-	{"data/BGM/パステルハウス.wav", -1},         //BGM5
-	{"data/BGM/自宅にて.wav", -1},               //BGM6
-	{"data/SE/シャキーン3.wav", 0},              //SE1
-	{"data/SE/爆発1.wav", 0},                    //SE2
-	{"data/SE/ラッパのファンファーレ.wav", 0},   //SE3
-	{"data/SE/呪いの旋律.wav", 0},               //SE4
-	{"data/SE/男衆「イヤッホー！」.wav", 0},     //SE5
-	{"data/SE/katana-slash1.wav", 0},             //SE6
-	{"data/SE/katana-slash2.wav", 0},             //SE7
-	{"data/SE/katana-slash3.wav", 0},             //SE7
-	{"data/SE/katana-slash4.wav", 0},             //SE8
-    {"data/SE/katana-slash5.wav", 0},             //SE10
-	{"data/SE/cannon1.wav", 0},                  //SE11
-	{"data/SE/cannon2.wav", 0},                  //SE12
-	{"data/SE/beamgun1.wav", 0},                  //SE13
-	{"data/SE/beamgun2.wav", 0},                  //SE14
-	{"data/SE/shot1.wav", 0},                  //SE15
-	{"data/SE/sword-slash6.wav", 0},                  //SE16
-	{"data/SE/laser1.wav", 0},                  //SE17
-	{"data/SE/sword-slash1.wav", 0},                  //SE18
-	{"data/SE/shot-struck1.wav", 0},                  //SE19
-	{"data/SE/qigong2.wav", 0},                  //SE20
 };
 
 //=============================================================================

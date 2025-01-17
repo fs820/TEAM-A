@@ -221,7 +221,7 @@ void InitTitle(void)
 		pVtx[3].tex = D3DXVECTOR2(1.0f, 1.0f);
 	}
 
-	PlaySound(SOUND_LABEL_BGM);
+	//PlaySound(SOUND_LABEL_BGM);
 
 	g_pVtxBuffTitle->Unlock();//プレイヤーバッファのアンロック
 }
@@ -294,7 +294,7 @@ void UpdateTitle(void)
 		if (g_RogoPos.y >= SCREEN_HEIGHT / 4)
 		{
 			g_TitleState = TITLESTATE_NORMAL;
-			PlaySound(SOUND_LABEL_TITLE);
+			//PlaySound(SOUND_LABEL_TITLE);
 		}
 
 		if (GetKeyboradTrigger(DIK_RETURN) == true || GetJoykeyTrigger(JOYKEY_START, CONTROLLER_MAX) == true || GetJoykeyTrigger(JOYKEY_A, CONTROLLER_MAX) == true)
@@ -322,7 +322,7 @@ void UpdateTitle(void)
 				pVtx[3].pos = D3DXVECTOR3(g_RogoPos.x + ROGO_WIDTH / 2, g_RogoPos.y + ROGO_WIDTH / 2 + ROGO_HEIGHT / 2, 0.0f);
 				g_pVtxBuffTitle->Unlock();//プレイヤーバッファのアンロック
 				g_TitleState = TITLESTATE_NORMAL;
-				PlaySound(SOUND_LABEL_TITLE);
+				//PlaySound(SOUND_LABEL_TITLE);
 			}
 		}
 		else if (GetMouseTrigger(MOUSE_LEFT) == true)
@@ -350,7 +350,7 @@ void UpdateTitle(void)
 				pVtx[3].pos = D3DXVECTOR3(g_RogoPos.x + ROGO_WIDTH / 2, g_RogoPos.y + ROGO_WIDTH / 2 + ROGO_HEIGHT / 2, 0.0f);
 				g_pVtxBuffTitle->Unlock();//プレイヤーバッファのアンロック
 				g_TitleState = TITLESTATE_NORMAL;
-				PlaySound(SOUND_LABEL_TITLE);
+				//PlaySound(SOUND_LABEL_TITLE);
 			}
 		}
 
@@ -383,7 +383,7 @@ void UpdateTitle(void)
 						pVtx[3].pos = D3DXVECTOR3(g_RogoPos.x + ROGO_WIDTH / 2, g_RogoPos.y + ROGO_WIDTH / 2 + ROGO_HEIGHT / 2, 0.0f);
 						g_pVtxBuffTitle->Unlock();//プレイヤーバッファのアンロック
 						g_TitleState = TITLESTATE_NORMAL;
-						PlaySound(SOUND_LABEL_TITLE);
+						//PlaySound(SOUND_LABEL_TITLE);
 					}
 				}
 
@@ -415,7 +415,7 @@ void UpdateTitle(void)
 						pVtx[3].pos = D3DXVECTOR3(g_RogoPos.x + ROGO_WIDTH / 2, g_RogoPos.y + ROGO_WIDTH / 2 + ROGO_HEIGHT / 2, 0.0f);
 						g_pVtxBuffTitle->Unlock();//プレイヤーバッファのアンロック
 						g_TitleState = TITLESTATE_NORMAL;
-						PlaySound(SOUND_LABEL_TITLE);
+						//PlaySound(SOUND_LABEL_TITLE);
 					}
 				}
 			}
@@ -446,7 +446,7 @@ void UpdateTitle(void)
 						pVtx[3].pos = D3DXVECTOR3(g_RogoPos.x + ROGO_WIDTH / 2, g_RogoPos.y + ROGO_WIDTH / 2 + ROGO_HEIGHT / 2, 0.0f);
 						g_pVtxBuffTitle->Unlock();//プレイヤーバッファのアンロック
 						g_TitleState = TITLESTATE_NORMAL;
-						PlaySound(SOUND_LABEL_TITLE);
+						//PlaySound(SOUND_LABEL_TITLE);
 					}
 				}
 			}
@@ -477,7 +477,7 @@ void UpdateTitle(void)
 						pVtx[3].pos = D3DXVECTOR3(g_RogoPos.x + ROGO_WIDTH / 2, g_RogoPos.y + ROGO_WIDTH / 2 + ROGO_HEIGHT / 2, 0.0f);
 						g_pVtxBuffTitle->Unlock();//プレイヤーバッファのアンロック
 						g_TitleState = TITLESTATE_NORMAL;
-						PlaySound(SOUND_LABEL_TITLE);
+						//PlaySound(SOUND_LABEL_TITLE);
 					}
 				}
 			}
@@ -538,8 +538,8 @@ void UpdateTitle(void)
 				fade = GetFade();
 				if (fade == FADE_NONE)
 				{
-					//サウンド
-					StopSound(SOUND_LABEL_BGM);
+					////サウンド
+					//StopSound(SOUND_LABEL_BGM);
 					//切替
 					SetFade(MODE_GAME);
 				}
@@ -549,8 +549,8 @@ void UpdateTitle(void)
 				fade = GetFade();
 				if (fade == FADE_NONE)
 				{
-					//サウンド
-					StopSound(SOUND_LABEL_BGM);
+					////サウンド
+					//StopSound(SOUND_LABEL_BGM);
 					//切替
 					SetFade(MODE_VS);
 				}
@@ -560,8 +560,8 @@ void UpdateTitle(void)
 				fade = GetFade();
 				if (fade == FADE_NONE)
 				{
-					//サウンド
-					StopSound(SOUND_LABEL_BGM);
+					////サウンド
+					//StopSound(SOUND_LABEL_BGM);
 					//切替
 					SetFade(MODE_TUTO);
 
@@ -572,8 +572,8 @@ void UpdateTitle(void)
 				fade = GetFade();
 				if (fade == FADE_NONE)
 				{
-					//サウンド
-					StopSound(SOUND_LABEL_BGM);
+					////サウンド
+					//StopSound(SOUND_LABEL_BGM);
 					//切替
 					SetFade(MODE_RANK);
 
@@ -584,8 +584,8 @@ void UpdateTitle(void)
 				fade = GetFade();
 				if (fade == FADE_NONE)
 				{
-					//サウンド
-					StopSound(SOUND_LABEL_BGM);
+					////サウンド
+					//StopSound(SOUND_LABEL_BGM);
 					//切替
 					SetFade(MODE_OPTION);
 
@@ -737,8 +737,8 @@ void UpdateTitle(void)
 						fade = GetFade();
 						if (fade == FADE_NONE)
 						{
-							//サウンド
-							StopSound(SOUND_LABEL_BGM);
+							////サウンド
+							//StopSound(SOUND_LABEL_BGM);
 							//切替
 							SetFade(MODE_GAME);
 						}
@@ -748,8 +748,8 @@ void UpdateTitle(void)
 						fade = GetFade();
 						if (fade == FADE_NONE)
 						{
-							//サウンド
-							StopSound(SOUND_LABEL_BGM);
+							////サウンド
+							//StopSound(SOUND_LABEL_BGM);
 							//切替
 							SetFade(MODE_VS);
 						}
@@ -759,8 +759,8 @@ void UpdateTitle(void)
 						fade = GetFade();
 						if (fade == FADE_NONE)
 						{
-							//サウンド
-							StopSound(SOUND_LABEL_BGM);
+							////サウンド
+							//StopSound(SOUND_LABEL_BGM);
 							//切替
 							SetFade(MODE_TUTO);
 
@@ -771,8 +771,8 @@ void UpdateTitle(void)
 						fade = GetFade();
 						if (fade == FADE_NONE)
 						{
-							//サウンド
-							StopSound(SOUND_LABEL_BGM);
+							////サウンド
+							//StopSound(SOUND_LABEL_BGM);
 							//切替
 							SetFade(MODE_RANK);
 
@@ -783,8 +783,8 @@ void UpdateTitle(void)
 						fade = GetFade();
 						if (fade == FADE_NONE)
 						{
-							//サウンド
-							StopSound(SOUND_LABEL_BGM);
+							////サウンド
+							//StopSound(SOUND_LABEL_BGM);
 							//切替
 							SetFade(MODE_OPTION);
 
@@ -795,8 +795,8 @@ void UpdateTitle(void)
 						fade = GetFade();
 						if (fade == FADE_NONE)
 						{
-							//サウンド
-							StopSound(SOUND_LABEL_BGM);
+							////サウンド
+							//StopSound(SOUND_LABEL_BGM);
 							//切替
 							HWND hWnd;
 							hWnd = GethWnd();
@@ -935,8 +935,8 @@ void UpdateTitle(void)
 						fade = GetFade();
 						if (fade == FADE_NONE)
 						{
-							//サウンド
-							StopSound(SOUND_LABEL_BGM);
+							////サウンド
+							//StopSound(SOUND_LABEL_BGM);
 							//切替
 							SetFade(MODE_GAME);
 						}
@@ -946,8 +946,8 @@ void UpdateTitle(void)
 						fade = GetFade();
 						if (fade == FADE_NONE)
 						{
-							//サウンド
-							StopSound(SOUND_LABEL_BGM);
+							////サウンド
+							//StopSound(SOUND_LABEL_BGM);
 							//切替
 							SetFade(MODE_VS);
 						}
@@ -957,8 +957,8 @@ void UpdateTitle(void)
 						fade = GetFade();
 						if (fade == FADE_NONE)
 						{
-							//サウンド
-							StopSound(SOUND_LABEL_BGM);
+							////サウンド
+							//StopSound(SOUND_LABEL_BGM);
 							//切替
 							SetFade(MODE_TUTO);
 
@@ -969,8 +969,8 @@ void UpdateTitle(void)
 						fade = GetFade();
 						if (fade == FADE_NONE)
 						{
-							//サウンド
-							StopSound(SOUND_LABEL_BGM);
+							////サウンド
+							//StopSound(SOUND_LABEL_BGM);
 							//切替
 							SetFade(MODE_RANK);
 
@@ -981,8 +981,8 @@ void UpdateTitle(void)
 						fade = GetFade();
 						if (fade == FADE_NONE)
 						{
-							//サウンド
-							StopSound(SOUND_LABEL_BGM);
+							////サウンド
+							//StopSound(SOUND_LABEL_BGM);
 							//切替
 							SetFade(MODE_OPTION);
 
@@ -993,8 +993,8 @@ void UpdateTitle(void)
 						fade = GetFade();
 						if (fade == FADE_NONE)
 						{
-							//サウンド
-							StopSound(SOUND_LABEL_BGM);
+							////サウンド
+							//StopSound(SOUND_LABEL_BGM);
 							//切替
 							HWND hWnd;
 							hWnd = GethWnd();
@@ -1133,8 +1133,8 @@ void UpdateTitle(void)
 						fade = GetFade();
 						if (fade == FADE_NONE)
 						{
-							//サウンド
-							StopSound(SOUND_LABEL_BGM);
+							////サウンド
+							//StopSound(SOUND_LABEL_BGM);
 							//切替
 							SetFade(MODE_GAME);
 						}
@@ -1144,8 +1144,8 @@ void UpdateTitle(void)
 						fade = GetFade();
 						if (fade == FADE_NONE)
 						{
-							//サウンド
-							StopSound(SOUND_LABEL_BGM);
+							////サウンド
+							//StopSound(SOUND_LABEL_BGM);
 							//切替
 							SetFade(MODE_VS);
 						}
@@ -1155,8 +1155,8 @@ void UpdateTitle(void)
 						fade = GetFade();
 						if (fade == FADE_NONE)
 						{
-							//サウンド
-							StopSound(SOUND_LABEL_BGM);
+							////サウンド
+							//StopSound(SOUND_LABEL_BGM);
 							//切替
 							SetFade(MODE_TUTO);
 
@@ -1167,8 +1167,8 @@ void UpdateTitle(void)
 						fade = GetFade();
 						if (fade == FADE_NONE)
 						{
-							//サウンド
-							StopSound(SOUND_LABEL_BGM);
+							////サウンド
+							//StopSound(SOUND_LABEL_BGM);
 							//切替
 							SetFade(MODE_RANK);
 
@@ -1179,8 +1179,8 @@ void UpdateTitle(void)
 						fade = GetFade();
 						if (fade == FADE_NONE)
 						{
-							//サウンド
-							StopSound(SOUND_LABEL_BGM);
+							////サウンド
+							//StopSound(SOUND_LABEL_BGM);
 							//切替
 							SetFade(MODE_OPTION);
 
@@ -1191,8 +1191,8 @@ void UpdateTitle(void)
 						fade = GetFade();
 						if (fade == FADE_NONE)
 						{
-							//サウンド
-							StopSound(SOUND_LABEL_BGM);
+							////サウンド
+							//StopSound(SOUND_LABEL_BGM);
 							//切替
 							HWND hWnd;
 							hWnd = GethWnd();
@@ -1331,8 +1331,8 @@ void UpdateTitle(void)
 						fade = GetFade();
 						if (fade == FADE_NONE)
 						{
-							//サウンド
-							StopSound(SOUND_LABEL_BGM);
+							////サウンド
+							//StopSound(SOUND_LABEL_BGM);
 							//切替
 							SetFade(MODE_GAME);
 						}
@@ -1342,8 +1342,8 @@ void UpdateTitle(void)
 						fade = GetFade();
 						if (fade == FADE_NONE)
 						{
-							//サウンド
-							StopSound(SOUND_LABEL_BGM);
+							////サウンド
+							//StopSound(SOUND_LABEL_BGM);
 							//切替
 							SetFade(MODE_VS);
 						}
@@ -1353,8 +1353,8 @@ void UpdateTitle(void)
 						fade = GetFade();
 						if (fade == FADE_NONE)
 						{
-							//サウンド
-							StopSound(SOUND_LABEL_BGM);
+							////サウンド
+							//StopSound(SOUND_LABEL_BGM);
 							//切替
 							SetFade(MODE_TUTO);
 
@@ -1365,8 +1365,8 @@ void UpdateTitle(void)
 						fade = GetFade();
 						if (fade == FADE_NONE)
 						{
-							//サウンド
-							StopSound(SOUND_LABEL_BGM);
+							////サウンド
+							//StopSound(SOUND_LABEL_BGM);
 							//切替
 							SetFade(MODE_RANK);
 
@@ -1377,8 +1377,8 @@ void UpdateTitle(void)
 						fade = GetFade();
 						if (fade == FADE_NONE)
 						{
-							//サウンド
-							StopSound(SOUND_LABEL_BGM);
+							////サウンド
+							//StopSound(SOUND_LABEL_BGM);
 							//切替
 							SetFade(MODE_OPTION);
 
@@ -1389,8 +1389,8 @@ void UpdateTitle(void)
 						fade = GetFade();
 						if (fade == FADE_NONE)
 						{
-							//サウンド
-							StopSound(SOUND_LABEL_BGM);
+							////サウンド
+							//StopSound(SOUND_LABEL_BGM);
 							//切替
 							HWND hWnd;
 							hWnd = GethWnd();
