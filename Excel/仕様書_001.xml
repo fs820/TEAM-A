@@ -9,7 +9,7 @@
   <Author>山本　哲司</Author>
   <LastAuthor>山本　哲司</LastAuthor>
   <Created>2025-01-17T00:18:23Z</Created>
-  <LastSaved>2025-01-17T00:44:02Z</LastSaved>
+  <LastSaved>2025-01-17T03:00:53Z</LastSaved>
   <Version>16.00</Version>
  </DocumentProperties>
  <OfficeDocumentSettings xmlns="urn:schemas-microsoft-com:office:office">
@@ -20,7 +20,7 @@
   <WindowWidth>18530</WindowWidth>
   <WindowTopX>32767</WindowTopX>
   <WindowTopY>32767</WindowTopY>
-  <ActiveSheet>1</ActiveSheet>
+  <ActiveSheet>3</ActiveSheet>
   <ProtectStructure>False</ProtectStructure>
   <ProtectWindows>False</ProtectWindows>
  </ExcelWorkbook>
@@ -33,6 +33,155 @@
    <Interior/>
    <NumberFormat/>
    <Protection/>
+  </Style>
+  <Style ss:ID="m2913144447512">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Center"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <Interior ss:Color="#C0E6F5" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="m2913144447532">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Center"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <Interior ss:Color="#C0E6F5" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="m2913144447552">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Center"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <Interior ss:Color="#C0E6F5" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="m2913144447572">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Center"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <Interior ss:Color="#C0E6F5" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="m2912415926992">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Center"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <Interior ss:Color="#44B3E1" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="m2912415927012">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Center"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+  </Style>
+  <Style ss:ID="m2912415927032">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Center"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <Interior ss:Color="#44B3E1" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="m2912415927052">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Center"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <Interior ss:Color="#44B3E1" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="m2912415927072">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Center"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <Interior ss:Color="#44B3E1" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="m2913144450404">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Center"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <Interior ss:Color="#44B3E1" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="m2913144450424">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Center"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <Interior ss:Color="#C0E6F5" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="m2913144450444">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Center"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <Interior ss:Color="#C0E6F5" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="m2913144450464">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Center"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <Interior ss:Color="#C0E6F5" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="m2913144450484">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Center"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <Interior ss:Color="#C0E6F5" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="m2913144456752">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Center"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <Interior ss:Color="#C0E6F5" ss:Pattern="Solid"/>
   </Style>
   <Style ss:ID="s70">
    <Borders>
@@ -98,6 +247,74 @@
     <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
    </Borders>
    <Interior ss:Color="#F1A983" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="s79">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Center"/>
+  </Style>
+  <Style ss:ID="s93">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Center"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <Interior ss:Color="#C0E6F5" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="s97">
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <Interior ss:Color="#C0E6F5" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="s101">
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <Interior ss:Color="#44B3E1" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="s103">
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <Font ss:FontName="Segoe UI Symbol" x:Family="Swiss" ss:Size="11"
+    ss:Color="#000000"/>
+   <Interior ss:Color="#C0E6F5" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="s105">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Center"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <Interior ss:Color="#C0E6F5" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="s106">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Center"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <Interior ss:Color="#C0E6F5" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="s108">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Center"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <Interior ss:Color="#C0E6F5" ss:Pattern="Solid"/>
   </Style>
  </Styles>
  <Worksheet ss:Name="scene">
@@ -278,12 +495,307 @@
     <Footer x:Margin="0.3"/>
     <PageMargins x:Bottom="0.75" x:Left="0.7" x:Right="0.7" x:Top="0.75"/>
    </PageSetup>
-   <Selected/>
    <Panes>
     <Pane>
      <Number>3</Number>
-     <ActiveRow>22</ActiveRow>
+     <ActiveRow>2</ActiveRow>
      <ActiveCol>4</ActiveCol>
+    </Pane>
+   </Panes>
+   <ProtectObjects>False</ProtectObjects>
+   <ProtectScenarios>False</ProtectScenarios>
+  </WorksheetOptions>
+ </Worksheet>
+ <Worksheet ss:Name="Sheet3">
+  <Table ss:ExpandedColumnCount="3" ss:ExpandedRowCount="6" x:FullColumns="1"
+   x:FullRows="1" ss:DefaultColumnWidth="52" ss:DefaultRowHeight="18">
+   <Row>
+    <Cell ss:MergeAcross="1" ss:StyleID="s79"><PhoneticText
+      xmlns="urn:schemas-microsoft-com:office:excel">ナマエ</PhoneticText><Data
+      ss:Type="String">名前</Data></Cell>
+    <Cell><PhoneticText xmlns="urn:schemas-microsoft-com:office:excel">タントウ</PhoneticText><Data
+      ss:Type="String">担当</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:MergeAcross="1" ss:StyleID="s79"><PhoneticText
+      xmlns="urn:schemas-microsoft-com:office:excel">サトウフウマ</PhoneticText><Data
+      ss:Type="String">佐藤楓馬</Data></Cell>
+    <Cell><Data ss:Type="String">scene</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:MergeAcross="1" ss:StyleID="s79"><PhoneticText
+      xmlns="urn:schemas-microsoft-com:office:excel">スドウヒロシト</PhoneticText><Data
+      ss:Type="String">須藤滉斗</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:MergeAcross="1" ss:StyleID="s79"><PhoneticText
+      xmlns="urn:schemas-microsoft-com:office:excel">タカハシミサキ</PhoneticText><Data
+      ss:Type="String">高橋美咲</Data></Cell>
+    <Cell><Data ss:Type="String">UI,motion</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:MergeAcross="1" ss:StyleID="s79"><Data ss:Type="String">FOMIN ANDREI</Data></Cell>
+    <Cell><Data ss:Type="String">モデル、サウンド</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:MergeAcross="1" ss:StyleID="s79"><PhoneticText
+      xmlns="urn:schemas-microsoft-com:office:excel">ヤマモトテツジ</PhoneticText><Data
+      ss:Type="String">山本哲司</Data></Cell>
+    <Cell><Data ss:Type="String">プランナー</Data></Cell>
+   </Row>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+   <PageSetup>
+    <Header x:Margin="0.3"/>
+    <Footer x:Margin="0.3"/>
+    <PageMargins x:Bottom="0.75" x:Left="0.7" x:Right="0.7" x:Top="0.75"/>
+   </PageSetup>
+   <Panes>
+    <Pane>
+     <Number>3</Number>
+     <ActiveRow>3</ActiveRow>
+     <ActiveCol>3</ActiveCol>
+    </Pane>
+   </Panes>
+   <ProtectObjects>False</ProtectObjects>
+   <ProtectScenarios>False</ProtectScenarios>
+  </WorksheetOptions>
+ </Worksheet>
+ <Worksheet ss:Name="佐藤楓馬">
+  <Table ss:ExpandedColumnCount="6" ss:ExpandedRowCount="39" x:FullColumns="1"
+   x:FullRows="1" ss:StyleID="s70" ss:DefaultColumnWidth="52"
+   ss:DefaultRowHeight="18">
+   <Row>
+    <Cell ss:MergeAcross="3" ss:StyleID="m2912415927012"><Data ss:Type="String">やること</Data></Cell>
+    <Cell><Data ss:Type="String">できた？</Data></Cell>
+    <Cell><PhoneticText xmlns="urn:schemas-microsoft-com:office:excel">シヨウ</PhoneticText><Data
+      ss:Type="String">仕様</Data></Cell>
+   </Row>
+   <Row ss:StyleID="s101">
+    <Cell ss:MergeAcross="3" ss:StyleID="m2913144450404"><Data ss:Type="String">TITLE</Data></Cell>
+   </Row>
+   <Row ss:StyleID="s97">
+    <Cell ss:MergeAcross="3" ss:StyleID="m2913144450424"><PhoneticText
+      xmlns="urn:schemas-microsoft-com:office:excel">キリカエ</PhoneticText><Data
+      ss:Type="String">シーン切替</Data></Cell>
+    <Cell ss:StyleID="s103"><Data ss:Type="String">✕</Data></Cell>
+   </Row>
+   <Row ss:StyleID="s97">
+    <Cell ss:MergeAcross="3" ss:StyleID="m2913144450444"><PhoneticText
+      xmlns="urn:schemas-microsoft-com:office:excel">ソウサ</PhoneticText><Data
+      ss:Type="String">カメラ操作</Data></Cell>
+    <Cell ss:StyleID="s103"><Data ss:Type="String">✕</Data></Cell>
+   </Row>
+   <Row ss:StyleID="s97">
+    <Cell ss:MergeAcross="3" ss:StyleID="m2913144450464"><PhoneticText
+      xmlns="urn:schemas-microsoft-com:office:excel">ム</PhoneticText><Data
+      ss:Type="String">ライトの向き</Data></Cell>
+    <Cell ss:StyleID="s103"><Data ss:Type="String">✕</Data></Cell>
+   </Row>
+   <Row ss:StyleID="s97">
+    <Cell ss:MergeAcross="3" ss:StyleID="m2913144450484"><PhoneticText
+      xmlns="urn:schemas-microsoft-com:office:excel">ツキハイチ</PhoneticText><Data
+      ss:Type="String">月の配置</Data></Cell>
+    <Cell ss:StyleID="s103"><Data ss:Type="String">✕</Data></Cell>
+   </Row>
+   <Row ss:StyleID="s101">
+    <Cell ss:MergeAcross="3" ss:StyleID="m2912415926992"><Data ss:Type="String">GAME</Data></Cell>
+   </Row>
+   <Row ss:StyleID="s97">
+    <Cell ss:MergeAcross="3" ss:StyleID="s93"><PhoneticText
+      xmlns="urn:schemas-microsoft-com:office:excel">キリカエ</PhoneticText><Data
+      ss:Type="String">シーン切替</Data></Cell>
+    <Cell ss:StyleID="s103"><Data ss:Type="String">✕</Data></Cell>
+   </Row>
+   <Row ss:StyleID="s97">
+    <Cell ss:MergeAcross="3" ss:StyleID="s93"><PhoneticText
+      xmlns="urn:schemas-microsoft-com:office:excel">ソウサ</PhoneticText><Data
+      ss:Type="String">カメラの操作</Data></Cell>
+    <Cell ss:StyleID="s103"><Data ss:Type="String">✕</Data></Cell>
+   </Row>
+   <Row ss:StyleID="s97">
+    <Cell ss:MergeAcross="3" ss:StyleID="s93"><PhoneticText
+      xmlns="urn:schemas-microsoft-com:office:excel">ム</PhoneticText><Data
+      ss:Type="String">ライトの向き</Data></Cell>
+    <Cell ss:StyleID="s103"><Data ss:Type="String">✕</Data></Cell>
+   </Row>
+   <Row ss:StyleID="s97">
+    <Cell ss:MergeAcross="3" ss:StyleID="s93"><PhoneticText
+      xmlns="urn:schemas-microsoft-com:office:excel">ソウサ</PhoneticText><Data
+      ss:Type="String">プレイヤーの操作</Data></Cell>
+    <Cell ss:StyleID="s103"><Data ss:Type="String">✕</Data></Cell>
+   </Row>
+   <Row ss:StyleID="s97">
+    <Cell ss:MergeAcross="3" ss:StyleID="s93"><Data ss:Type="String">プレイヤーのオフセット</Data></Cell>
+    <Cell ss:StyleID="s103"><Data ss:Type="String">✕</Data></Cell>
+   </Row>
+   <Row ss:StyleID="s97">
+    <Cell ss:MergeAcross="3" ss:StyleID="s93"><Data ss:Type="String">プレイヤーのモーション</Data></Cell>
+    <Cell ss:StyleID="s103"><Data ss:Type="String">✕</Data></Cell>
+   </Row>
+   <Row ss:StyleID="s97">
+    <Cell ss:MergeAcross="3" ss:StyleID="s93"><PhoneticText
+      xmlns="urn:schemas-microsoft-com:office:excel">ジョウタイカンリ</PhoneticText><Data
+      ss:Type="String">プレイヤーの状態管理</Data></Cell>
+    <Cell ss:StyleID="s103"><Data ss:Type="String">✕</Data></Cell>
+   </Row>
+   <Row ss:StyleID="s97">
+    <Cell ss:MergeAcross="3" ss:StyleID="s93"><PhoneticText
+      xmlns="urn:schemas-microsoft-com:office:excel">コガタツウジョウ</PhoneticText><Data
+      ss:Type="String">小型エネミー(通常)のモデル</Data></Cell>
+    <Cell ss:StyleID="s103"><Data ss:Type="String">✕</Data></Cell>
+   </Row>
+   <Row ss:StyleID="s97">
+    <Cell ss:MergeAcross="3" ss:StyleID="m2913144456752"><PhoneticText
+      xmlns="urn:schemas-microsoft-com:office:excel">コガタツウジョウ</PhoneticText><Data
+      ss:Type="String">小型エネミー(通常)のモーション</Data></Cell>
+    <Cell ss:StyleID="s103"><Data ss:Type="String">✕</Data></Cell>
+   </Row>
+   <Row ss:StyleID="s97">
+    <Cell ss:MergeAcross="3" ss:StyleID="m2913144447532"><PhoneticText
+      xmlns="urn:schemas-microsoft-com:office:excel">コガタツウジョウジョウタイカンリ</PhoneticText><Data
+      ss:Type="String">小型エネミー(通常)の状態管理</Data></Cell>
+    <Cell ss:StyleID="s103"><Data ss:Type="String">✕</Data></Cell>
+   </Row>
+   <Row ss:StyleID="s97">
+    <Cell ss:MergeAcross="3" ss:StyleID="m2913144447552"><PhoneticText
+      xmlns="urn:schemas-microsoft-com:office:excel">コガタジョウタイカンリ</PhoneticText><Data
+      ss:Type="String">小型エネミー(ゲロ)の状態管理</Data></Cell>
+    <Cell ss:StyleID="s103"><Data ss:Type="String">✕</Data></Cell>
+   </Row>
+   <Row ss:StyleID="s97">
+    <Cell ss:MergeAcross="3" ss:StyleID="m2913144447572"><PhoneticText
+      xmlns="urn:schemas-microsoft-com:office:excel">コガタジョウタイカンリ</PhoneticText><Data
+      ss:Type="String">小型エネミー(ゲロ)の状態管理</Data></Cell>
+    <Cell ss:StyleID="s103"><Data ss:Type="String">✕</Data></Cell>
+   </Row>
+   <Row ss:StyleID="s97">
+    <Cell ss:MergeAcross="3" ss:StyleID="s93"><PhoneticText
+      xmlns="urn:schemas-microsoft-com:office:excel">ジョウタイカンリ</PhoneticText><Data
+      ss:Type="String">小型エネミー(ゲロ)状態管理</Data></Cell>
+    <Cell ss:StyleID="s103"><Data ss:Type="String">✕</Data></Cell>
+   </Row>
+   <Row ss:StyleID="s97">
+    <Cell ss:MergeAcross="3" ss:StyleID="m2913144447512"><PhoneticText
+      xmlns="urn:schemas-microsoft-com:office:excel">オオガタ</PhoneticText><Data
+      ss:Type="String">大型エネミー(BOSS)システム</Data></Cell>
+    <Cell ss:StyleID="s103"><Data ss:Type="String">✕</Data></Cell>
+   </Row>
+   <Row ss:StyleID="s97">
+    <Cell ss:StyleID="s105"/>
+    <Cell ss:StyleID="s108"/>
+    <Cell ss:StyleID="s108"/>
+    <Cell ss:StyleID="s106"/>
+    <Cell ss:StyleID="s103"/>
+   </Row>
+   <Row ss:StyleID="s97">
+    <Cell ss:StyleID="s105"/>
+    <Cell ss:StyleID="s108"/>
+    <Cell ss:StyleID="s108"/>
+    <Cell ss:StyleID="s106"/>
+    <Cell ss:StyleID="s103"/>
+   </Row>
+   <Row ss:StyleID="s97">
+    <Cell ss:MergeAcross="3" ss:StyleID="s93"><PhoneticText
+      xmlns="urn:schemas-microsoft-com:office:excel">ジメンハイチ</PhoneticText><Data
+      ss:Type="String">地面の配置</Data></Cell>
+    <Cell ss:StyleID="s103"><Data ss:Type="String">✕</Data></Cell>
+   </Row>
+   <Row ss:StyleID="s97">
+    <Cell ss:MergeAcross="3" ss:StyleID="s93"><PhoneticText
+      xmlns="urn:schemas-microsoft-com:office:excel">チキュウハイチ</PhoneticText><Data
+      ss:Type="String">地球の配置</Data></Cell>
+    <Cell ss:StyleID="s103"><Data ss:Type="String">✕</Data></Cell>
+   </Row>
+   <Row ss:StyleID="s97">
+    <Cell ss:MergeAcross="3" ss:StyleID="s93"><PhoneticText
+      xmlns="urn:schemas-microsoft-com:office:excel">タイヨウハイチ</PhoneticText><Data
+      ss:Type="String">太陽の配置</Data></Cell>
+    <Cell ss:StyleID="s103"><Data ss:Type="String">✕</Data></Cell>
+   </Row>
+   <Row ss:StyleID="s97">
+    <Cell ss:MergeAcross="3" ss:StyleID="s93"><PhoneticText
+      xmlns="urn:schemas-microsoft-com:office:excel">ホシゾラハイチ</PhoneticText><Data
+      ss:Type="String">星空の配置</Data></Cell>
+    <Cell ss:StyleID="s103"><Data ss:Type="String">✕</Data></Cell>
+   </Row>
+   <Row ss:StyleID="s97">
+    <Cell ss:MergeAcross="3" ss:StyleID="s93"><PhoneticText
+      xmlns="urn:schemas-microsoft-com:office:excel">タテモノハイチ</PhoneticText><Data
+      ss:Type="String">建物Aの配置</Data></Cell>
+    <Cell ss:StyleID="s103"><Data ss:Type="String">✕</Data></Cell>
+   </Row>
+   <Row ss:StyleID="s97">
+    <Cell ss:MergeAcross="3" ss:StyleID="s93"><PhoneticText
+      xmlns="urn:schemas-microsoft-com:office:excel">ハイチ</PhoneticText><Data
+      ss:Type="String">建物Bの配置</Data></Cell>
+    <Cell ss:StyleID="s103"><Data ss:Type="String">✕</Data></Cell>
+   </Row>
+   <Row ss:StyleID="s97">
+    <Cell ss:MergeAcross="3" ss:StyleID="s93"><PhoneticText
+      xmlns="urn:schemas-microsoft-com:office:excel">ハイチ</PhoneticText><Data
+      ss:Type="String">建物Cの配置</Data></Cell>
+    <Cell ss:StyleID="s103"><Data ss:Type="String">✕</Data></Cell>
+   </Row>
+   <Row ss:StyleID="s97">
+    <Cell ss:MergeAcross="3" ss:StyleID="s93"><PhoneticText
+      xmlns="urn:schemas-microsoft-com:office:excel">ハイチ</PhoneticText><Data
+      ss:Type="String">アイテムAの配置、システム</Data></Cell>
+    <Cell ss:StyleID="s103"><Data ss:Type="String">✕</Data></Cell>
+   </Row>
+   <Row ss:StyleID="s97">
+    <Cell ss:MergeAcross="3" ss:StyleID="s93"><PhoneticText
+      xmlns="urn:schemas-microsoft-com:office:excel">ハイチ</PhoneticText><Data
+      ss:Type="String">アイテムBの配置、システム</Data></Cell>
+    <Cell ss:StyleID="s103"><Data ss:Type="String">✕</Data></Cell>
+   </Row>
+   <Row ss:StyleID="s97">
+    <Cell ss:MergeAcross="3" ss:StyleID="s93"><PhoneticText
+      xmlns="urn:schemas-microsoft-com:office:excel">ハイチ</PhoneticText><Data
+      ss:Type="String">アイテムCの配置、システム</Data></Cell>
+    <Cell ss:StyleID="s103"><Data ss:Type="String">✕</Data></Cell>
+   </Row>
+   <Row ss:StyleID="s101">
+    <Cell ss:MergeAcross="3" ss:StyleID="m2912415927032"><Data ss:Type="String">RESULT</Data></Cell>
+   </Row>
+   <Row ss:StyleID="s97">
+    <Cell ss:MergeAcross="3" ss:StyleID="s93"><PhoneticText
+      xmlns="urn:schemas-microsoft-com:office:excel">キリカエ</PhoneticText><Data
+      ss:Type="String">シーン切替</Data></Cell>
+    <Cell ss:StyleID="s103"><Data ss:Type="String">✕</Data></Cell>
+   </Row>
+   <Row ss:StyleID="s101">
+    <Cell ss:MergeAcross="3" ss:StyleID="m2912415927052"><Data ss:Type="String">RANKING</Data></Cell>
+   </Row>
+   <Row ss:StyleID="s97">
+    <Cell ss:MergeAcross="3" ss:StyleID="s93"><PhoneticText
+      xmlns="urn:schemas-microsoft-com:office:excel">キリカエ</PhoneticText><Data
+      ss:Type="String">シーン切替</Data></Cell>
+    <Cell ss:StyleID="s103"><Data ss:Type="String">✕</Data></Cell>
+   </Row>
+   <Row ss:StyleID="s101">
+    <Cell ss:MergeAcross="3" ss:StyleID="m2912415927072"><Data ss:Type="String">TUTORIAL</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="16.5" ss:StyleID="s97">
+    <Cell ss:MergeAcross="3" ss:StyleID="s93"><PhoneticText
+      xmlns="urn:schemas-microsoft-com:office:excel">キリカエ</PhoneticText><Data
+      ss:Type="String">シーン切替</Data></Cell>
+    <Cell ss:StyleID="s103"><Data ss:Type="String">✕</Data></Cell>
+   </Row>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+   <PageSetup>
+    <Header x:Margin="0.3"/>
+    <Footer x:Margin="0.3"/>
+    <PageMargins x:Bottom="0.75" x:Left="0.7" x:Right="0.7" x:Top="0.75"/>
+   </PageSetup>
+   <Selected/>
+   <TopRowVisible>6</TopRowVisible>
+   <Panes>
+    <Pane>
+     <Number>3</Number>
+     <ActiveRow>18</ActiveRow>
+     <RangeSelection>R19C1:R19C4</RangeSelection>
     </Pane>
    </Panes>
    <ProtectObjects>False</ProtectObjects>

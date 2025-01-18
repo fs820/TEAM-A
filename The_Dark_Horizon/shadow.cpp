@@ -228,10 +228,10 @@ int SetShadow(D3DXVECTOR3 pos, D3DXVECTOR3 rot,float fWidth)
 void SetPositionShadow(int nIdxShadow, D3DXVECTOR3 pos)
 {
 	VERTEX_3D* pVtx = NULL;
-	D3DXVECTOR3 move = D3DXVECTOR3(0.0f,0.0f,0.0f);
+	D3DXVECTOR3 move = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 	D3DXCOLOR col = g_aShadow[nIdxShadow].col;
-	float fMaguA;
-	float fMaguB;
+	float fDiffA;
+	float fMagu;
 
 	// 頂点バッファをロック
 	g_pVtxBuffShadow->Lock(0, 0, (void**)&pVtx, 0);
@@ -242,47 +242,69 @@ void SetPositionShadow(int nIdxShadow, D3DXVECTOR3 pos)
 	g_aShadow[nIdxShadow].pos.y -= 30.0f;
 	g_aShadow[nIdxShadow].pos.z = pos.z;
 
-	g_aShadow[nIdxShadow].branding = false;	// 乗ってない
+	g_aShadow[nIdxShadow].branding = false;	// 乗っない
 
-	if (CollisionMeshField(&g_aShadow[nIdxShadow].pos, &pos, &move))
+	D3DXVECTOR3 Dummy = {};	// 使わない引数用
+	D3DXVECTOR3 sp = {};	// ポリゴンの一頂点保存用
+	D3DXVECTOR3 nor = {};	// ポリゴンの法線保存用
+
+	if (CollisionMeshField(&sp, &nor, &g_aShadow[nIdxShadow].pos, &Dummy))
 	{
 		g_aShadow[nIdxShadow].branding = true;	// 乗ってる
-		fMaguA = pos.y / g_aShadow[nIdxShadow].pos.y * 0.9f;
-		fMaguB = g_aShadow[nIdxShadow].pos.y / pos.y;
-
-		// 頂点座標の設定
-		pVtx[0].pos.x = -g_aShadow[nIdxShadow].fWidth * fMaguA;
-		pVtx[0].pos.y = 0.1f;
-		pVtx[0].pos.z = g_aShadow[nIdxShadow].fWidth * fMaguA;
-
-		pVtx[1].pos.x = g_aShadow[nIdxShadow].fWidth * fMaguA;
-		pVtx[1].pos.y = 0.1f;
-		pVtx[1].pos.z = g_aShadow[nIdxShadow].fWidth * fMaguA;
-
-		pVtx[2].pos.x = -g_aShadow[nIdxShadow].fWidth * fMaguA;
-		pVtx[2].pos.y = 0.1f;
-		pVtx[2].pos.z = -g_aShadow[nIdxShadow].fWidth * fMaguA;
-
-		pVtx[3].pos.x = g_aShadow[nIdxShadow].fWidth * fMaguA;
-		pVtx[3].pos.y = 0.1f;
-		pVtx[3].pos.z = -g_aShadow[nIdxShadow].fWidth * fMaguA;
-
-		col.r = g_aShadow[nIdxShadow].col.r * fMaguB;
-		col.g = g_aShadow[nIdxShadow].col.g * fMaguB;
-		col.b = g_aShadow[nIdxShadow].col.b * fMaguB;
-		col.a = g_aShadow[nIdxShadow].col.a * fMaguB;
-
-		if (col.a <= 0.1f)
-		{
-			col.a = 0.0f;
-		}
-
-		// 頂点カラーの設定
-		pVtx[0].col = col;
-		pVtx[1].col = col;
-		pVtx[2].col = col;
-		pVtx[3].col = col;
 	}
+
+	fDiffA = (pos.y - g_aShadow[nIdxShadow].pos.y) * 0.9f;
+
+	float fWidth = g_aShadow[nIdxShadow].fWidth + fDiffA;
+	fMagu = g_aShadow[nIdxShadow].fWidth / fWidth;
+
+	// 頂点座標の設定
+	pVtx[0].pos.x = -fWidth;
+	pVtx[0].pos.y = 0.0f;
+	pVtx[0].pos.z = fWidth;
+
+	pVtx[1].pos.x = fWidth;
+	pVtx[1].pos.y = 0.0f;
+	pVtx[1].pos.z = fWidth;
+
+	pVtx[2].pos.x = -fWidth;
+	pVtx[2].pos.y = 0.0f;
+	pVtx[2].pos.z = -fWidth;
+
+	pVtx[3].pos.x = fWidth;
+	pVtx[3].pos.y = 0.0f;
+	pVtx[3].pos.z = -fWidth;
+
+	// 法線とポリゴンの一頂点の内積
+	float fdot = (nor.x * sp.x + nor.y * sp.y + nor.z * sp.z);
+
+	for (int nCntVtx = 0; nCntVtx < 4; nCntVtx++)
+	{
+		//プレイヤーがポリゴン上にいるときのy座標を求める
+		pVtx[nCntVtx].pos.y = (-nor.x * (pVtx[nCntVtx].pos.x + g_aShadow[nIdxShadow].pos.x) -
+			nor.z * (pVtx[nCntVtx].pos.z + g_aShadow[nIdxShadow].pos.z) + fdot) /
+			nor.y;
+	}
+
+	g_aShadow[nIdxShadow].pos.y = 0.5f;
+
+	float fCol = 1.0f * fMagu;
+
+	col.r = fCol;
+	col.g = fCol;
+	col.b = fCol;
+	col.a = fCol;
+
+	if (col.a <= 0.05f)
+	{
+		col.a = 0.0f;
+	}
+
+	// 頂点カラーの設定
+	pVtx[0].col = col;
+	pVtx[1].col = col;
+	pVtx[2].col = col;
+	pVtx[3].col = col;
 
 	// 頂点バッファをアンロック
 	g_pVtxBuffShadow->Unlock();

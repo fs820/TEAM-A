@@ -827,7 +827,8 @@ void UpdatePlayer(void)
 
 		g_Player.bJump = !CollisionStage(&g_Player.pStage);
 
-		g_Player.bJump = !CollisionMeshField(&g_Player.pos, &g_Player.posOld, &g_Player.move);
+		D3DXVECTOR3 dummy;	// égÇÌÇ»Ç¢à¯êîóp
+		g_Player.bJump = !CollisionMeshField(&dummy ,&dummy ,&g_Player.pos, &g_Player.move);
 
 		if (g_Player.pStage != NULL)
 		{

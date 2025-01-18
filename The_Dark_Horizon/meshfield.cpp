@@ -310,7 +310,7 @@ void SetMeshField(D3DXVECTOR3 pos, D3DXVECTOR3 rot)
 //*******************************************
 // メッシュフィールドの当たり判定
 //*******************************************
-bool CollisionMeshField(D3DXVECTOR3* pPos, D3DXVECTOR3* pPosOld, D3DXVECTOR3* pMove)
+bool CollisionMeshField(D3DXVECTOR3* sp, D3DXVECTOR3* nor, D3DXVECTOR3* pPos, D3DXVECTOR3* pMove)
 {
 	bool bRanding = false;
 
@@ -378,6 +378,10 @@ bool CollisionMeshField(D3DXVECTOR3* pPos, D3DXVECTOR3* pPosOld, D3DXVECTOR3* pM
 
 				pp.y = (-(a.x * pp.x) -(a.z * pp.z) + dotA) / a.y
 				*/
+
+				// スタートポジションと法線を覚えておく
+				* sp = pVtx[pIdx[nCntIdx]].pos;
+				*nor = g_meshField.aNor[nCntPoliOll];
 
 				// 法線とポリゴンの一頂点の内積
 				float fdot = (g_meshField.aNor[nCntPoliOll].x * pVtx[pIdx[nCntIdx]].pos.x +

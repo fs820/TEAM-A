@@ -290,7 +290,8 @@ void EditPlayerManager()
 	// 位置の更新
 	g_editPlayer.pos += g_editPlayer.move;
 
-	CollisionMeshField(&g_editPlayer.pos, &g_editPlayer.posOld, &g_editPlayer.move);
+	D3DXVECTOR3 dummy;	// 使わない引数用
+	CollisionMeshField(&dummy,&dummy,&g_editPlayer.pos, &g_editPlayer.move);
 
 	if (g_editPlayer.pos.y <= -10.0f)
 	{// エディプレイヤーの限界高度以下になったら
