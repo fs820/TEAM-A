@@ -96,7 +96,7 @@ void UninitEditPlayer()
 void UpdateEditPlayer()
 {
 	//エディットモード切替
-	if (GetKeyboradTrigger(DIK_F1))
+	if (GetKeyboradTrigger(DIK_F9))
 	{
 		g_editPlayer.Type = (EDITTYPE)!g_editPlayer.Type;
 	}
@@ -639,7 +639,8 @@ void EditPlayerManagerObject()
 
 	g_editPlayer.pStage = NULL;
 
-	CollisionMeshField(&g_editPlayer.pos, &g_editPlayer.posOld, &g_editPlayer.move);
+	D3DXVECTOR3 dummy;	// 使わない引数用
+	CollisionMeshField(&dummy, &dummy, &g_editPlayer.pos, &g_editPlayer.move);
 
 	if (g_editPlayer.pos.y <= -10.0f)
 	{// エディプレイヤーの限界高度以下になったら
