@@ -66,8 +66,10 @@ void InitGame(void)
 	SetMeshField(D3DXVECTOR3(0.0f, 0.0f, 0.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f));
 	SetCylinder(D3DXVECTOR3(0.0f, 0.0f, 0.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f));
 	SetSphere(D3DXVECTOR3(0.0f, 0.0f, 0.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f));
+
 	//ステージ
-	LoadStage();	
+	LoadStageManager();
+	LoadStage();
 
 	//カメラ
 	GameCamera(CAMERA_XNUM * CAMERA_YNUM);

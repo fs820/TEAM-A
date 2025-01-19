@@ -1,0 +1,14 @@
+13
+data\\MODEL\\Bill.x
+data\\MODEL\\crystal.x
+data\\MODEL\\crystal2.x
+data\\MODEL\\Doam.x
+data\\MODEL\\enemy000.x
+data\\MODEL\\enemy001.x
+data\\MODEL\\Gun.x
+data\\MODEL\\Item.x
+data\\MODEL\\model000.x
+data\\MODEL\\moon.x
+data\\MODEL\\Rocket.x
+data\\MODEL\\Spaceship.x
+data\\MODEL\\Twor.x

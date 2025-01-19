@@ -35,6 +35,7 @@
 #define CLASS_NAME "WindowClass" // クラス名
 #define WINDOW_NAME "White" // ウインドウ名
 #define DATA_FILE "data\\DATA\\data.bin"//スコア保存用ファイル
+#define MANAGER_FILE "data\\DATA\\XfileManager.txt"
 #define STAGE_FILE "data\\DATA\\stage.txt"
 #define MODEL_FILE "data\\DATA\\model.txt"
 #define WALL_FILE "data\\DATA\\wall.txt"

@@ -23,7 +23,17 @@
 
 LPDIRECT3D9 g_pD3D = NULL;//ダイレクトXオブジェクトのグローバルポインタを宣言
 LPDIRECT3DDEVICE9 g_pD3DDevice = NULL;//ダイレクトXデバイスのグローバルポインタを宣言
+#ifdef _DEBUG
+
+MODE g_mode = MODE_GAME;
+
+#endif
+
+#ifndef _DEBUG
+
 MODE g_mode = MODE_TITLE;
+
+#endif
 HINSTANCE g_hInstance;
 HWND g_hWnd;
 bool g_bStop = false;
@@ -213,7 +223,7 @@ LRESULT CALLBACK WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 				ConfineCursorToWindow(hWnd);
 			}
 			break;
-		case VK_F2:
+		case VK_F3:
 			g_bDebug = !g_bDebug;
 			break;
 		case VK_F4:

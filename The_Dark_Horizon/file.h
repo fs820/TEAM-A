@@ -17,7 +17,9 @@
 int* Soat(int* pData);//ソート処理
 void SaveFile(int* pData);//セーブ処理
 int* LoadFile(void);//ロード処理
+void LoadStageManager(void);//ロード処理
 void LoadStage(void);//ロード処理
+void SaveStage(void);//セーブ処理
 void LoadModel(void);//ロード処理
 
 #endif _DATA_H_

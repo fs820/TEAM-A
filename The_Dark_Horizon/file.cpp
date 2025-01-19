@@ -95,11 +95,50 @@ int *LoadFile(void)
 //---------------------------------------
 //ロード処理
 //---------------------------------------
+void LoadStageManager(void)
+{
+	FILE* pFile;//ファイルポインタを宣言
+	XFILE Xfile;
+	int nCount = 0;
+
+	//Xファイル
+	pFile = fopen(MANAGER_FILE, "r");//ファイルを開く
+	if (pFile != NULL)
+	{//開けたら
+		if (fscanf(pFile, "%d", &Xfile.XfileNum) == EOF)//数値を書き入れ
+		{
+			fclose(pFile);//ファイルを閉じる
+			return;
+		}
+		for (nCount = 0; nCount < Xfile.XfileNum; nCount++)
+		{
+			if (fscanf(pFile, "%63s", Xfile.Pass[nCount].aName) == EOF)break;//数値を書き入れ
+		}
+
+		//設定
+		SetStageManager(Xfile);
+
+		fclose(pFile);//ファイルを閉じる
+	}
+	else
+	{//開けなかった
+		HWND hWnd;
+		hWnd = GethWnd();
+		ReleaseCursor();
+		while (ShowCursor(TRUE) < 0);
+		MessageBox(hWnd, "ロードエラー", "ロードできなかったよ", MB_OK | MB_ICONERROR);
+		PostMessage(hWnd, WM_KEYDOWN, VK_ESCAPE, 0);
+	}
+}
+
+//---------------------------------------
+//ロード処理
+//---------------------------------------
 void LoadStage(void)
 {
 	FILE* pFile;//ファイルポインタを宣言
 	int nCount = 0;
-	char name[64] = { "\0" };
+	int nNumber = 0;
 	D3DXVECTOR3 pos = D3DXVECTOR3(0.0f, 0.0f, 0.0f), rot = D3DXVECTOR3(0.0f, 0.0f, 0.0f), scale = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 
 	//Xファイル
@@ -108,7 +147,7 @@ void LoadStage(void)
 	{//開けたら
 		for (nCount = 0; nCount < STAGE_MAX; nCount++)
 		{
-			if (fscanf(pFile, "%63s", name) == EOF)break;//数値を書き入れ
+			if (fscanf(pFile, "%d", &nNumber) == EOF)break;//数値を書き入れ
 			if (fscanf(pFile, "%f", &pos.x) == EOF)break;//数値を書き入れ
 			if (fscanf(pFile, "%f", &pos.y) == EOF)break;//数値を書き入れ
 			if (fscanf(pFile, "%f", &pos.z) == EOF)break;//数値を書き入れ
@@ -122,7 +161,7 @@ void LoadStage(void)
 			//角度変換
 			rot = D3DXToRadian(rot);
 			//オブジェクト設置
-			SetStage(name, pos, rot, scale);
+			SetStage(nNumber, pos, rot, scale);
 		}
 		fclose(pFile);//ファイルを閉じる
 	}
@@ -198,8 +237,54 @@ void LoadStage(void)
 	}
 }
 
+//---------------------------------------
+//ロード処理
+//---------------------------------------
+void SaveStage(void)
+{
+	FILE* pFile;//ファイルポインタを宣言
+	Stage* pStage = GetStage();
+	D3DXVECTOR3 rot;
+	int nCount = 0;
+
+	//Xファイル
+	pFile = fopen(STAGE_FILE, "w");//ファイルを開く
+	if (pFile != NULL)
+	{//開けたら
+		for (nCount = 0; nCount < STAGE_MAX; nCount++, pStage++)
+		{
+			if (pStage->bUse)
+			{
+				//角度変換
+				rot = D3DXToDegree(pStage->rot);
+
+				fprintf(pFile, "%d\n", pStage->nTypeNumber);//数値を書き入れ
+				fprintf(pFile, "%.1f ", pStage->pos.x);//数値を書き入れ
+				fprintf(pFile, "%.1f ", pStage->pos.y);//数値を書き入れ
+				fprintf(pFile, "%.1f\n", pStage->pos.z);//数値を書き入れ
+				fprintf(pFile, "%.1f ", rot.x);//数値を書き入れ
+				fprintf(pFile, "%.1f ", rot.y);//数値を書き入れ
+				fprintf(pFile, "%.1f\n", rot.z);//数値を書き入れ
+				fprintf(pFile, "%.1f ", pStage->scale.x);//数値を書き入れ
+				fprintf(pFile, "%.1f ", pStage->scale.y);//数値を書き入れ
+				fprintf(pFile, "%.1f\n", pStage->scale.z);//数値を書き入れ
+			}
+		}
+		fclose(pFile);//ファイルを閉じる
+	}
+	else
+	{//開けなかった
+		HWND hWnd;
+		hWnd = GethWnd();
+		ReleaseCursor();
+		while (ShowCursor(TRUE) < 0);
+		MessageBox(hWnd, "ロードエラー", "ロードできなかったよ", MB_OK | MB_ICONERROR);
+		PostMessage(hWnd, WM_KEYDOWN, VK_ESCAPE, 0);
+	}
+}
+
 //----------------------------
-//
+//ロード処理
 //----------------------------
 void LoadModel(void)
 {

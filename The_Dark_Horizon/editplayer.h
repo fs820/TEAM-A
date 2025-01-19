@@ -2,10 +2,19 @@
 #define _EDITPLAYER_H_
 
 #include "main.h"
+#include "stage.h"
 
 #define MAX_EDITPLAYER_TEX_NUM (6)		// テクスチャの数
 #define EDITPLAYER_MOVE_MAX (20.0f)		// エディットプレイヤーの移動量
 #define EDITPLAYER_GRAVITY_MAX (10.0f)	// エディットプレイヤーの重力量
+
+//エディットタイプの列挙型定義
+typedef enum
+{
+	MESH = 0,          // 起伏
+	OBJECT,            // オブジェクト設置
+	EDIT_MAX
+}EDITTYPE;
 
 // エディットプレイヤー構造体
 typedef struct
@@ -18,6 +27,8 @@ typedef struct
 	float movement;		// 移動量
 	float graviment;	// 重力量
 	float jumpment;		// ジャンプ量
+	EDITTYPE Type;      // エディットタイプ
+	Stage* pStage;      //ステージポインタ
 	bool bDisp;			// 映すかどうか
 
 	LPDIRECT3DTEXTURE9 apTexture[MAX_EDITPLAYER_TEX_NUM];	// テクスチャへのポンタ
@@ -31,6 +42,7 @@ void InitEditPlayer();			// エディットプレイヤーの初期化
 void UninitEditPlayer();		// エディットプレイヤーの終了
 void UpdateEditPlayer();		// エディットプレイヤーの更新
 void DrawEditPlayer();			// エディットプレイヤーの描画
-void EditPlayerManager();		// エディットプレイヤーの管理
+void EditPlayerManagerMesh();   // エディットプレイヤーの管理(Mesh)
+void EditPlayerManagerObject(); // エディットプレイヤーの管理(Object)
 EDITPLAYER* GetEditPlayer();	// エディットプレイヤーの取得
 #endif // !_EDITPLAYER_H_

@@ -6,8 +6,10 @@
 //*********************************************************************************************
 #include "editplayer.h"
 #include "camera.h"
-#include"input.h"
-#include"meshfield.h"
+#include "input.h"
+#include "meshfield.h"
+#include "file.h"
+#include "shadow.h"
 
 // グローバル変数宣言
 EDITPLAYER g_editPlayer;	// エディットプレイヤー情報
@@ -28,6 +30,8 @@ void InitEditPlayer()
 	g_editPlayer.movement = 2.0f;							// 移動量
 	g_editPlayer.graviment = 0.0f;							// 重力量
 	g_editPlayer.jumpment = 20.0f;							// ジャンプ量
+	g_editPlayer.Type = MESH;                               //エディットタイプ
+	g_editPlayer.pStage = NULL;                             //ステージポインタ
 	g_editPlayer.bDisp = true;								// 映すかどうか
 
 	// Xファイルの読み込み
@@ -91,7 +95,22 @@ void UninitEditPlayer()
 //*********************************************************************************************
 void UpdateEditPlayer()
 {
-	EditPlayerManager();	// エディットプレイヤーの管理
+	//エディットモード切替
+	if (GetKeyboradTrigger(DIK_F1))
+	{
+		g_editPlayer.Type = (EDITTYPE)!g_editPlayer.Type;
+	}
+
+	//エディットモードで処理をかえる
+	switch (g_editPlayer.Type)
+	{
+	case MESH:
+		EditPlayerManagerMesh();	// エディットプレイヤーの管理(Mesh)
+		break;
+	case OBJECT:
+		EditPlayerManagerObject();  // エディットプレイヤーの管理(Object)
+		break;
+	}
 }
 
 //*********************************************************************************************
@@ -151,9 +170,9 @@ void DrawEditPlayer()
 }
 
 //*********************************************************************************************
-// エディットプレイヤーの管理
+// エディットプレイヤーの管理(Mesh)
 //*********************************************************************************************
-void EditPlayerManager()
+void EditPlayerManagerMesh()
 {
 	Camera* pCamera = GetCamera();				// カメラの取得
 
@@ -289,6 +308,335 @@ void EditPlayerManager()
 
 	// 位置の更新
 	g_editPlayer.pos += g_editPlayer.move;
+
+	CollisionMeshField(&g_editPlayer.pos, &g_editPlayer.posOld, &g_editPlayer.move);
+
+	if (g_editPlayer.pos.y <= -10.0f)
+	{// エディプレイヤーの限界高度以下になったら
+		g_editPlayer.pos.y = -10.0f;
+		g_editPlayer.move.y = 0.0f;
+	}
+
+	// 慣性
+	g_editPlayer.move.x += (-g_editPlayer.move.x) * 0.3f;
+	g_editPlayer.move.y += (-g_editPlayer.move.y) * 0.3f;
+	g_editPlayer.move.z += (-g_editPlayer.move.z) * 0.3f;
+}
+
+//*********************************************************************************************
+// エディットプレイヤーの管理(Object)
+//*********************************************************************************************
+void EditPlayerManagerObject()
+{
+	Camera* pCamera = GetCamera();				              // カメラの取得
+	static D3DXVECTOR3 pos = D3DXVECTOR3(0.0f, 0.0f, 0.0f), 
+		               rot = D3DXVECTOR3(0.0f, 0.0f, 0.0f), 
+		               scale = D3DXVECTOR3(1.0f, 1.0f, 1.0f); // オブジェクト設置用
+	static int nNumber = 0, EndNumber = -1, CollNumber = -1;                    //オブジェクトナンバー
+
+	// カメラに対して移動する処理--------------------------------------------------------------
+	if (GetKeyboradPress(DIK_LSHIFT) || GetJoykeyPress(JOYKEY_LB, CONTROLLER_1))
+	{// Lシフト長押し
+		// コマンド処理
+		if (GetKeyboradPress(DIK_W))
+		{// 移動量上昇
+			g_editPlayer.movement += 0.1f;
+		}
+		else if (GetKeyboradPress(DIK_S))
+		{// 移動減少
+			g_editPlayer.movement -= 0.1f;
+		}
+		else if (GetKeyboradPress(DIK_A))
+		{// 移動ゼロ
+			g_editPlayer.movement = 0.0f;
+		}
+
+		if (GetKeyboradTrigger(DIK_Q))
+		{// 重力上昇
+			g_editPlayer.graviment += 0.1f;
+		}
+		else if (GetKeyboradTrigger(DIK_E))
+		{// 重力減少
+			g_editPlayer.graviment -= 0.1f;
+		}
+		else if (GetKeyboradTrigger(DIK_D))
+		{// 重力ゼロ
+			g_editPlayer.graviment = 0.0f;
+		}
+
+		if (GetKeyboradPress(DIK_Z))
+		{// 重力上昇
+			g_editPlayer.jumpment += 0.1f;
+		}
+		else if (GetKeyboradPress(DIK_X))
+		{// 重力減少
+			g_editPlayer.jumpment -= 0.1f;
+		}
+		else if (GetKeyboradPress(DIK_C))
+		{// 重力ゼロ
+			g_editPlayer.jumpment = 0.0f;
+		}
+
+		if (GetJoykeyPress(JOYKEY_L3, CONTROLLER_1))
+		{// 上移動
+			g_editPlayer.move.y += g_editPlayer.movement;
+		}
+
+		if (GetKeyboradTrigger(DIK_SPACE))
+		{// 位置リセット,位置は注視点
+			g_editPlayer.pos = pCamera->posR;
+		}
+
+	}
+	else
+	{
+		bool bMove = false;
+		float fMoveX = 0.0f;
+		float fMoveZ = 0.0f;
+
+		if (GetKeyboradPress(DIK_W))
+		{// 前移動
+			bMove = true;
+			fMoveZ = 1.0f;
+		}
+		else if (GetKeyboradPress(DIK_S))
+		{// 手前移動
+			bMove = true;
+			fMoveZ = -1.0f;
+		}
+
+		if (GetKeyboradPress(DIK_A))
+		{// 左移動
+			bMove = true;
+			fMoveX = -1.0f;
+		}
+		else if (GetKeyboradPress(DIK_D))
+		{// 右移動
+			bMove = true;
+			fMoveX = 1.0f;
+		}
+
+		if (GetKeyboradPress(DIK_Q))
+		{// 上移動
+			g_editPlayer.move.y += g_editPlayer.movement;
+		}
+		else if (GetKeyboradPress(DIK_E))
+		{// 下移動
+			g_editPlayer.move.y -= g_editPlayer.movement;
+		}
+
+		if (GetKeyboradTrigger(DIK_SPACE))
+		{// ジャンプ
+			g_editPlayer.move.y += g_editPlayer.jumpment;
+		}
+
+		if (GetKeyboradTrigger(DIK_RIGHT))
+		{// オブジェクト切替
+			nNumber++;
+		}
+		else if (GetKeyboradTrigger(DIK_LEFT))
+		{// オブジェクト切替
+			nNumber--;
+		}
+
+		if (nNumber<0)
+		{//ループ
+			nNumber = GetXfileNum() - 1;
+		}
+
+		//範囲制限
+		nNumber %= GetXfileNum();
+
+		if (GetKeyboradPress(DIK_F) == true || GetJoykeyPress(JOYKEY_LEFT, CONTROLLER_1) == true)//Aキー
+		{
+			if (GetKeyboradPress(DIK_T) == true || GetJoykeyPress(JOYKEY_UP, CONTROLLER_1) == true)//Wキー
+			{//左上
+				pos.x += sinf(pCamera->rot.y + D3DX_PI * -0.25f) * 10.0f;
+				pos.z += cosf(pCamera->rot.y + D3DX_PI * -0.25f) * 10.0f;
+			}
+			else if (GetKeyboradPress(DIK_G) == true || GetJoykeyPress(JOYKEY_DOWN, CONTROLLER_1) == true)//Sキー
+			{//左下
+				pos.x += sinf(pCamera->rot.y + D3DX_PI * -0.75f) * 10.0f;
+				pos.z += cosf(pCamera->rot.y + D3DX_PI * -0.75f) * 10.0f;
+			}
+			else
+			{//左
+				pos.x += sinf(pCamera->rot.y + D3DX_PI * -0.5f) * 10.0f;
+				pos.z += cosf(pCamera->rot.y + D3DX_PI * -0.5f) * 10.0f;
+			}
+		}
+		else if (GetKeyboradPress(DIK_H) == true || GetJoykeyPress(JOYKEY_RIGHT, CONTROLLER_1) == true)//Dキー
+		{
+			if (GetKeyboradPress(DIK_T) == true || GetJoykeyPress(JOYKEY_UP, CONTROLLER_1) == true)//Wキー
+			{//右上
+				pos.x += sinf(pCamera->rot.y + D3DX_PI * 0.25f) * 10.0f;
+				pos.z += cosf(pCamera->rot.y + D3DX_PI * 0.25f) * 10.0f;
+			}
+			else if (GetKeyboradPress(DIK_G) == true || GetJoykeyPress(JOYKEY_DOWN, CONTROLLER_1) == true)//Sキー
+			{//右下
+				pos.x += sinf(pCamera->rot.y + D3DX_PI * 0.75f) * 10.0f;
+				pos.z += cosf(pCamera->rot.y + D3DX_PI * 0.75f) * 10.0f;
+			}
+			else
+			{//右
+				pos.x += sinf(pCamera->rot.y + D3DX_PI * 0.5f) * 10.0f;
+				pos.z += cosf(pCamera->rot.y + D3DX_PI * 0.5f) * 10.0f;
+			}
+		}
+		else if (GetKeyboradPress(DIK_T) == true || GetJoykeyPress(JOYKEY_UP, CONTROLLER_1) == true)//Wキー
+		{//上
+			pos.x += sinf(pCamera->rot.y) * 10.0f;
+			pos.z += cosf(pCamera->rot.y) * 10.0f;
+		}
+		else if (GetKeyboradPress(DIK_G) == true || GetJoykeyPress(JOYKEY_DOWN, CONTROLLER_1) == true)//Sキー
+		{//下
+			pos.x += sinf(pCamera->rot.y + D3DX_PI) * 10.0f;
+			pos.z += cosf(pCamera->rot.y + D3DX_PI) * 10.0f;
+		}
+
+		if (GetKeyboradPress(DIK_V) == true)//Wキー
+		{//上
+			pos.y -= 10.0f;
+		}
+		if (GetKeyboradPress(DIK_B) == true)//Sキー
+		{//下
+			pos.y += 10.0f;
+		}
+
+		if (GetKeyboradPress(DIK_U) || GetJoykeyPress(JOYKEY_A, CONTROLLER_1))
+		{// 押している間
+			rot.x -= 0.1f;
+		}
+		if (GetKeyboradPress(DIK_I) || GetJoykeyPress(JOYKEY_B, CONTROLLER_1))
+		{// 押している間
+			rot.x+= 0.1f;
+		}
+		if (GetKeyboradPress(DIK_J) || GetJoykeyPress(JOYKEY_LT, CONTROLLER_1))
+		{// 押している間
+			rot.y-= 0.1f;
+		}
+		if (GetKeyboradPress(DIK_K) || GetJoykeyPress(JOYKEY_RT, CONTROLLER_1))
+		{// 押している間
+			rot.y+= 0.1f;
+		}
+		if (GetKeyboradPress(DIK_M) || GetJoykeyPress(JOYKEY_X, CONTROLLER_1))
+		{// 押している間
+			rot.z-= 0.1f;
+		}
+		if (GetKeyboradPress(DIK_COMMA) || GetJoykeyPress(JOYKEY_Y, CONTROLLER_1))
+		{// 押している間
+			rot.z+= 0.1f;
+		}
+		if (GetKeyboradPress(DIK_7) || GetJoykeyPress(JOYKEY_BACK, CONTROLLER_1))
+		{// 押している間
+			scale.x-= 0.2f;
+			scale.y-= 0.2f;
+			scale.z-= 0.2f;
+		}
+		if (GetKeyboradPress(DIK_8) || GetJoykeyPress(JOYKEY_START, CONTROLLER_1))
+		{// 押している間
+			scale.x+= 0.2f;
+			scale.y+= 0.2f;
+			scale.z+= 0.2f;
+		}
+
+		if (GetKeyboradTrigger(DIK_0) || GetJoykeyTrigger(JOYKEY_R3, CONTROLLER_1))
+		{// 初期化
+			pos = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
+			rot = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
+			scale = D3DXVECTOR3(1.0f, 1.0f, 1.0f);
+		}
+
+		//正規化
+		if (rot.x > D3DX_PI)
+		{
+			rot.x -= D3DX_PI * 2.0f;
+		}
+		else if (rot.x < -D3DX_PI)
+		{
+			rot.x += D3DX_PI * 2.0f;
+		}
+		if (rot.y > D3DX_PI)
+		{
+			rot.y -= D3DX_PI * 2.0f;
+		}
+		else if (rot.y < -D3DX_PI)
+		{
+			rot.y += D3DX_PI * 2.0f;
+		}
+		if (rot.z > D3DX_PI)
+		{
+			rot.z -= D3DX_PI * 2.0f;
+		}
+		else if (rot.z < -D3DX_PI)
+		{
+			rot.z += D3DX_PI * 2.0f;
+		}
+
+		//スケール制限
+		scale.x = max(STAGE_SCALE_MIN, min(STAGE_SCALE_MAX, scale.x));
+		scale.y = max(STAGE_SCALE_MIN, min(STAGE_SCALE_MAX, scale.y));
+		scale.z = max(STAGE_SCALE_MIN, min(STAGE_SCALE_MAX, scale.z));
+
+		if (GetKeyboradTrigger(DIK_RSHIFT) || GetJoykeyTrigger(JOYKEY_RB, CONTROLLER_1))
+		{// 押したとき
+			EndNumber = -1;
+		}
+		if (GetKeyboradPress(DIK_RSHIFT) || GetJoykeyPress(JOYKEY_RB, CONTROLLER_1))
+		{// 押している間
+			EndStage(EndNumber);
+			EndNumber=SetStage(nNumber, g_editPlayer.pos + pos, g_editPlayer.rot + rot, scale);
+		}
+
+		if (GetKeyboradTrigger(DIK_BACK) || GetJoykeyTrigger(JOYKEY_L3, CONTROLLER_1))
+		{// 押している間
+			EndStage(EndNumber);
+		}
+
+		if (GetKeyboradTrigger(DIK_F8))
+		{// セーブ
+			SaveStage();
+		}
+
+		// Lスティックでの移動
+		float fSticRot = pCamera->rot.y + atan2f(*GetJoyStick(STICK_LEFT, CONTROLLER_1), *(GetJoyStick(STICK_LEFT, CONTROLLER_1) + 1));	// スティックを角度へ変換
+
+		float fMoveMax = sqrtf((32767.0f * 32767.0f) + (32767.0f * 32767.0f));
+		float fMoveNow = sqrtf((*GetJoyStick(STICK_LEFT, CONTROLLER_1) * *GetJoyStick(STICK_LEFT, CONTROLLER_1)) + (*(GetJoyStick(STICK_LEFT, CONTROLLER_1) + 1) * *(GetJoyStick(STICK_LEFT, CONTROLLER_1) + 1)));
+		float fMove = g_editPlayer.movement * (fMoveNow / fMoveMax);
+
+		g_editPlayer.move.x += sinf(fSticRot) * fMove;
+		g_editPlayer.move.z += cosf(fSticRot) * fMove;
+
+		if (bMove)
+		{// 動きます！
+			float fKeyRot = pCamera->rot.y + atan2f(fMoveX, fMoveZ);	// 角度へ変換
+			g_editPlayer.move.x += sinf(fKeyRot) * g_editPlayer.movement;
+			g_editPlayer.move.z += cosf(fKeyRot) * g_editPlayer.movement;
+		}
+	}
+
+	// エディプレイヤーが目的の方向へ向く処理
+	g_editPlayer.rot.y = atan2f(g_editPlayer.move.x, g_editPlayer.move.z) + D3DX_PI;
+
+	// 重力
+	g_editPlayer.move.y += g_editPlayer.graviment;
+
+	// 位置の更新
+	g_editPlayer.pos += g_editPlayer.move;
+
+	CollisionStage(&g_editPlayer.pStage);
+
+	if (g_editPlayer.pStage != NULL)
+	{
+		if (GetKeyboradTrigger(DIK_DELETE) || (GetJoykeyTrigger(JOYKEY_L3, CONTROLLER_1) && GetJoykeyTrigger(JOYKEY_R3, CONTROLLER_1)))
+		{// 押している間
+			EndShadow(g_editPlayer.pStage->nIdxShadow);
+			g_editPlayer.pStage->bUse = false;
+		}
+	}
+
+	g_editPlayer.pStage = NULL;
 
 	CollisionMeshField(&g_editPlayer.pos, &g_editPlayer.posOld, &g_editPlayer.move);
 
