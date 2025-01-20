@@ -1,0 +1,27 @@
+Debug時F6でEditMode切替
+F9でEditType(Mesh,Object)切替
+
+共通
+WASD 移動
+QE 上下移動
+LSHIFT 各種設定
+
+Mesh
+RSHIFT 起伏
+F1 起伏保存
+F2 起伏読み込み
+
+Object
+RSHIFT オブジェクト設置(長押しでホールド)
+左右キー オブジェクト切替
+TFGH 移動のようにposをプレイヤーからずらす
+UIJKM, 回転
+7 8 スケール
+0 位置、回転、スケール初期化
+BACKSPACE 前回置いたオブジェクトの消去
+DEL 今触れているオブジェクトの消去
+F8 オブジェクト保存
+
+Debug表示の一番下にEditTypeと現在のオブジェクトが出ます
+
+XfileManager.txtに書かれているXファイルがおけます(一番上はXファイルの個数)
