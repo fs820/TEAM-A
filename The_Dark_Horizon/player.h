@@ -44,6 +44,7 @@
 
 #define MAX_HP (100.0f)
 #define MAX_ENERGY (100.0f)
+#define BULLET_ENERGY (10.0f)
 
 //プレイヤー状態の列挙型定義
 typedef enum

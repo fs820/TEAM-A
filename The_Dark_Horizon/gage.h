@@ -79,7 +79,7 @@ void Updategage(void);
 void UpdateRedgage(void);
 void Drawgage(void);
 void SetHPgage(void);
-void SetEnergygage(void);
+bool SetEnergygage(void);
 void SetO2gage(void);
 
 #endif

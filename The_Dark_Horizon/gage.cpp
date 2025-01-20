@@ -378,13 +378,20 @@ void UpdateRedgage(void)
 //=====================================================
 // エネルギーゲージの設定処理
 //=====================================================
-void SetEnergygage(void)
+bool SetEnergygage(void)
 {
 	VERTEX_2D* pVtx;  // 頂点情報へのポインタ
 	Player* pPlayer = GetPlayer();
 
 	if (g_energygage.bUse == true)
 	{
+		if (pPlayer->fEnergy - BULLET_ENERGY<0.0f)
+		{
+			return false;
+		}
+
+		pPlayer->fEnergy -= BULLET_ENERGY;
+
 		// 変化したエネルギーを割合に変換させる
 		float fPercentEnergy = (float)(pPlayer->fEnergy / MAX_ENERGY);
 
@@ -405,7 +412,11 @@ void SetEnergygage(void)
 
 		// 頂点バッファをアンロックする
 		g_pVtxBuffgage->Unlock();
+
+		return true;
 	}
+
+	return false;
 }
 //=====================================================
 // 酸素ゲージの設定処理
