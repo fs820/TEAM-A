@@ -626,7 +626,10 @@ void EditPlayerManagerObject()
 	// ˆÊ’u‚ÌXV
 	g_editPlayer.pos += g_editPlayer.move;
 
-	CollisionStage(&g_editPlayer.pStage);
+	if (!GetKeyboradPress(DIK_RSHIFT) && !GetJoykeyPress(JOYKEY_RB, CONTROLLER_1))
+	{// ‰Ÿ‚µ‚Ä‚¢‚éŠÔ
+		CollisionStage(&g_editPlayer.pStage);
+	}
 
 	if (g_editPlayer.pStage != NULL)
 	{
