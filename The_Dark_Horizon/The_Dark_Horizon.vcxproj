@@ -152,6 +152,7 @@
     <ClCompile Include="cylinder.cpp" />
     <ClCompile Include="editplayer.cpp" />
     <ClCompile Include="effect.cpp" />
+    <ClCompile Include="enemy.cpp" />
     <ClCompile Include="fade.cpp" />
     <ClCompile Include="file.cpp" />
     <ClCompile Include="gage.cpp" />
@@ -162,6 +163,8 @@
     <ClCompile Include="meshfield.cpp" />
     <ClCompile Include="meshwall.cpp" />
     <ClCompile Include="model.cpp" />
+    <ClCompile Include="modelEnemy.cpp" />
+    <ClCompile Include="motionEnemy.cpp" />
     <ClCompile Include="particle.cpp" />
     <ClCompile Include="pause.cpp" />
     <ClCompile Include="player.cpp" />
@@ -183,6 +186,7 @@
     <ClInclude Include="cylinder.h" />
     <ClInclude Include="editplayer.h" />
     <ClInclude Include="effect.h" />
+    <ClInclude Include="enemy.h" />
     <ClInclude Include="fade.h" />
     <ClInclude Include="file.h" />
     <ClInclude Include="gage.h" />
@@ -193,6 +197,8 @@
     <ClInclude Include="meshfield.h" />
     <ClInclude Include="meshwall.h" />
     <ClInclude Include="model.h" />
+    <ClInclude Include="modelEnemy.h" />
+    <ClInclude Include="motionEnemy.h" />
     <ClInclude Include="particle.h" />
     <ClInclude Include="pause.h" />
     <ClInclude Include="player.h" />
