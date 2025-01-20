@@ -16,6 +16,7 @@ typedef struct
 	D3DXVECTOR3 move;	// 移動量
 
 	ModelEnemy aModelEnemy[10];	// モデルパーツ
+	MOTION_ENEMY motion;		// モーション
 }ENEMY;
 
 // エネミーの管理構造体
