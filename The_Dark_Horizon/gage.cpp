@@ -7,6 +7,7 @@
 
 #include "gage.h"
 #include "player.h"
+#include "game.h"
 
 // マクロ定義
 #define MAX_TEXTUREW_HP (570.0f)
@@ -267,6 +268,11 @@ void Updategage(void)
 
 		// 頂点バッファをアンロックする
 		g_pVtxBuffgage->Unlock();
+
+		if (g_o2gage.fHeght <= 0.0f)
+		{
+			SetGameState(GAMESTATE_END);
+		}
 
 		g_o2gage.nCountTime = 0;
 	}

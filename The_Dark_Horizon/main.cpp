@@ -755,14 +755,14 @@ void DrawDebug(void)
 	rect.top += FONT_SIZE;
 
 	//文字列の代入
-	snprintf(&aStr[0], sizeof(aStr), "プレイヤー体力:%d\n", pPlayer->nLife);
+	snprintf(&aStr[0], sizeof(aStr), "プレイヤー体力:%f\n", pPlayer->fLife);
 
 	//テキストの描画
 	g_pFont->DrawText(NULL, &aStr[0], -1, &rect, DT_LEFT, D3DCOLOR_RGBA(255, 255, 255, 255));
 	rect.top += FONT_SIZE;
 
 	//文字列の代入
-	snprintf(&aStr[0], sizeof(aStr), "プレイヤー体力:%f\n", (float)((float)pPlayer->nLife / (float)PLAYER_LIFE));
+	snprintf(&aStr[0], sizeof(aStr), "プレイヤー体力:%f\n", (float)((float)pPlayer->fLife / (float)MAX_HP));
 
 	//テキストの描画
 	g_pFont->DrawText(NULL, &aStr[0], -1, &rect, DT_LEFT, D3DCOLOR_RGBA(255, 255, 255, 255));

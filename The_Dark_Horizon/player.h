@@ -42,6 +42,9 @@
 #define BLEND_FRAME (10.0f)
 #define PLAYER_SIZE (50.0f)
 
+#define MAX_HP (100.0f)
+#define MAX_ENERGY (100.0f)
+
 //プレイヤー状態の列挙型定義
 typedef enum
 {
@@ -98,7 +101,8 @@ typedef struct
 	D3DXVECTOR3 Destrot;
 	D3DXVECTOR3 scale;
 	bool bJump;
-	int nLife;
+	float fLife;
+	float fEnergy;
 	PLAYERSTATE state;
 	D3DXMATRIX mtxWorld;
 	int nIdxShadow;

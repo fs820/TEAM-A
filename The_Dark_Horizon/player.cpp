@@ -14,6 +14,7 @@
 #include"file.h"
 #include"particle.h"
 #include"meshfield.h"
+#include"gage.h"
 
 //ÉOÉçÅ[ÉoÉãïœêîêÈåæ
 Player g_Player;
@@ -138,7 +139,8 @@ void InitPlayer(void)
 	g_Player.Destrot = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 	g_Player.scale = D3DXVECTOR3(1.0f, 1.0f, 1.0f);
 	g_Player.bJump = false;
-	g_Player.nLife = PLAYER_LIFE;
+	g_Player.fLife = MAX_HP;
+	g_Player.fEnergy = MAX_ENERGY;
 	g_Player.state = PLAYERSTATE_NORMAL;
 	g_Player.nIdxShadow = -1;
 	g_Player.nIdxLife = -1;
@@ -933,7 +935,7 @@ void UpdatePlayer(void)
 			g_Player.bUse = false;
 			break;
 		case PLAYERSTATE_NORMAL:
-			if (g_Player.nLife <= 0)
+			if (g_Player.fLife <= 0.0f)
 			{
 				g_Player.state = PLAYERSTATE_DIE;
 			}

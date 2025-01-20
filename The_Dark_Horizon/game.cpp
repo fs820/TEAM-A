@@ -20,6 +20,7 @@
 #include"score.h"
 #include"camera.h"
 #include"ui.h"
+#include"gage.h"
 
 #include"shadow.h"
 #include"billboard.h"
@@ -59,7 +60,7 @@ void InitGame(void)
 	InitEffect();
 	InitParticle();
 	InitBillboard();
-	InitTime();
+	Initgage();
 	InitUi();
 
 	//‹óŠÔ
@@ -92,7 +93,7 @@ void UninitGame(void)
 	EndSound();
 
 	UninitUi();
-	UninitTime();
+	Uninitgage();
 	UninitParticle();
 	UninitEffect();
 	UninitBullet();
@@ -177,14 +178,7 @@ void UpdateGame(void)
 		switch (g_gameState)
 		{
 		case GAMESTATE_NORMAL:
-			//g_GameTime++;
-			SetTime(TIME_LIMIT - g_GameTime / FRAME, true);
-			if (g_GameTime / FRAME >= TIME_LIMIT)
-			{
-				g_gameState = GAMESTATE_END;
-				g_bClear = true;
-			}
-			else if (pPlayer->state == PLAYERSTATE_DIE)
+			if (!pPlayer->bUse)
 			{
 				g_gameState = GAMESTATE_END;
 				g_bClear = false;
@@ -243,6 +237,8 @@ void UpdateGame(void)
 		UpdateBullet();
 		UpdateEffect();
 		UpdateParticle();
+		UpdateRedgage();
+		Updategage();
 		UpdateUi();
 	}
 }
@@ -275,7 +271,7 @@ void DrawGame(void)
 
 #endif
 	DrawAlphaMeshWall();
-	DrawTime();
+	Drawgage();
 	DrawUi();
 }
 

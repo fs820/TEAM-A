@@ -105,6 +105,9 @@
     <ClCompile Include="meshfield.cpp">
       <Filter>ソース ファイル\tetsuji</Filter>
     </ClCompile>
+    <ClCompile Include="gage.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="billboard.h">
@@ -193,6 +196,9 @@
     </ClInclude>
     <ClInclude Include="meshfield.h">
       <Filter>ヘッダー ファイル\tetsuji</Filter>
+    </ClInclude>
+    <ClInclude Include="gage.h">
+      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
