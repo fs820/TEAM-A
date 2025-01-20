@@ -8,6 +8,9 @@
 #define EDITPLAYER_MOVE_MAX (20.0f)		// エディットプレイヤーの移動量
 #define EDITPLAYER_GRAVITY_MAX (10.0f)	// エディットプレイヤーの重力量
 
+#define EDITPLAYER_WIDTH (100.0f)
+#define EDITPLAYER_HEIGHT (100.0f)
+
 //エディットタイプの列挙型定義
 typedef enum
 {
@@ -45,4 +48,5 @@ void DrawEditPlayer();			// エディットプレイヤーの描画
 void EditPlayerManagerMesh();   // エディットプレイヤーの管理(Mesh)
 void EditPlayerManagerObject(); // エディットプレイヤーの管理(Object)
 EDITPLAYER* GetEditPlayer();	// エディットプレイヤーの取得
+int GetXnumber();
 #endif // !_EDITPLAYER_H_

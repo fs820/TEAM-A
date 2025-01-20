@@ -66,5 +66,6 @@ void EndStage(int nEndNumber);
 Stage* GetStage(void);
 int GetXfileNum(void);
 bool CollisionStage(Stage** pStage);
+String GetXfileName(int nNumber);
 
 #endif _STAGE_H_

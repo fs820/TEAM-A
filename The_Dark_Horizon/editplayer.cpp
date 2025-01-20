@@ -13,6 +13,7 @@
 
 // グローバル変数宣言
 EDITPLAYER g_editPlayer;	// エディットプレイヤー情報
+int g_nNumber = 0;
 
 //*********************************************************************************************
 // エディットプレイヤーの初期化
@@ -306,6 +307,9 @@ void EditPlayerManagerMesh()
 	// 重力
 	g_editPlayer.move.y += g_editPlayer.graviment;
 
+	//位置の保存
+	g_editPlayer.posOld = g_editPlayer.pos;
+
 	// 位置の更新
 	g_editPlayer.pos += g_editPlayer.move;
 
@@ -333,7 +337,7 @@ void EditPlayerManagerObject()
 	static D3DXVECTOR3 pos = D3DXVECTOR3(0.0f, 0.0f, 0.0f), 
 		               rot = D3DXVECTOR3(0.0f, 0.0f, 0.0f), 
 		               scale = D3DXVECTOR3(1.0f, 1.0f, 1.0f); // オブジェクト設置用
-	static int nNumber = 0, EndNumber = -1, CollNumber = -1;                    //オブジェクトナンバー
+	static int EndNumber = -1, CollNumber = -1;                    //オブジェクトナンバー
 
 	// カメラに対して移動する処理--------------------------------------------------------------
 	if (GetKeyboradPress(DIK_LSHIFT) || GetJoykeyPress(JOYKEY_LB, CONTROLLER_1))
@@ -433,20 +437,20 @@ void EditPlayerManagerObject()
 
 		if (GetKeyboradTrigger(DIK_RIGHT))
 		{// オブジェクト切替
-			nNumber++;
+			g_nNumber++;
 		}
 		else if (GetKeyboradTrigger(DIK_LEFT))
 		{// オブジェクト切替
-			nNumber--;
+			g_nNumber--;
 		}
 
-		if (nNumber<0)
+		if (g_nNumber <0)
 		{//ループ
-			nNumber = GetXfileNum() - 1;
+			g_nNumber = GetXfileNum() - 1;
 		}
 
 		//範囲制限
-		nNumber %= GetXfileNum();
+		g_nNumber %= GetXfileNum();
 
 		if (GetKeyboradPress(DIK_F) == true || GetJoykeyPress(JOYKEY_LEFT, CONTROLLER_1) == true)//Aキー
 		{
@@ -586,7 +590,7 @@ void EditPlayerManagerObject()
 		if (GetKeyboradPress(DIK_RSHIFT) || GetJoykeyPress(JOYKEY_RB, CONTROLLER_1))
 		{// 押している間
 			EndStage(EndNumber);
-			EndNumber=SetStage(nNumber, g_editPlayer.pos + pos, g_editPlayer.rot + rot, scale);
+			EndNumber=SetStage(g_nNumber, g_editPlayer.pos + pos, g_editPlayer.rot + rot, scale);
 		}
 
 		if (GetKeyboradTrigger(DIK_BACK) || GetJoykeyTrigger(JOYKEY_L3, CONTROLLER_1))
@@ -622,6 +626,9 @@ void EditPlayerManagerObject()
 
 	// 重力
 	g_editPlayer.move.y += g_editPlayer.graviment;
+
+	//位置の保存
+	g_editPlayer.posOld = g_editPlayer.pos;
 
 	// 位置の更新
 	g_editPlayer.pos += g_editPlayer.move;
@@ -663,4 +670,12 @@ void EditPlayerManagerObject()
 EDITPLAYER *GetEditPlayer()
 {
 	return &g_editPlayer;
+}
+
+//*********************************************************************************************
+// エディットオブジェクトナンバーの取得
+//*********************************************************************************************
+int GetXnumber()
+{
+	return g_nNumber;
 }

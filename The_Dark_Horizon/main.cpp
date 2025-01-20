@@ -18,6 +18,7 @@
 #include"player.h"
 #include"input.h"
 #include"pause.h"
+#include"editplayer.h"
 
 #define IDI_ICON1 (WORD)"IDI_ICON1"
 
@@ -846,6 +847,28 @@ void DrawDebug(void)
 
 	//文字列の代入
 	snprintf(&aStr[0], sizeof(aStr), "時間:%d\n", GetClearTime());
+
+	//テキストの描画
+	g_pFont->DrawText(NULL, &aStr[0], -1, &rect, DT_LEFT, D3DCOLOR_RGBA(255, 255, 255, 255));
+	rect.top += FONT_SIZE;
+	rect.top += FONT_SIZE;
+
+	//文字列の代入
+	snprintf(&aStr[0], sizeof(aStr), "Edit:%s\n", GetEditPlayer()->Type ? "Object" : "Mesh");
+
+	//テキストの描画
+	g_pFont->DrawText(NULL, &aStr[0], -1, &rect, DT_LEFT, D3DCOLOR_RGBA(255, 255, 255, 255));
+	rect.top += FONT_SIZE;
+
+	//文字列の代入
+	snprintf(&aStr[0], sizeof(aStr), "XfileNum:%d\n", GetXfileNum());
+
+	//テキストの描画
+	g_pFont->DrawText(NULL, &aStr[0], -1, &rect, DT_LEFT, D3DCOLOR_RGBA(255, 255, 255, 255));
+	rect.top += FONT_SIZE;
+
+	//文字列の代入
+	snprintf(&aStr[0], sizeof(aStr), "XfileName:%s\n", GetXfileName(GetXnumber()).aName);
 
 	//テキストの描画
 	g_pFont->DrawText(NULL, &aStr[0], -1, &rect, DT_LEFT, D3DCOLOR_RGBA(255, 255, 255, 255));
