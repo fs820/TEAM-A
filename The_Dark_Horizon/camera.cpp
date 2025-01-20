@@ -234,7 +234,7 @@ void UpdateCamera(void)
 				}
 
 				//ƒXƒP[ƒ‹§ŒÀ
-				g_camera[nCount].rot.x = max(-D3DX_PI * CAMERA_ROTX - D3DX_PI * CAMERA_ROTX * 0.5f, min(D3DX_PI * CAMERA_ROTX - D3DX_PI * CAMERA_ROTX * 0.5f, g_camera[nCount].rot.x));
+				g_camera[nCount].rot.x = max(-D3DX_PI * CAMERA_ROTX + D3DX_PI * CAMERA_ROTX * 0.7f, min(D3DX_PI * CAMERA_ROTX - D3DX_PI * CAMERA_ROTX * 0.5f, g_camera[nCount].rot.x));
 				g_camera[nCount].posV = pPlayer->pos + pPlayer->move;
 				g_camera[nCount].posV.y += pPlayer->aModel[0].pos.y + pPlayer->aModel[1].pos.y + pPlayer->aModel[1].vtxMax.y * 0.5f;
 				g_camera[nCount].posR.x = g_camera[nCount].posV.x + sinf(g_camera[nCount].rot.y) * cosf(g_camera[nCount].rot.x) * g_camera[nCount].fDistance;

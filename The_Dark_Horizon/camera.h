@@ -16,7 +16,7 @@
 #define CAMERA_ROT_SPEED (0.05f)//回転スピード
 #define CAMERA_SPEED (2.0f)//移動スピード
 #define CAMERA_INA (0.05f)//追従倍率
-#define CAMERA_ROTX (0.3f)//縦回転範囲
+#define CAMERA_ROTX (0.7f)//縦回転範囲
 #define CAMERA_ROTX_GRA (0.02f)//縦回転地面スペース
 #define CAMERA_DISTANCE_SPEED (50.0f)
 #define CAMERA_DISTANCE_MIN (50.0f)//ズーム制限
