@@ -244,36 +244,15 @@ void SetPositionShadow(int nIdxShadow, D3DXVECTOR3 pos)
 
 	g_aShadow[nIdxShadow].branding = false;	// 乗っない
 
-	D3DXVECTOR3 Dummy = {};	// 使わない引数用
-	D3DXVECTOR3 sp = {};	// ポリゴンの一頂点保存用
-	D3DXVECTOR3 nor = {};	// ポリゴンの法線保存用
+	D3DXVECTOR3 Dummy = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
+	D3DXVECTOR3 sp = {};
+	D3DXVECTOR3 nor = {};
 
+	// メッシュフィールドに当たっているかどうか調べる
 	if (CollisionMeshField(&sp, &nor, &g_aShadow[nIdxShadow].pos, &Dummy))
-	{
+	{// 乗ってたら
 		g_aShadow[nIdxShadow].branding = true;	// 乗ってる
 	}
-
-	fDiffA = (pos.y - g_aShadow[nIdxShadow].pos.y) * 0.9f;
-
-	float fWidth = g_aShadow[nIdxShadow].fWidth + fDiffA;
-	fMagu = g_aShadow[nIdxShadow].fWidth / fWidth;
-
-	// 頂点座標の設定
-	pVtx[0].pos.x = -fWidth;
-	pVtx[0].pos.y = 0.0f;
-	pVtx[0].pos.z = fWidth;
-
-	pVtx[1].pos.x = fWidth;
-	pVtx[1].pos.y = 0.0f;
-	pVtx[1].pos.z = fWidth;
-
-	pVtx[2].pos.x = -fWidth;
-	pVtx[2].pos.y = 0.0f;
-	pVtx[2].pos.z = -fWidth;
-
-	pVtx[3].pos.x = fWidth;
-	pVtx[3].pos.y = 0.0f;
-	pVtx[3].pos.z = -fWidth;
 
 	// 法線とポリゴンの一頂点の内積
 	float fdot = (nor.x * sp.x + nor.y * sp.y + nor.z * sp.z);
@@ -286,7 +265,29 @@ void SetPositionShadow(int nIdxShadow, D3DXVECTOR3 pos)
 			nor.y;
 	}
 
-	g_aShadow[nIdxShadow].pos.y = 0.5f;
+	//g_aShadow[nIdxShadow].pos.y = 0.5f;
+
+	fDiffA = (pos.y - g_aShadow[nIdxShadow].pos.y) * 0.9f;
+
+	float fWidth = g_aShadow[nIdxShadow].fWidth + fDiffA;
+	fMagu = g_aShadow[nIdxShadow].fWidth / fWidth;
+
+	// 頂点座標の設定
+	pVtx[0].pos.x = -fWidth;
+	pVtx[0].pos.y -= g_aShadow[nIdxShadow].pos.y - 0.5f;
+	pVtx[0].pos.z = fWidth;
+
+	pVtx[1].pos.x = fWidth;
+	pVtx[1].pos.y -= g_aShadow[nIdxShadow].pos.y - 0.5f;
+	pVtx[1].pos.z = fWidth;
+
+	pVtx[2].pos.x = -fWidth;
+	pVtx[2].pos.y -= g_aShadow[nIdxShadow].pos.y - 0.5f;
+	pVtx[2].pos.z = -fWidth;
+
+	pVtx[3].pos.x = fWidth;
+	pVtx[3].pos.y -= g_aShadow[nIdxShadow].pos.y - 0.5f;
+	pVtx[3].pos.z = -fWidth;
 
 	float fCol = 1.0f * fMagu;
 
