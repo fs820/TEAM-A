@@ -460,7 +460,7 @@ bool CollisionStage(Stage** pStage)
 			Posvec = pEditPlayer->pos - aPos[0];//壁に対するプレイヤーのベクトル
 			PosOldvec = pEditPlayer->posOld - aPos[0];//壁に対するプレイヤーの旧ベクトル
 			movevec = pEditPlayer->pos - pEditPlayer->posOld;//プレイヤーの移動ベクトル
-			if ((Stagevec.z * Posvec.x) - (Stagevec.x * Posvec.z) <= 0.0f && (Stagevec.z * PosOldvec.x) - (Stagevec.x * PosOldvec.z) >= 0.0f && pEditPlayer->pos.y < g_aStage[nCntStage].pos.y + g_aStage[nCntStage].vtxMax.y && pEditPlayer->pos.y > g_aStage[nCntStage].pos.y + g_aStage[nCntStage].vtxMin.y)
+			if ((Stagevec.z * Posvec.x) - (Stagevec.x * Posvec.z) <= 0.0f && (Stagevec.z * PosOldvec.x) - (Stagevec.x * PosOldvec.z) >= 0.0f && pEditPlayer->pos.y < g_aStage[nCntStage].pos.y + g_aStage[nCntStage].vtxMax.y && pEditPlayer->pos.y + 50.0f > g_aStage[nCntStage].pos.y + g_aStage[nCntStage].vtxMin.y)
 			{//左
 				StageCross = (Stagevec.z * movevec.x) - (Stagevec.x * movevec.z);
 				PosCross = (Posvec.z * movevec.x) - (Posvec.x * movevec.z);
@@ -484,7 +484,7 @@ bool CollisionStage(Stage** pStage)
 			Posvec = pEditPlayer->pos - aPos[1];//壁に対するプレイヤーのベクトル
 			PosOldvec = pEditPlayer->posOld - aPos[1];//壁に対するプレイヤーの旧ベクトル
 			movevec = pEditPlayer->pos - pEditPlayer->posOld;//プレイヤーの移動ベクトル
-			if ((Stagevec.z * Posvec.x) - (Stagevec.x * Posvec.z) <= 0.0f && (Stagevec.z * PosOldvec.x) - (Stagevec.x * PosOldvec.z) >= 0.0f && pEditPlayer->pos.y < g_aStage[nCntStage].pos.y + g_aStage[nCntStage].vtxMax.y && pEditPlayer->pos.y > g_aStage[nCntStage].pos.y + g_aStage[nCntStage].vtxMin.y)
+			if ((Stagevec.z * Posvec.x) - (Stagevec.x * Posvec.z) <= 0.0f && (Stagevec.z * PosOldvec.x) - (Stagevec.x * PosOldvec.z) >= 0.0f && pEditPlayer->pos.y < g_aStage[nCntStage].pos.y + g_aStage[nCntStage].vtxMax.y && pEditPlayer->pos.y + 50.0f > g_aStage[nCntStage].pos.y + g_aStage[nCntStage].vtxMin.y)
 			{//手前
 				StageCross = (Stagevec.z * movevec.x) - (Stagevec.x * movevec.z);
 				PosCross = (Posvec.z * movevec.x) - (Posvec.x * movevec.z);
@@ -508,7 +508,7 @@ bool CollisionStage(Stage** pStage)
 			Posvec = pEditPlayer->pos - aPos[2];//壁に対するプレイヤーのベクトル
 			PosOldvec = pEditPlayer->posOld - aPos[2];//壁に対するプレイヤーの旧ベクトル
 			movevec = pEditPlayer->pos - pEditPlayer->posOld;//プレイヤーの移動ベクトル
-			if ((Stagevec.z * Posvec.x) - (Stagevec.x * Posvec.z) <= 0.0f && (Stagevec.z * PosOldvec.x) - (Stagevec.x * PosOldvec.z) >= 0.0f && pEditPlayer->pos.y < g_aStage[nCntStage].pos.y + g_aStage[nCntStage].vtxMax.y && pEditPlayer->pos.y > g_aStage[nCntStage].pos.y + g_aStage[nCntStage].vtxMin.y)
+			if ((Stagevec.z * Posvec.x) - (Stagevec.x * Posvec.z) <= 0.0f && (Stagevec.z * PosOldvec.x) - (Stagevec.x * PosOldvec.z) >= 0.0f && pEditPlayer->pos.y < g_aStage[nCntStage].pos.y + g_aStage[nCntStage].vtxMax.y && pEditPlayer->pos.y + 50.0f > g_aStage[nCntStage].pos.y + g_aStage[nCntStage].vtxMin.y)
 			{//右
 				StageCross = (Stagevec.z * movevec.x) - (Stagevec.x * movevec.z);
 				PosCross = (Posvec.z * movevec.x) - (Posvec.x * movevec.z);
@@ -532,7 +532,7 @@ bool CollisionStage(Stage** pStage)
 			Posvec = pEditPlayer->pos - aPos[3];//壁に対するプレイヤーのベクトル
 			PosOldvec = pEditPlayer->posOld - aPos[3];//壁に対するプレイヤーの旧ベクトル
 			movevec = pEditPlayer->pos - pEditPlayer->posOld;//プレイヤーの移動ベクトル
-			if ((Stagevec.z * Posvec.x) - (Stagevec.x * Posvec.z) <= 0.0f && (Stagevec.z * PosOldvec.x) - (Stagevec.x * PosOldvec.z) >= 0.0f && pEditPlayer->pos.y < g_aStage[nCntStage].pos.y + g_aStage[nCntStage].vtxMax.y && pEditPlayer->pos.y > g_aStage[nCntStage].pos.y + g_aStage[nCntStage].vtxMin.y)
+			if ((Stagevec.z * Posvec.x) - (Stagevec.x * Posvec.z) <= 0.0f && (Stagevec.z * PosOldvec.x) - (Stagevec.x * PosOldvec.z) >= 0.0f && pEditPlayer->pos.y < g_aStage[nCntStage].pos.y + g_aStage[nCntStage].vtxMax.y && pEditPlayer->pos.y + 50.0f > g_aStage[nCntStage].pos.y + g_aStage[nCntStage].vtxMin.y)
 			{//奥
 				StageCross = (Stagevec.z * movevec.x) - (Stagevec.x * movevec.z);
 				PosCross = (Posvec.z * movevec.x) - (Posvec.x * movevec.z);
@@ -556,7 +556,7 @@ bool CollisionStage(Stage** pStage)
 			Posvec = pEditPlayer->pos - aPos[4];//壁に対するプレイヤーのベクトル
 			PosOldvec = pEditPlayer->posOld - aPos[4];//壁に対するプレイヤーの旧ベクトル
 			movevec = pEditPlayer->pos - pEditPlayer->posOld;//プレイヤーの移動ベクトル
-			if ((Stagevec.x * Posvec.y) - (Stagevec.y * Posvec.x) <= 0.0f && (Stagevec.x * PosOldvec.y) - (Stagevec.y * PosOldvec.x) >= 0.0f && pEditPlayer->pos.z < g_aStage[nCntStage].pos.z + cosf(g_aStage[nCntStage].rot.y + D3DX_PI * 0.5f) * g_aStage[nCntStage].fLength && pEditPlayer->pos.z > g_aStage[nCntStage].pos.z + cosf(g_aStage[nCntStage].rot.y + D3DX_PI * -0.5f) * g_aStage[nCntStage].fLength)
+			if ((Stagevec.x * Posvec.y) - (Stagevec.y * Posvec.x) <= 0.0f && (Stagevec.x * PosOldvec.y) - (Stagevec.y * PosOldvec.x) >= 0.0f && pEditPlayer->pos.z - 50.0f < g_aStage[nCntStage].pos.z + cosf(g_aStage[nCntStage].rot.y + D3DX_PI * 0.5f) * g_aStage[nCntStage].fLength && pEditPlayer->pos.z + 50.0f > g_aStage[nCntStage].pos.z + cosf(g_aStage[nCntStage].rot.y + D3DX_PI * -0.5f) * g_aStage[nCntStage].fLength)
 			{//上
 				StageCross = (Stagevec.x * movevec.y) - (Stagevec.y * movevec.x);
 				PosCross = (Posvec.x * movevec.y) - (Posvec.y * movevec.x);
@@ -582,7 +582,7 @@ bool CollisionStage(Stage** pStage)
 			Posvec = pEditPlayer->pos - aPos[6];//壁に対するプレイヤーのベクトル
 			PosOldvec = pEditPlayer->posOld - aPos[6];//壁に対するプレイヤーの旧ベクトル
 			movevec = pEditPlayer->pos - pEditPlayer->posOld;//プレイヤーの移動ベクトル
-			if ((Stagevec.x * Posvec.y) - (Stagevec.y * Posvec.x) <= 0.0f && (Stagevec.x * PosOldvec.y) - (Stagevec.y * PosOldvec.x) >= 0.0f && pEditPlayer->pos.z < g_aStage[nCntStage].pos.z + cosf(g_aStage[nCntStage].rot.y + D3DX_PI * 0.5f) * g_aStage[nCntStage].fLength && pEditPlayer->pos.z > g_aStage[nCntStage].pos.z + cosf(g_aStage[nCntStage].rot.y + D3DX_PI * -0.5f) * g_aStage[nCntStage].fLength)
+			if ((Stagevec.x * Posvec.y) - (Stagevec.y * Posvec.x) <= 0.0f && (Stagevec.x * PosOldvec.y) - (Stagevec.y * PosOldvec.x) >= 0.0f && pEditPlayer->pos.z - 50.0f < g_aStage[nCntStage].pos.z + cosf(g_aStage[nCntStage].rot.y + D3DX_PI * 0.5f) * g_aStage[nCntStage].fLength && pEditPlayer->pos.z + 50.0f > g_aStage[nCntStage].pos.z + cosf(g_aStage[nCntStage].rot.y + D3DX_PI * -0.5f) * g_aStage[nCntStage].fLength)
 			{//下
 				StageCross = (Stagevec.x * movevec.y) - (Stagevec.y * movevec.x);
 				PosCross = (Posvec.x * movevec.y) - (Posvec.y * movevec.x);
