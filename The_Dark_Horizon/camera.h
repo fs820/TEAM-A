@@ -16,7 +16,7 @@
 #define CAMERA_ROT_SPEED (0.05f)//回転スピード
 #define CAMERA_SPEED (2.0f)//移動スピード
 #define CAMERA_INA (0.05f)//追従倍率
-#define CAMERA_ROTX (0.2f)//縦回転範囲
+#define CAMERA_ROTX (0.3f)//縦回転範囲
 #define CAMERA_ROTX_GRA (0.02f)//縦回転地面スペース
 #define CAMERA_DISTANCE_SPEED (50.0f)
 #define CAMERA_DISTANCE_MIN (50.0f)//ズーム制限
@@ -25,6 +25,7 @@
 #define CAMERA_WIDTH (90.0f)//視野の広さ
 #define CAMERA_MIN (10.0f)//視野の最小
 #define CAMERA_MAX (10000.0f)//視野の最大
+#define NECK_INA (0.03f)//首の補正値
 
 typedef enum
 {

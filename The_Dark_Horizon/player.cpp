@@ -519,7 +519,6 @@ void UpdatePlayer(void)
 			{
 				g_Player.move.x += sinf(pCamera->rot.y + D3DX_PI * 0.5f + -atan2f(*(pStick + 1), *pStick)) * SPEED;
 				g_Player.move.z += cosf(pCamera->rot.y + D3DX_PI * 0.5f + -atan2f(*(pStick + 1), *pStick)) * SPEED;
-				g_Player.Destrot.y = pCamera->rot.y + D3DX_PI * -0.5f + -atan2f(*(pStick + 1), *pStick);
 				if (g_Player.motionType != MOTIONTYPE_JUMP && g_Player.motionType != MOTIONTYPE_LANDING && g_Player.motionType != MOTIONTYPE_ACTION)
 				{
 					g_Player.motionType = MOTIONTYPE_MOVE;
@@ -536,7 +535,6 @@ void UpdatePlayer(void)
 			{
 				g_Player.move.x += sinf(pCamera->rot.y + D3DX_PI * 0.5f + atan2f(*(pStick + 1), *pStick)) * SPEED;
 				g_Player.move.z += cosf(pCamera->rot.y + D3DX_PI * 0.5f + atan2f(*(pStick + 1), *pStick)) * SPEED;
-				g_Player.Destrot.y = pCamera->rot.y + D3DX_PI * -0.5f + atan2f(*(pStick + 1), *pStick);
 				if (g_Player.motionType != MOTIONTYPE_JUMP && g_Player.motionType != MOTIONTYPE_LANDING && g_Player.motionType != MOTIONTYPE_ACTION)
 				{
 					g_Player.motionType = MOTIONTYPE_MOVE;
@@ -550,7 +548,6 @@ void UpdatePlayer(void)
 			{//¶ã
 				g_Player.move.x += sinf(pCamera->rot.y + D3DX_PI * -0.25f) * SPEED;
 				g_Player.move.z += cosf(pCamera->rot.y + D3DX_PI * -0.25f) * SPEED;
-				g_Player.Destrot.y = pCamera->rot.y + D3DX_PI * 0.75f;
 				if (g_Player.motionType != MOTIONTYPE_JUMP && g_Player.motionType != MOTIONTYPE_LANDING && g_Player.motionType != MOTIONTYPE_ACTION)
 				{
 					g_Player.motionType = MOTIONTYPE_MOVE;
@@ -560,7 +557,6 @@ void UpdatePlayer(void)
 			{//¶‰º
 				g_Player.move.x += sinf(pCamera->rot.y + D3DX_PI * -0.75f) * SPEED;
 				g_Player.move.z += cosf(pCamera->rot.y + D3DX_PI * -0.75f) * SPEED;
-				g_Player.Destrot.y = pCamera->rot.y + D3DX_PI * 0.25f;
 				if (g_Player.motionType != MOTIONTYPE_JUMP && g_Player.motionType != MOTIONTYPE_LANDING && g_Player.motionType != MOTIONTYPE_ACTION)
 				{
 					g_Player.motionType = MOTIONTYPE_MOVE;
@@ -570,7 +566,6 @@ void UpdatePlayer(void)
 			{//¶
 				g_Player.move.x += sinf(pCamera->rot.y + D3DX_PI * -0.5f) * SPEED;
 				g_Player.move.z += cosf(pCamera->rot.y + D3DX_PI * -0.5f) * SPEED;
-				g_Player.Destrot.y = pCamera->rot.y + D3DX_PI * 0.5f;
 				if (g_Player.motionType != MOTIONTYPE_JUMP && g_Player.motionType != MOTIONTYPE_LANDING && g_Player.motionType != MOTIONTYPE_ACTION)
 				{
 					g_Player.motionType = MOTIONTYPE_MOVE;
@@ -583,7 +578,6 @@ void UpdatePlayer(void)
 			{//‰Eã
 				g_Player.move.x += sinf(pCamera->rot.y + D3DX_PI * 0.25f) * SPEED;
 				g_Player.move.z += cosf(pCamera->rot.y + D3DX_PI * 0.25f) * SPEED;
-				g_Player.Destrot.y = pCamera->rot.y + D3DX_PI * -0.75f;
 				if (g_Player.motionType != MOTIONTYPE_JUMP && g_Player.motionType != MOTIONTYPE_LANDING && g_Player.motionType != MOTIONTYPE_ACTION)
 				{
 					g_Player.motionType = MOTIONTYPE_MOVE;
@@ -593,7 +587,6 @@ void UpdatePlayer(void)
 			{//‰E‰º
 				g_Player.move.x += sinf(pCamera->rot.y + D3DX_PI * 0.75f) * SPEED;
 				g_Player.move.z += cosf(pCamera->rot.y + D3DX_PI * 0.75f) * SPEED;
-				g_Player.Destrot.y = pCamera->rot.y + D3DX_PI * -0.25f;
 				if (g_Player.motionType != MOTIONTYPE_JUMP && g_Player.motionType != MOTIONTYPE_LANDING && g_Player.motionType != MOTIONTYPE_ACTION)
 				{
 					g_Player.motionType = MOTIONTYPE_MOVE;
@@ -603,7 +596,6 @@ void UpdatePlayer(void)
 			{//‰E
 				g_Player.move.x += sinf(pCamera->rot.y + D3DX_PI * 0.5f) * SPEED;
 				g_Player.move.z += cosf(pCamera->rot.y + D3DX_PI * 0.5f) * SPEED;
-				g_Player.Destrot.y = pCamera->rot.y + D3DX_PI * -0.5f;
 				if (g_Player.motionType != MOTIONTYPE_JUMP && g_Player.motionType != MOTIONTYPE_LANDING && g_Player.motionType != MOTIONTYPE_ACTION)
 				{
 					g_Player.motionType = MOTIONTYPE_MOVE;
@@ -614,7 +606,6 @@ void UpdatePlayer(void)
 		{//ã
 			g_Player.move.x += sinf(pCamera->rot.y) * SPEED;
 			g_Player.move.z += cosf(pCamera->rot.y) * SPEED;
-			g_Player.Destrot.y = pCamera->rot.y + D3DX_PI;
 			if (g_Player.motionType != MOTIONTYPE_JUMP && g_Player.motionType != MOTIONTYPE_LANDING && g_Player.motionType != MOTIONTYPE_ACTION)
 			{
 				g_Player.motionType = MOTIONTYPE_MOVE;
@@ -624,7 +615,6 @@ void UpdatePlayer(void)
 		{//‰º
 			g_Player.move.x += sinf(pCamera->rot.y + D3DX_PI) * SPEED;
 			g_Player.move.z += cosf(pCamera->rot.y + D3DX_PI) * SPEED;
-			g_Player.Destrot.y = pCamera->rot.y;
 			if (g_Player.motionType != MOTIONTYPE_JUMP && g_Player.motionType != MOTIONTYPE_LANDING && g_Player.motionType != MOTIONTYPE_ACTION)
 			{
 				g_Player.motionType = MOTIONTYPE_MOVE;
@@ -653,7 +643,6 @@ void UpdatePlayer(void)
 			{
 				g_Player.move.x += sinf(pCamera->rot.y) * SPEED;
 				g_Player.move.z += cosf(pCamera->rot.y) * SPEED;
-				g_Player.Destrot.y = pCamera->rot.y + D3DX_PI;
 				if (g_Player.motionType != MOTIONTYPE_JUMP && g_Player.motionType != MOTIONTYPE_LANDING && g_Player.motionType != MOTIONTYPE_ACTION)
 				{
 					g_Player.motionType = MOTIONTYPE_MOVE;
@@ -663,7 +652,6 @@ void UpdatePlayer(void)
 			{
 				g_Player.move.x += sinf(pCamera->rot.y + D3DX_PI * 0.25f) * SPEED;
 				g_Player.move.z += cosf(pCamera->rot.y + D3DX_PI * 0.25f) * SPEED;
-				g_Player.Destrot.y = pCamera->rot.y + D3DX_PI * -0.75f;
 				if (g_Player.motionType != MOTIONTYPE_JUMP && g_Player.motionType != MOTIONTYPE_LANDING && g_Player.motionType != MOTIONTYPE_ACTION)
 				{
 					g_Player.motionType = MOTIONTYPE_MOVE;
@@ -673,7 +661,6 @@ void UpdatePlayer(void)
 			{
 				g_Player.move.x += sinf(pCamera->rot.y + D3DX_PI * 0.5f) * SPEED;
 				g_Player.move.z += cosf(pCamera->rot.y + D3DX_PI * 0.5f) * SPEED;
-				g_Player.Destrot.y = pCamera->rot.y + D3DX_PI * -0.5f;
 				if (g_Player.motionType != MOTIONTYPE_JUMP && g_Player.motionType != MOTIONTYPE_LANDING && g_Player.motionType != MOTIONTYPE_ACTION)
 				{
 					g_Player.motionType = MOTIONTYPE_MOVE;
@@ -683,7 +670,6 @@ void UpdatePlayer(void)
 			{
 				g_Player.move.x += sinf(pCamera->rot.y + D3DX_PI * 0.75f) * SPEED;
 				g_Player.move.z += cosf(pCamera->rot.y + D3DX_PI * 0.75f) * SPEED;
-				g_Player.Destrot.y = pCamera->rot.y + D3DX_PI * -0.25f;
 				if (g_Player.motionType != MOTIONTYPE_JUMP && g_Player.motionType != MOTIONTYPE_LANDING && g_Player.motionType != MOTIONTYPE_ACTION)
 				{
 					g_Player.motionType = MOTIONTYPE_MOVE;
@@ -693,7 +679,6 @@ void UpdatePlayer(void)
 			{
 				g_Player.move.x += sinf(pCamera->rot.y + D3DX_PI) * SPEED;
 				g_Player.move.z += cosf(pCamera->rot.y + D3DX_PI) * SPEED;
-				g_Player.Destrot.y = pCamera->rot.y;
 				if (g_Player.motionType != MOTIONTYPE_JUMP && g_Player.motionType != MOTIONTYPE_LANDING && g_Player.motionType != MOTIONTYPE_ACTION)
 				{
 					g_Player.motionType = MOTIONTYPE_MOVE;
@@ -703,7 +688,6 @@ void UpdatePlayer(void)
 			{
 				g_Player.move.x += sinf(pCamera->rot.y + D3DX_PI * -0.75f) * SPEED;
 				g_Player.move.z += cosf(pCamera->rot.y + D3DX_PI * -0.75f) * SPEED;
-				g_Player.Destrot.y = pCamera->rot.y + D3DX_PI * 0.25f;
 				if (g_Player.motionType != MOTIONTYPE_JUMP && g_Player.motionType != MOTIONTYPE_LANDING && g_Player.motionType != MOTIONTYPE_ACTION)
 				{
 					g_Player.motionType = MOTIONTYPE_MOVE;
@@ -713,7 +697,6 @@ void UpdatePlayer(void)
 			{
 				g_Player.move.x += sinf(pCamera->rot.y + D3DX_PI * -0.5f) * SPEED;
 				g_Player.move.z += cosf(pCamera->rot.y + D3DX_PI * -0.5f) * SPEED;
-				g_Player.Destrot.y = pCamera->rot.y + D3DX_PI * 0.5f;
 				if (g_Player.motionType != MOTIONTYPE_JUMP && g_Player.motionType != MOTIONTYPE_LANDING && g_Player.motionType != MOTIONTYPE_ACTION)
 				{
 					g_Player.motionType = MOTIONTYPE_MOVE;
@@ -723,7 +706,6 @@ void UpdatePlayer(void)
 			{
 				g_Player.move.x += sinf(pCamera->rot.y + D3DX_PI * -0.25f) * SPEED;
 				g_Player.move.z += cosf(pCamera->rot.y + D3DX_PI * -0.25f) * SPEED;
-				g_Player.Destrot.y = pCamera->rot.y + D3DX_PI * 0.75f;
 				if (g_Player.motionType != MOTIONTYPE_JUMP && g_Player.motionType != MOTIONTYPE_LANDING && g_Player.motionType != MOTIONTYPE_ACTION)
 				{
 					g_Player.motionType = MOTIONTYPE_MOVE;
@@ -804,6 +786,8 @@ void UpdatePlayer(void)
 			}
 		}
 
+		g_Player.Destrot.y = pCamera->rot.y;
+
 		g_Player.move.y += GRAVITY;
 
 		if (g_Player.bJump)
@@ -852,7 +836,7 @@ void UpdatePlayer(void)
 			g_Player.pos.z = GAME_WALL;
 		}
 
-		if (sqrtf(g_Player.move.x * g_Player.move.x + g_Player.move.z * g_Player.move.z) < 0.1f && g_Player.motionType == MOTIONTYPE_MOVE)
+		if (sqrtf(g_Player.move.x * g_Player.move.x + g_Player.move.z * g_Player.move.z) < 0.3f && g_Player.motionType == MOTIONTYPE_MOVE)
 		{
 			g_Player.move.x = 0.0f;
 			g_Player.move.z = 0.0f;
