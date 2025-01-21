@@ -91,7 +91,7 @@ void InitTitle(void)
 		pVtx[2 + (4 * nCount)].tex = D3DXVECTOR2(0.0f, 1.0f);
 		pVtx[3 + (4 * nCount)].tex = D3DXVECTOR2(1.0f, 1.0f);
 
-		switch (nCount)
+		/*switch (nCount)
 		{
 		case TITLETYPE_SKY:
 			break;
@@ -106,7 +106,7 @@ void InitTitle(void)
 		case TITLETYPE_SKY:
 			break;
 
-		}
+		}*/
 	}
 
 	// 頂点バッファをアンロックする
