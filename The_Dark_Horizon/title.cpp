@@ -14,9 +14,9 @@
 #define MAX_TEXTUREH_TITLE (720.0f)			// タイトルテクスチャの縦幅
 #define MAX_TEXTUREW_TITLENAME (1000.0f)	// タイトル名テクスチャの横幅
 #define MAX_TEXTUREH_TITLENAME (200.0f)		// タイトル名テクスチャの縦幅
-#define MAX_TEXTUREW_TITLEUI (500.0f)		// タイトルUIテクスチャの横幅
-#define MAX_TEXTUREH_TITLEUI (90.0f)		// タイトルUIテクスチャの縦幅
-#define MAX_TEXTUREW (10.0f)				// UIテクスチャ同士の横幅
+#define MAX_TEXTUREW_TITLEUI (250.0f)		// タイトルUIテクスチャの横幅
+#define MAX_TEXTUREH_TITLEUI (40.0f)		// タイトルUIテクスチャの縦幅
+#define MAX_TEXTUREW (20.0f)				// UIテクスチャ同士の横幅
 #define MAX_TITLEUI (3)						// UIテクスチャの最大数
 
 // グローバル変数
@@ -30,11 +30,12 @@ TitleUI g_TitleUI[MAX_TITLEUI];							// タイトルの構造体
 void InitTitle(void)
 {
 	LPDIRECT3DDEVICE9 pDevice;  // デバイスへのポインタ
+	int nNumber = 0;
 
 	// タイトルの構造体の初期化
 	for (int nCount = 0; nCount < MAX_TITLEUI; nCount++)
 	{
-		g_TitleUI[nCount].pos = D3DXVECTOR3(640.0f, 400.0f, 0.0f);	// 位置を初期化する
+		g_TitleUI[nCount].pos = D3DXVECTOR3(640.0f, 350.0f + (MAX_TEXTUREH_TITLEUI * nCount) + MAX_TEXTUREW, 0.0f);	// 位置を初期化する
 		g_TitleUI[nCount].fWidth = MAX_TEXTUREW_TITLEUI;			// 横幅を初期化する 
 		g_TitleUI[nCount].fHeght = MAX_TEXTUREH_TITLEUI;			// 縦幅を初期化する 
 		g_TitleUI[nCount].bUse = false;								// 使用しているかを初期化する 
@@ -91,22 +92,78 @@ void InitTitle(void)
 		pVtx[2 + (4 * nCount)].tex = D3DXVECTOR2(0.0f, 1.0f);
 		pVtx[3 + (4 * nCount)].tex = D3DXVECTOR2(1.0f, 1.0f);
 
-		/*switch (nCount)
+		switch (nCount)
 		{
 		case TITLETYPE_SKY:
-			break;
-		case TITLETYPE_MOON:
-			break;
-		case TITLETYPE_NAME:
-			break;
-		case TITLETYPE_GAMEPLAY:
-			break;
-		case TITLETYPE_TUTORIAL:
-			break;
-		case TITLETYPE_EXIT:
+			// 頂点座標の設定
+			pVtx[0 + (4 * TITLETYPE_SKY)].pos = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
+			pVtx[1 + (4 * TITLETYPE_SKY)].pos = D3DXVECTOR3(MAX_TEXTUREW_TITLE, 0.0f, 0.0f);
+			pVtx[2 + (4 * TITLETYPE_SKY)].pos = D3DXVECTOR3(0.0f, MAX_TEXTUREH_TITLE, 0.0f);
+			pVtx[3 + (4 * TITLETYPE_SKY)].pos = D3DXVECTOR3(MAX_TEXTUREW_TITLE, MAX_TEXTUREH_TITLE, 0.0f);
 			break;
 
-		}*/
+		case TITLETYPE_MOON:
+			pVtx[0 + (4 * TITLETYPE_MOON)].pos = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
+			pVtx[1 + (4 * TITLETYPE_MOON)].pos = D3DXVECTOR3(MAX_TEXTUREW_TITLE, 0.0f, 0.0f);
+			pVtx[2 + (4 * TITLETYPE_MOON)].pos = D3DXVECTOR3(0.0f, MAX_TEXTUREH_TITLE, 0.0f);
+			pVtx[3 + (4 * TITLETYPE_MOON)].pos = D3DXVECTOR3(MAX_TEXTUREW_TITLE, MAX_TEXTUREH_TITLE, 0.0f);
+			break;
+
+		case TITLETYPE_NAME:
+			pVtx[0 + (4 * TITLETYPE_NAME)].pos = D3DXVECTOR3(300.0f , 80.0f , 0.0f);
+			pVtx[1 + (4 * TITLETYPE_NAME)].pos = D3DXVECTOR3(300.0f + MAX_TEXTUREW_TITLENAME, 80.0f , 0.0f);
+			pVtx[2 + (4 * TITLETYPE_NAME)].pos = D3DXVECTOR3(300.0f , 80.0f + MAX_TEXTUREH_TITLENAME, 0.0f);
+			pVtx[3 + (4 * TITLETYPE_NAME)].pos = D3DXVECTOR3(300.0f + MAX_TEXTUREW_TITLENAME, 80.0f + MAX_TEXTUREH_TITLENAME, 0.0f);
+			break;
+
+		case TITLETYPE_GAMEPLAY:
+			pVtx[0 + (4 * TITLETYPE_GAMEPLAY)].pos = D3DXVECTOR3(g_TitleUI[nNumber].pos.x - MAX_TEXTUREW_TITLEUI, g_TitleUI[nNumber].pos.y - MAX_TEXTUREH_TITLEUI, 0.0f);
+			pVtx[1 + (4 * TITLETYPE_GAMEPLAY)].pos = D3DXVECTOR3(g_TitleUI[nNumber].pos.x + MAX_TEXTUREW_TITLEUI, g_TitleUI[nNumber].pos.y + MAX_TEXTUREH_TITLEUI, 0.0f);
+			pVtx[2 + (4 * TITLETYPE_GAMEPLAY)].pos = D3DXVECTOR3(g_TitleUI[nNumber].pos.x - MAX_TEXTUREW_TITLEUI, g_TitleUI[nNumber].pos.y - MAX_TEXTUREH_TITLEUI, 0.0f);
+			pVtx[3 + (4 * TITLETYPE_GAMEPLAY)].pos = D3DXVECTOR3(g_TitleUI[nNumber].pos.x + MAX_TEXTUREW_TITLEUI, g_TitleUI[nNumber].pos.y + MAX_TEXTUREH_TITLEUI, 0.0f);
+
+			// テクスチャ座標の設定
+			pVtx[0 + (4 * TITLETYPE_GAMEPLAY)].tex = D3DXVECTOR2(0.0f, 0.0f + (1.0f * 0.6) * UITYPE_GAMEPLAY);
+			pVtx[1 + (4 * TITLETYPE_GAMEPLAY)].tex = D3DXVECTOR2(1.0f, 0.0f + (1.0f * 0.6) * UITYPE_GAMEPLAY);
+			pVtx[2 + (4 * TITLETYPE_GAMEPLAY)].tex = D3DXVECTOR2(0.0f, (1.0f * 0.6) + (1.0f * 0.6) * UITYPE_GAMEPLAY);
+			pVtx[3 + (4 * TITLETYPE_GAMEPLAY)].tex = D3DXVECTOR2(1.0f, (1.0f * 0.6) + (1.0f * 0.6) * UITYPE_GAMEPLAY);
+
+			nNumber++;
+
+			break;
+
+		case TITLETYPE_TUTORIAL:
+			pVtx[0 + (4 * TITLETYPE_TUTORIAL)].pos = D3DXVECTOR3(g_TitleUI[nNumber].pos.x - MAX_TEXTUREW_TITLEUI, g_TitleUI[nNumber].pos.y - MAX_TEXTUREH_TITLEUI, 0.0f);
+			pVtx[1 + (4 * TITLETYPE_TUTORIAL)].pos = D3DXVECTOR3(g_TitleUI[nNumber].pos.x + MAX_TEXTUREW_TITLEUI, g_TitleUI[nNumber].pos.y + MAX_TEXTUREH_TITLEUI, 0.0f);
+			pVtx[2 + (4 * TITLETYPE_TUTORIAL)].pos = D3DXVECTOR3(g_TitleUI[nNumber].pos.x - MAX_TEXTUREW_TITLEUI, g_TitleUI[nNumber].pos.y - MAX_TEXTUREH_TITLEUI, 0.0f);
+			pVtx[3 + (4 * TITLETYPE_TUTORIAL)].pos = D3DXVECTOR3(g_TitleUI[nNumber].pos.x + MAX_TEXTUREW_TITLEUI, g_TitleUI[nNumber].pos.y + MAX_TEXTUREH_TITLEUI, 0.0f);
+
+			// テクスチャ座標の設定
+			pVtx[0 + (4 * TITLETYPE_TUTORIAL)].tex = D3DXVECTOR2(0.0f, 0.0f + (1.0f * 0.6) * UITYPE_TUTORIAL);
+			pVtx[1 + (4 * TITLETYPE_TUTORIAL)].tex = D3DXVECTOR2(1.0f, 0.0f + (1.0f * 0.6) * UITYPE_TUTORIAL);
+			pVtx[2 + (4 * TITLETYPE_TUTORIAL)].tex = D3DXVECTOR2(0.0f, (1.0f * 0.6) + (1.0f * 0.6) * UITYPE_TUTORIAL);
+			pVtx[3 + (4 * TITLETYPE_TUTORIAL)].tex = D3DXVECTOR2(1.0f, (1.0f * 0.6) + (1.0f * 0.6) * UITYPE_TUTORIAL);
+
+			nNumber++;
+
+			break;
+
+		case TITLETYPE_EXIT:
+			pVtx[0 + (4 * TITLETYPE_EXIT)].pos = D3DXVECTOR3(g_TitleUI[nNumber].pos.x - MAX_TEXTUREW_TITLEUI, g_TitleUI[nNumber].pos.y - MAX_TEXTUREH_TITLEUI, 0.0f);
+			pVtx[1 + (4 * TITLETYPE_EXIT)].pos = D3DXVECTOR3(g_TitleUI[nNumber].pos.x + MAX_TEXTUREW_TITLEUI, g_TitleUI[nNumber].pos.y + MAX_TEXTUREH_TITLEUI, 0.0f);
+			pVtx[2 + (4 * TITLETYPE_EXIT)].pos = D3DXVECTOR3(g_TitleUI[nNumber].pos.x - MAX_TEXTUREW_TITLEUI, g_TitleUI[nNumber].pos.y - MAX_TEXTUREH_TITLEUI, 0.0f);
+			pVtx[3 + (4 * TITLETYPE_EXIT)].pos = D3DXVECTOR3(g_TitleUI[nNumber].pos.x + MAX_TEXTUREW_TITLEUI, g_TitleUI[nNumber].pos.y + MAX_TEXTUREH_TITLEUI, 0.0f);
+
+			// テクスチャ座標の設定
+			pVtx[0 + (4 * TITLETYPE_EXIT)].tex = D3DXVECTOR2(0.0f, 0.0f + (1.0f * 0.6) * UITYPE_EXIT);
+			pVtx[1 + (4 * TITLETYPE_EXIT)].tex = D3DXVECTOR2(1.0f, 0.0f + (1.0f * 0.6) * UITYPE_EXIT);
+			pVtx[2 + (4 * TITLETYPE_EXIT)].tex = D3DXVECTOR2(0.0f, (1.0f * 0.6) + (1.0f * 0.6) * UITYPE_EXIT);
+			pVtx[3 + (4 * TITLETYPE_EXIT)].tex = D3DXVECTOR2(1.0f, (1.0f * 0.6) + (1.0f * 0.6) * UITYPE_EXIT);
+
+			nNumber++;
+
+			break;
+		}
 	}
 
 	// 頂点バッファをアンロックする
