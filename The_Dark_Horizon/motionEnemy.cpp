@@ -13,7 +13,10 @@ void InitMotion(void)
 	g_SetMotiMane.nCntKey = 0;
 }
 
-void ReadScript(const char* pFileName)
+//************************************************
+// モーションの初期化
+//************************************************
+void ReadScript(const char* pFileName,MOTION_ENEMY *motionEnemy,ModelEnemy *modelEnemy, CHARPARAM *charparam)
 {
 	// ファイルポインター宣言、ファイルを開く
 	FILE* pFile = fopen(pFileName, "r");
@@ -65,8 +68,21 @@ void ReadScript(const char* pFileName)
 
 			// ここから文字列を比較していく
 			if (strcmp("SCRIPT", &cDataB[0]) == 0)
-			{
-
+			{// スクリプト読み込み開始
+				cleareString(256, &cDataB[0]);	// 文字列をきれいにする
+				nCntS = 0;						// 保存用文字列カウンターリセット
+			}
+			else 	if (strcmp("END_SCRIPT", &cDataB[0]) == 0)
+			{// スクリプト読み込み終了
+				cleareString(256, &cDataB[0]);	// 文字列をきれいにする
+				nCntS = 0;						// 保存用文字列カウンターリセット
+			}
+			else 	if (strcmp("NUM_MODEL", &cDataB[0]) == 0)
+			{// モデル数読み込み
+				fgets(&cDataC[0],3,pFile);		// =の部分を読み取る
+				fscanf(pFile,"%d", charparam);	// モデル数代入
+				cleareString(256, &cDataB[0]);	// 文字列をきれいにする
+				nCntS = 0;						// 保存用文字列カウンターリセット
 			}
 
 			if (nCntS >= 256)
