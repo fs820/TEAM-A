@@ -123,7 +123,7 @@
     <ClCompile Include="modelEnemy.cpp">
       <Filter>ソース ファイル\tetsuji</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\source\repos\TeamProject\item.cpp">
+    <ClCompile Include="item.cpp">
       <Filter>ソース ファイル\misaki</Filter>
     </ClCompile>
   </ItemGroup>
@@ -227,7 +227,7 @@
     <ClInclude Include="motionEnemy.h">
       <Filter>ヘッダー ファイル\tetsuji</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\source\repos\TeamProject\item.h">
+    <ClInclude Include="item.h">
       <Filter>ヘッダー ファイル\misaki</Filter>
     </ClInclude>
   </ItemGroup>
