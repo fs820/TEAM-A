@@ -19,6 +19,12 @@
     <Filter Include="ヘッダー ファイル\tetsuji">
       <UniqueIdentifier>{e40522a2-cd8d-4859-b148-127bd7be4359}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\misaki">
+      <UniqueIdentifier>{d8330ac2-86da-469d-bd75-056104a38585}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\misaki">
+      <UniqueIdentifier>{53703894-c8d4-4b93-9173-93492c34d28a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="billboard.cpp">
@@ -116,6 +122,9 @@
     </ClCompile>
     <ClCompile Include="modelEnemy.cpp">
       <Filter>ソース ファイル\tetsuji</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\repos\TeamProject\item.cpp">
+      <Filter>ソース ファイル\misaki</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -217,6 +226,9 @@
     </ClInclude>
     <ClInclude Include="motionEnemy.h">
       <Filter>ヘッダー ファイル\tetsuji</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\repos\TeamProject\item.h">
+      <Filter>ヘッダー ファイル\misaki</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
