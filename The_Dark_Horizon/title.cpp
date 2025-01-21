@@ -13,7 +13,7 @@
 #define MAX_TEXTUREW_TITLE (1280.0f)		// タイトルテクスチャの横幅
 #define MAX_TEXTUREH_TITLE (720.0f)			// タイトルテクスチャの縦幅
 #define MAX_TEXTUREW_TITLENAME (1000.0f)	// タイトル名テクスチャの横幅
-#define MAX_TEXTUREH_TITLENAME (200.0f)		// タイトル名テクスチャの縦幅
+#define MAX_TEXTUREH_TITLENAME (100.0f)		// タイトル名テクスチャの縦幅
 #define MAX_TEXTUREW_TITLEUI (250.0f)		// タイトルUIテクスチャの横幅
 #define MAX_TEXTUREH_TITLEUI (40.0f)		// タイトルUIテクスチャの縦幅
 #define MAX_TEXTUREW (20.0f)				// UIテクスチャ同士の横幅
@@ -54,7 +54,7 @@ void InitTitle(void)
 	}
 
 	// 頂点バッファの生成
-	pDevice->CreateVertexBuffer(sizeof(VERTEX_2D) * 4 * (MAX_TITLEUI + 2),
+	pDevice->CreateVertexBuffer(sizeof(VERTEX_2D) * 4 * TITLETYPE_MAX,
 		D3DUSAGE_WRITEONLY,
 		FVF_VERTEX_2D,
 		D3DPOOL_MANAGED,
@@ -176,6 +176,22 @@ void InitTitle(void)
 //------------------
 void UninitTitle(void)
 {
+	for (int nCount = 0; nCount < TITLETYPE_MAX; nCount++)
+	{
+		// テクスチャの破棄
+		if (g_pTextureTitle[nCount] != NULL)
+		{
+			g_pTextureTitle[nCount]->Release();
+			g_pTextureTitle[nCount] = NULL;
+		}
+	}
+
+	// 頂点バッファの破棄
+	if (g_pVtxBuffTitle != NULL)
+	{
+		g_pVtxBuffTitle->Release();
+		g_pVtxBuffTitle = NULL;
+	}
 
 }
 
@@ -257,5 +273,22 @@ void UpdateTitle(void)
 //-------------------
 void DrawTitle(void)
 {
+	LPDIRECT3DDEVICE9 pDevice;  // デバイスへのポインタ
+
+	// デバイスの取得
+	pDevice = GetDevice();
+
+	// 頂点バッファをデータストリームに設定
+	pDevice->SetStreamSource(0, g_pVtxBuffTitle, 0, sizeof(VERTEX_2D));
+	// 頂点フォーマットの設定
+	pDevice->SetFVF(FVF_VERTEX_2D);
+
+	for (int nCount = 0; nCount < TITLETYPE_MAX; nCount++)
+	{
+		// テクスチャの設定
+		pDevice->SetTexture(0, g_pTextureTitle[nCount]);
+		// アイテムの描画
+		pDevice->DrawPrimitive(D3DPT_TRIANGLESTRIP, 4 * nCount, 2);
+	}
 
 }

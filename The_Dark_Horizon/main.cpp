@@ -26,7 +26,7 @@ LPDIRECT3D9 g_pD3D = NULL;//ダイレクトXオブジェクトのグローバルポインタを宣言
 LPDIRECT3DDEVICE9 g_pD3DDevice = NULL;//ダイレクトXデバイスのグローバルポインタを宣言
 #ifdef _DEBUG
 
-MODE g_mode = MODE_GAME;
+MODE g_mode = MODE_TITLE;
 
 #endif
 
