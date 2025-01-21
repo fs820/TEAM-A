@@ -109,6 +109,10 @@ void UninitGame(void)
 	//UninitCylinder();
 	UninitSphere();
 	UninitMeshfield();
+
+	// tetsuji
+	UninitEnemy();// エネミー
+
 #ifdef _DEBUG
 
 	UninitEditPlayer();
@@ -265,6 +269,10 @@ void DrawGame(void)
 	DrawBillboard();
 	DrawEffect();
 	DrawBullet();
+
+	// tetsuji
+	DrawEnemy();	// エネミー
+
 	if (!g_Edit)
 	{
 		DrawPlayer();//プレイヤー

@@ -6,7 +6,8 @@
 #include "motionEnemy.h"
 
 // マクロ定義
-#define MAX_ENEMY (32)		// 敵の最大数
+#define MAX_ENEMY (32)				// 敵の最大数
+#define MAX_MODELE_PARTS_ENEMY (10)	// 敵の最大モデルパーツ数
 
 // エネミーの構造体
 typedef struct
@@ -14,10 +15,11 @@ typedef struct
 	D3DXVECTOR3 pos;	// 位置
 	D3DXVECTOR3 rot;	// 向き
 	D3DXVECTOR3 move;	// 移動量
+	D3DXMATRIX mtxWorldEnemy;// ワールドマトリックス
 
-	ModelEnemy aModelEnemy[10];	// モデルパーツ
-	MOTION_ENEMY motion;		// モーション
-	CHARPARAM charparam;		// キャラクターパラメータ
+	ModelEnemy aModelEnemy[MAX_MODELE_PARTS_ENEMY];	// モデルパーツ
+	MOTION_ENEMY motion;							// モーション
+	CHARPARAM charParam;							// キャラクターパラメータ
 }ENEMY;
 
 // エネミーの管理構造体

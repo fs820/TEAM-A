@@ -30,13 +30,14 @@ void ReadScript(const char* pFileName,MOTION_ENEMY *pMotionEnemy,ModelEnemy * pM
 		int nCntModel = 0;		// モデル数カウンター
 		int nResult = 0;		// 結果を保存する変数
 		int nNumParts = 0;		// パーツ数
+		int nScriptType = SCRIPT_TYPE_SCRIPT;	// スクリプトタイプ
 		bool bComment = false;	// コメント機能有無
 
 		// デバイスの取得
 		LPDIRECT3DDEVICE9 pDevice = GetDevice();
 
 		while (1)
-		{
+		{// 読み込むために繰り返す-----------------------------------------------------------------------------------
 			// 1文字受け取る
 			cDataA = fgetc(pFile);
 
@@ -75,97 +76,133 @@ void ReadScript(const char* pFileName,MOTION_ENEMY *pMotionEnemy,ModelEnemy * pM
 			// 保存用文字列カウンター追加
 			nCntS++;
 
-			// ここから文字列を比較していく
-			if (strcmp("SCRIPT", &cDataB[0]) == 0)
-			{// スクリプト読み込み開始
-				cleareString(256, &cDataB[0]);	// 文字列をきれいにする
-				nCntS = 0;						// 保存用文字列カウンターリセット
-			}
-			else 	if (strcmp("END_SCRIPT", &cDataB[0]) == 0)
-			{// スクリプト読み込み終了
-				cleareString(256, &cDataB[0]);	// 文字列をきれいにする
-				nCntS = 0;						// 保存用文字列カウンターリセット
-			}
-			else 	if (strcmp("NUM_MODEL", &cDataB[0]) == 0)
-			{// モデル数の読み込み
-				fgets(&cDataC[0],3,pFile);								// =の部分を読み取る
-				nResult = fscanf(pFile,"%d", &pCharparam->nNumModel);	// モデル数代入
-				cleareString(256, &cDataB[0]);							// 文字列をきれいにする
-				nCntS = 0;												// 保存用文字列カウンターリセット
-			}
-			else if (strcmp("MODEL_FILENAME", &cDataB[0]) == 0)
-			{// モデルファイルの読み込み
-				fgets(&cDataC[0], 3, pFile);				// =の部分を読み取る
-				nResult = fscanf(pFile, "%s", &cDataB[0]);	// モデルパス代入
-				const char* pFileName = &cDataB[0];			// パスの文字列を代入
+			// ここから文字列をタイプによって比較していく
+			switch (nScriptType)
+			{
+			case SCRIPT_TYPE_SCRIPT:	// スクリプト読み込み---------------------------------------------------------
+				if (strcmp("SCRIPT", &cDataB[0]) == 0)
+				{// スクリプト読み込み開始
+					cleareString(256, &cDataB[0]);	// 文字列をきれいにする
+					nCntS = 0;						// 保存用文字列カウンターリセット
+				}
+				else 	if (strcmp("END_SCRIPT", &cDataB[0]) == 0)
+				{// スクリプト読み込み終了
+					cleareString(256, &cDataB[0]);	// 文字列をきれいにする
+					nCntS = 0;						// 保存用文字列カウンターリセット
+				}
+				else 	if (strcmp("NUM_MODEL", &cDataB[0]) == 0)
+				{// モデル数の読み込み
+					fgets(&cDataC[0], 3, pFile);								// =の部分を読み取る
+					nResult = fscanf(pFile, "%d", &pCharparam->nNumModel);	// モデル数代入
+					cleareString(256, &cDataB[0]);							// 文字列をきれいにする
+					nCntS = 0;												// 保存用文字列カウンターリセット
+				}
+				else if (strcmp("MODEL_FILENAME", &cDataB[0]) == 0)
+				{// モデルファイルの読み込み
+					fgets(&cDataC[0], 3, pFile);				// =の部分を読み取る
+					nResult = fscanf(pFile, "%s", &cDataB[0]);	// モデルパス代入
+					const char* pFileName = &cDataB[0];			// パスの文字列を代入
 
-				pModelEnemy += nCntModel;					// モデル数カウント分ずらす
+					pModelEnemy += nCntModel;					// モデル数カウント分ずらす
 
-				// Xファイルの読み込み
-				HRESULT hresult;
-				hresult = D3DXLoadMeshFromX(pFileName,
-					D3DXMESH_SYSTEMMEM,
-					pDevice,
-					NULL,
-					&pModelEnemy->pBuffMat,
-					NULL,
-					&pModelEnemy->dwNumMat,
-					&pModelEnemy->pMesh);
+					// Xファイルの読み込み
+					HRESULT hresult;
+					hresult = D3DXLoadMeshFromX(pFileName,
+						D3DXMESH_SYSTEMMEM,
+						pDevice,
+						NULL,
+						&pModelEnemy->pBuffMat,
+						NULL,
+						&pModelEnemy->dwNumMat,
+						&pModelEnemy->pMesh);
 
-				pModelEnemy -= nCntModel;			// モデル数カウント分戻す
-				nCntModel++;						// モデル数カウント
-				cleareString(256, &cDataB[0]);		// 文字列をきれいにする
-				nCntS = 0;							// 保存用文字列カウンターリセット
-			}
-			else if (strcmp("CHARACTERSET", &cDataB[0]) == 0)
-			{// キャラクター情報の読み込み
-				cleareString(256, &cDataB[0]);					// 文字列をきれいにする
-				nCntS = 0;										// 保存用文字列カウンターリセット
-			}
-			else if (strcmp("END_CHARACTERSET", &cDataB[0]) == 0)
-			{// キャラクター情報の読み込み
-				pModelEnemy -= nNumParts;			// モデル情報をずらす
-				cleareString(256, &cDataB[0]);		// 文字列をきれいにする
-				nCntS = 0;							// 保存用文字列カウンターリセット
-			}
-			else if (strcmp("NUM_PARTS", &cDataB[0]) == 0)
-			{// パーツ数の読み込み
-				fgets(&cDataC[0], 3, pFile);						// =の部分を読み取る
-				nResult = fscanf(pFile, "%d", &nNumParts);		// 高さ代入
-				cleareString(256, &cDataB[0]);					// 文字列をきれいにする
-				nCntS = 0;										// 保存用文字列カウンターリセット
-			}
-			else if (strcmp("RADIUS", &cDataB[0]) == 0)
-			{// 半径の読み込み
-				fgets(&cDataC[0], 3, pFile);							// =の部分を読み取る
-				nResult = fscanf(pFile, "%f", &pCharparam->fRadius);	// 半径代入
-				cleareString(256, &cDataB[0]);							// 文字列をきれいにする
-				nCntS = 0;												// 保存用文字列カウンターリセット
-			}
-			else if (strcmp("HEIGHT", &cDataB[0]) == 0)
-			{// 高さの読み込み
-				fgets(&cDataC[0], 3, pFile);							// =の部分を読み取る
-				nResult = fscanf(pFile, "%f", &pCharparam->fHeigt);	// 高さ代入
-				cleareString(256, &cDataB[0]);							// 文字列をきれいにする
-				nCntS = 0;												// 保存用文字列カウンターリセット
-			}
-			else if (strcmp("PARTSSET", &cDataB[0]) == 0)
-			{// パーツセットの読み込み
-				cleareString(256, &cDataB[0]);					// 文字列をきれいにする
-				nCntS = 0;										// 保存用文字列カウンターリセット
-			}
-			else if (strcmp("END_PARTSSET", &cDataB[0]) == 0)
-			{// パーツセットの読み込み
-				pModelEnemy++;						// モデル情報をずらす
-				cleareString(256, &cDataB[0]);		// 文字列をきれいにする
-				nCntS = 0;							// 保存用文字列カウンターリセット
-			}
-			else if (strcmp("INDEX", &cDataB[0]) == 0)
-			{// パーツのインデックスの読み込み
-				fgets(&cDataC[0], 3, pFile);										// =の部分を読み取る
-				nResult = fscanf(pFile, "%d", &pModelEnemy->nIdxModelEnemyParent);	// インデックス代入
-				cleareString(256, &cDataB[0]);										// 文字列をきれいにする
-				nCntS = 0;															// 保存用文字列カウンターリセット
+					pModelEnemy -= nCntModel;			// モデル数カウント分戻す
+					nCntModel++;						// モデル数カウント
+					cleareString(256, &cDataB[0]);		// 文字列をきれいにする
+					nCntS = 0;							// 保存用文字列カウンターリセット
+				}
+				else if (strcmp("CHARACTERSET", &cDataB[0]) == 0)
+				{// キャラクター情報の読み込み開始
+					nScriptType = SCRIPT_TYPE_CHARCTERSET;	// タイプキャラクターセット
+					cleareString(256, &cDataB[0]);			// 文字列をきれいにする
+					nCntS = 0;								// 保存用文字列カウンターリセット
+				}
+				break;
+
+			case SCRIPT_TYPE_CHARCTERSET:	// キャラクターセット読み込み---------------------------------------------
+				
+				if (strcmp("END_CHARACTERSET", &cDataB[0]) == 0)
+				{// キャラクター情報の読み込み
+					nScriptType = SCRIPT_TYPE_SCRIPT;	// タイプスクリプト
+					pModelEnemy -= nNumParts;			// モデル情報をずらす
+					cleareString(256, &cDataB[0]);		// 文字列をきれいにする
+					nCntS = 0;							// 保存用文字列カウンターリセット
+				}
+				else if (strcmp("NUM_PARTS", &cDataB[0]) == 0)
+				{// パーツ数の読み込み
+					fgets(&cDataC[0], 3, pFile);					// =の部分を読み取る
+					nResult = fscanf(pFile, "%d", &nNumParts);		// 高さ代入
+					cleareString(256, &cDataB[0]);					// 文字列をきれいにする
+					nCntS = 0;										// 保存用文字列カウンターリセット
+				}
+				else if (strcmp("RADIUS", &cDataB[0]) == 0)
+				{// 半径の読み込み
+					fgets(&cDataC[0], 3, pFile);							// =の部分を読み取る
+					nResult = fscanf(pFile, "%f", &pCharparam->fRadius);	// 半径代入
+					cleareString(256, &cDataB[0]);							// 文字列をきれいにする
+					nCntS = 0;												// 保存用文字列カウンターリセット
+				}
+				else if (strcmp("HEIGHT", &cDataB[0]) == 0)
+				{// 高さの読み込み
+					fgets(&cDataC[0], 3, pFile);							// =の部分を読み取る
+					nResult = fscanf(pFile, "%f", &pCharparam->fHeigt);		// 高さ代入
+					cleareString(256, &cDataB[0]);							// 文字列をきれいにする
+					nCntS = 0;												// 保存用文字列カウンターリセット
+				}
+				else if (strcmp("PARTSSET", &cDataB[0]) == 0)
+				{// パーツセットの読み込み
+					cleareString(256, &cDataB[0]);					// 文字列をきれいにする
+					nCntS = 0;										// 保存用文字列カウンターリセット
+				}
+				else if (strcmp("END_PARTSSET", &cDataB[0]) == 0)
+				{// パーツセットの読み込み
+					pModelEnemy++;						// モデル情報をずらす
+					cleareString(256, &cDataB[0]);		// 文字列をきれいにする
+					nCntS = 0;							// 保存用文字列カウンターリセット
+				}
+				else if (strcmp("INDEX", &cDataB[0]) == 0)
+				{// パーツのインデックスの読み込み
+					fgets(&cDataC[0], 3, pFile);										// =の部分を読み取る
+					nResult = fscanf(pFile, "%d", &pModelEnemy->nIdxModelEnemyParent);	// インデックス代入
+					cleareString(256, &cDataB[0]);										// 文字列をきれいにする
+					nCntS = 0;															// 保存用文字列カウンターリセット
+				}
+				else if (strcmp("PARENT", &cDataB[0]) == 0)
+				{// 親の読み込み
+					fgets(&cDataC[0], 3, pFile);										// =の部分を読み取る
+					nResult = fscanf(pFile, "%d", &pModelEnemy->nIdxModelEnemyParent);	// 親代入
+					cleareString(256, &cDataB[0]);										// 文字列をきれいにする
+					nCntS = 0;															// 保存用文字列カウンターリセット
+				}
+				else if (strcmp("POS", &cDataB[0]) == 0)
+				{// 位置の読み込み
+					fgets(&cDataC[0], 3, pFile);							// =の部分を読み取る
+					nResult = fscanf(pFile, "%f", &pModelEnemy->pos.x);		// 位置代入
+					nResult = fscanf(pFile, "%f", &pModelEnemy->pos.y);		// 位置代入
+					nResult = fscanf(pFile, "%f", &pModelEnemy->pos.z);		// 位置代入
+					cleareString(256, &cDataB[0]);							// 文字列をきれいにする
+					nCntS = 0;												// 保存用文字列カウンターリセット
+				}
+				else if (strcmp("ROT", &cDataB[0]) == 0)
+				{// 向きの読み込み
+					fgets(&cDataC[0], 3, pFile);							// =の部分を読み取る
+					nResult = fscanf(pFile, "%f", &pModelEnemy->pos.x);		// 向き代入
+					nResult = fscanf(pFile, "%f", &pModelEnemy->pos.y);		// 向き代入
+					nResult = fscanf(pFile, "%f", &pModelEnemy->pos.z);		// 向き代入
+					cleareString(256, &cDataB[0]);							// 文字列をきれいにする
+					nCntS = 0;												// 保存用文字列カウンターリセット
+				}
+				break;
 			}
 
 			if (nCntS >= 256)

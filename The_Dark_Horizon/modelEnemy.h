@@ -3,10 +3,11 @@
 
 #include "main.h"
 
+#define MAX_MODEL_TEXTURE (6)	// モデルのテクスチャの最大枚数
 // モデル構造体
 typedef struct
 {
-	LPDIRECT3DTEXTURE9 apTexture[6];	// テクスチャへのポンタ
+	LPDIRECT3DTEXTURE9 apTexture[MAX_MODEL_TEXTURE];	// テクスチャへのポンタ
 	LPD3DXMESH pMesh;					// メッシュ(頂点情報へのポインタ)
 	LPD3DXBUFFER pBuffMat;				// マテリアルへのポインタ
 	DWORD dwNumMat;						// マテリアルの数
