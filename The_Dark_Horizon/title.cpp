@@ -97,13 +97,13 @@ void InitTitle(void)
 			break;
 		case TITLETYPE_MOON:
 			break;
-		case TITLETYPE_SKY:
+		case TITLETYPE_NAME:
 			break;
-		case TITLETYPE_SKY:
+		case TITLETYPE_GAMEPLAY:
 			break;
-		case TITLETYPE_SKY:
+		case TITLETYPE_TUTORIAL:
 			break;
-		case TITLETYPE_SKY:
+		case TITLETYPE_EXIT:
 			break;
 
 		}
