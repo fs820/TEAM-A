@@ -292,7 +292,7 @@ void UpdatePlayer(void)
 			//g_Player.motionType = MOTIONTYPE_ACTION;
 			if (SetEnergygage())
 			{//ÉGÉlÉãÉMÅ[Ç™Ç†ÇÍÇŒ
-				SetBullet(g_Player.pos + g_Player.aModel[0].pos + D3DXVECTOR3(0.0f, g_Player.aModel[2].pos.y, 0.0f), -D3DXVECTOR3(sinf(g_Player.rot.y) * cosf(g_Player.rot.x), sinf(g_Player.rot.x), cosf(g_Player.rot.y) * cosf(g_Player.rot.x)), g_Player.aModel[3].scale);
+				SetBullet(g_Player.pos + g_Player.aModel[0].pos + D3DXVECTOR3(0.0f, g_Player.aModel[2].pos.y, 0.0f), D3DXVECTOR3(sinf(g_Player.rot.y) * cosf(g_Player.rot.x), sinf(g_Player.rot.x), cosf(g_Player.rot.y) * cosf(g_Player.rot.x)), g_Player.aModel[3].scale);
 			}
 		}
 
