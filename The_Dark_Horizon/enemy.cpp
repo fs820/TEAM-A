@@ -17,6 +17,9 @@ void InitEnemy(void)
 		g_aEnemy[nCntEnemy].rot;	// 向き
 		g_aEnemy[nCntEnemy].move;	// 移動量
 	}
+
+	// スクリプト読み込み
+	ReadScript("data\\tetsuji\\text\\motion.txt", &g_aEnemy[0].motion, &g_aEnemy[0].aModelEnemy[0], &g_aEnemy[0].charparam);
 }
 
 //**************************************************

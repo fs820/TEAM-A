@@ -17,6 +17,7 @@ typedef struct
 
 	ModelEnemy aModelEnemy[10];	// モデルパーツ
 	MOTION_ENEMY motion;		// モーション
+	CHARPARAM charparam;		// キャラクターパラメータ
 }ENEMY;
 
 // エネミーの管理構造体

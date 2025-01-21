@@ -49,6 +49,7 @@ typedef struct
 	float fWidth;	// 幅
 	float fHeigt;	// 高さ
 	float fJamp;	// ジャンプ力
+	float fRadius;	// 半径
 	int nNumModel;	// モデル数
 	int nLife;		// 体力
 	int nState;		// 状態
@@ -67,5 +68,6 @@ typedef struct
 // プロトタイプ宣言
 void InitMotion(void);
 
-void ReadScript(const char *pFileName);
+void ReadScript(const char* pFileName, MOTION_ENEMY* pMotionEnemy, ModelEnemy* pModelEnemy, CHARPARAM* pCharparam);	// スクリプトを読み込む関数
+void cleareString(int nCntChar, char* cData);	// 文字列をリセットする関数
 #endif // !_MOTION_H_

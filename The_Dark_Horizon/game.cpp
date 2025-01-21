@@ -31,6 +31,9 @@
 #include"sphere.h"
 #include"meshwall.h"
 
+// tetsuji
+#include "enemy.h"
+
 //グローバル変数
 GAMESTATE g_gameState = GAMESTATE_NONE;
 int g_nCounterGameState = 0;
@@ -51,6 +54,10 @@ void InitGame(void)
 	InitSphere();
 	InitMeshWall();
 	InitPlayer();//プレイヤー
+
+	// tetsuji
+	InitEnemy();
+
 #ifdef _DEBUG
 
 	InitEditPlayer();

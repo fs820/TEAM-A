@@ -16,7 +16,7 @@ void InitMotion(void)
 //************************************************
 // モーションの初期化
 //************************************************
-void ReadScript(const char* pFileName,MOTION_ENEMY *motionEnemy,ModelEnemy *modelEnemy, CHARPARAM *charparam)
+void ReadScript(const char* pFileName,MOTION_ENEMY *pMotionEnemy,ModelEnemy * pModelEnemy, CHARPARAM *pCharparam)
 {
 	// ファイルポインター宣言、ファイルを開く
 	FILE* pFile = fopen(pFileName, "r");
@@ -25,10 +25,15 @@ void ReadScript(const char* pFileName,MOTION_ENEMY *motionEnemy,ModelEnemy *mode
 	{// ファイルがあったら
 		char cDataB[256] = {};	// 保存用文字列
 		char cDataC[3];			// 文字列保存用変数
-		int nCntS = 0;			// 保存用文字列カウンター
 		char cDataA;			// 一文字格納用変数
+		int nCntS = 0;			// 保存用文字列カウンター
+		int nCntModel = 0;		// モデル数カウンター
 		int nResult = 0;		// 結果を保存する変数
+		int nNumParts = 0;		// パーツ数
 		bool bComment = false;	// コメント機能有無
+
+		// デバイスの取得
+		LPDIRECT3DDEVICE9 pDevice = GetDevice();
 
 		while (1)
 		{
@@ -54,6 +59,10 @@ void ReadScript(const char* pFileName,MOTION_ENEMY *motionEnemy,ModelEnemy *mode
 			{// コメント文字だったら,コメント機能オン
 				bComment = true;
 			}
+			else if (nResult == EOF)
+			{// 読み取りエラーが起きたら,読み込み終了
+				break;
+			}
 
 			if (bComment)
 			{// コメント機能オンだったら
@@ -78,11 +87,85 @@ void ReadScript(const char* pFileName,MOTION_ENEMY *motionEnemy,ModelEnemy *mode
 				nCntS = 0;						// 保存用文字列カウンターリセット
 			}
 			else 	if (strcmp("NUM_MODEL", &cDataB[0]) == 0)
-			{// モデル数読み込み
-				fgets(&cDataC[0],3,pFile);		// =の部分を読み取る
-				fscanf(pFile,"%d", charparam);	// モデル数代入
-				cleareString(256, &cDataB[0]);	// 文字列をきれいにする
-				nCntS = 0;						// 保存用文字列カウンターリセット
+			{// モデル数の読み込み
+				fgets(&cDataC[0],3,pFile);								// =の部分を読み取る
+				nResult = fscanf(pFile,"%d", &pCharparam->nNumModel);	// モデル数代入
+				cleareString(256, &cDataB[0]);							// 文字列をきれいにする
+				nCntS = 0;												// 保存用文字列カウンターリセット
+			}
+			else if (strcmp("MODEL_FILENAME", &cDataB[0]) == 0)
+			{// モデルファイルの読み込み
+				fgets(&cDataC[0], 3, pFile);				// =の部分を読み取る
+				nResult = fscanf(pFile, "%s", &cDataB[0]);	// モデルパス代入
+				const char* pFileName = &cDataB[0];			// パスの文字列を代入
+
+				pModelEnemy += nCntModel;					// モデル数カウント分ずらす
+
+				// Xファイルの読み込み
+				HRESULT hresult;
+				hresult = D3DXLoadMeshFromX(pFileName,
+					D3DXMESH_SYSTEMMEM,
+					pDevice,
+					NULL,
+					&pModelEnemy->pBuffMat,
+					NULL,
+					&pModelEnemy->dwNumMat,
+					&pModelEnemy->pMesh);
+
+				pModelEnemy -= nCntModel;			// モデル数カウント分戻す
+				nCntModel++;						// モデル数カウント
+				cleareString(256, &cDataB[0]);		// 文字列をきれいにする
+				nCntS = 0;							// 保存用文字列カウンターリセット
+			}
+			else if (strcmp("CHARACTERSET", &cDataB[0]) == 0)
+			{// キャラクター情報の読み込み
+				cleareString(256, &cDataB[0]);					// 文字列をきれいにする
+				nCntS = 0;										// 保存用文字列カウンターリセット
+			}
+			else if (strcmp("END_CHARACTERSET", &cDataB[0]) == 0)
+			{// キャラクター情報の読み込み
+				pModelEnemy -= nNumParts;			// モデル情報をずらす
+				cleareString(256, &cDataB[0]);		// 文字列をきれいにする
+				nCntS = 0;							// 保存用文字列カウンターリセット
+			}
+			else if (strcmp("NUM_PARTS", &cDataB[0]) == 0)
+			{// パーツ数の読み込み
+				fgets(&cDataC[0], 3, pFile);						// =の部分を読み取る
+				nResult = fscanf(pFile, "%d", &nNumParts);		// 高さ代入
+				cleareString(256, &cDataB[0]);					// 文字列をきれいにする
+				nCntS = 0;										// 保存用文字列カウンターリセット
+			}
+			else if (strcmp("RADIUS", &cDataB[0]) == 0)
+			{// 半径の読み込み
+				fgets(&cDataC[0], 3, pFile);							// =の部分を読み取る
+				nResult = fscanf(pFile, "%f", &pCharparam->fRadius);	// 半径代入
+				cleareString(256, &cDataB[0]);							// 文字列をきれいにする
+				nCntS = 0;												// 保存用文字列カウンターリセット
+			}
+			else if (strcmp("HEIGHT", &cDataB[0]) == 0)
+			{// 高さの読み込み
+				fgets(&cDataC[0], 3, pFile);							// =の部分を読み取る
+				nResult = fscanf(pFile, "%f", &pCharparam->fHeigt);	// 高さ代入
+				cleareString(256, &cDataB[0]);							// 文字列をきれいにする
+				nCntS = 0;												// 保存用文字列カウンターリセット
+			}
+			else if (strcmp("PARTSSET", &cDataB[0]) == 0)
+			{// パーツセットの読み込み
+				cleareString(256, &cDataB[0]);					// 文字列をきれいにする
+				nCntS = 0;										// 保存用文字列カウンターリセット
+			}
+			else if (strcmp("END_PARTSSET", &cDataB[0]) == 0)
+			{// パーツセットの読み込み
+				pModelEnemy++;						// モデル情報をずらす
+				cleareString(256, &cDataB[0]);		// 文字列をきれいにする
+				nCntS = 0;							// 保存用文字列カウンターリセット
+			}
+			else if (strcmp("INDEX", &cDataB[0]) == 0)
+			{// パーツのインデックスの読み込み
+				fgets(&cDataC[0], 3, pFile);										// =の部分を読み取る
+				nResult = fscanf(pFile, "%d", &pModelEnemy->nIdxModelEnemyParent);	// インデックス代入
+				cleareString(256, &cDataB[0]);										// 文字列をきれいにする
+				nCntS = 0;															// 保存用文字列カウンターリセット
 			}
 
 			if (nCntS >= 256)
