@@ -297,7 +297,7 @@ void UpdatePlayer(void)
 		}
 
 		//ÉJÉÅÉâÇ∆ìØÇ∂ï˚å¸Çå¸Ç≠
-		g_Player.Destrot.y = pCamera->rot.y - D3DX_PI;
+		g_Player.Destrot.y = pCamera->rot.y;
 
 		g_Player.move.y += GRAVITY;//èdóÕ
 
