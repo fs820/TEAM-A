@@ -286,32 +286,86 @@ void SaveStage(void)
 //----------------------------
 //ロード処理
 //----------------------------
-void LoadModel(void)
+void LoadPlayer(void)
 {
 	FILE* pFile;//ファイルポインタを宣言
+	Player* pPlayer = GetPlayer();
 	int nCount = 0;
+	int ModelNum = 0;
 	char name[64] = { "\0" };
 	D3DXVECTOR3 pos = D3DXVECTOR3(0.0f, 0.0f, 0.0f), rot = D3DXVECTOR3(0.0f, 0.0f, 0.0f), scale = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 
 	pFile = fopen(MODEL_FILE, "r");//ファイルを開く
 	if (pFile != NULL)
 	{//開けたら
-		for (nCount = 0; nCount < MAX_MODEL; nCount++)
+		//モデル数
+		if (fscanf(pFile, "%d", &ModelNum) == EOF)
 		{
-			if (fscanf(pFile, "%63s", name) == EOF)break;//数値を書き入れ
-			if (fscanf(pFile, "%f", &pos.x) == EOF)break;//数値を書き入れ
-			if (fscanf(pFile, "%f", &pos.y) == EOF)break;//数値を書き入れ
-			if (fscanf(pFile, "%f", &pos.z) == EOF)break;//数値を書き入れ
-			if (fscanf(pFile, "%f", &rot.x) == EOF)break;//数値を書き入れ
-			if (fscanf(pFile, "%f", &rot.y) == EOF)break;//数値を書き入れ
-			if (fscanf(pFile, "%f", &rot.z) == EOF)break;//数値を書き入れ
-			if (fscanf(pFile, "%f", &scale.x) == EOF)break;//数値を書き入れ
-			if (fscanf(pFile, "%f", &scale.y) == EOF)break;//数値を書き入れ
-			if (fscanf(pFile, "%f", &scale.z) == EOF)break;//数値を書き入れ
-
-			//角度変換
-			rot = D3DXToRadian(rot);
+			fclose(pFile);//ファイルを閉じる
+			return;
 		}
+
+		//ファイルパスの取得
+		for (nCount = 0; nCount < ModelNum; nCount++)
+		{
+			if (fscanf(pFile, "%63s", pPlayer->Xname[nCount].aName) == EOF)break;//数値を書き入れ
+		}
+
+		//プレイヤーモデル数
+		if (fscanf(pFile, "%d", &pPlayer->nNumModel) == EOF)//モデル数
+		{
+			fclose(pFile);//ファイルを閉じる
+			return;
+		}
+
+		for (nCount = 0; nCount < pPlayer->nNumModel; nCount++)
+		{//モデル数繰り返す
+			if (fscanf(pFile, "%d", &pPlayer->aModel[nCount].nIdxModelParent) == EOF)break;//親
+			//オフセット
+			if (fscanf(pFile, "%f", &pPlayer->aModel[nCount].pos.x) == EOF)break;
+			if (fscanf(pFile, "%f", &pPlayer->aModel[nCount].pos.y) == EOF)break;
+			if (fscanf(pFile, "%f", &pPlayer->aModel[nCount].pos.z) == EOF)break;
+			if (fscanf(pFile, "%f", &pPlayer->aModel[nCount].rot.x) == EOF)break;
+			if (fscanf(pFile, "%f", &pPlayer->aModel[nCount].rot.y) == EOF)break;
+			if (fscanf(pFile, "%f", &pPlayer->aModel[nCount].rot.z) == EOF)break;
+			if (fscanf(pFile, "%f", &pPlayer->aModel[nCount].scale.x) == EOF)break;
+			if (fscanf(pFile, "%f", &pPlayer->aModel[nCount].scale.y) == EOF)break;
+			if (fscanf(pFile, "%f", &pPlayer->aModel[nCount].scale.z) == EOF)break;
+		}
+
+		//モーション数
+		if (fscanf(pFile, "%d", &pPlayer->nNumMotion) == EOF)
+		{
+			fclose(pFile);//ファイルを閉じる
+			return;
+		}
+
+		for (int nCntMotion = 0; nCntMotion < pPlayer->nNumMotion; nCntMotion++)
+		{//モーション数繰り返す
+
+			//ループの有無
+			if (fscanf(pFile, "%d", &pPlayer->aMotionInfo[nCntMotion].bLoop) == EOF)break;
+			//キー数
+			if (fscanf(pFile, "%d", &pPlayer->aMotionInfo[nCntMotion].nNumKey) == EOF)break;
+
+			for (int nCntKey = 0; nCntKey < pPlayer->aMotionInfo[nCntMotion].nNumKey; nCntKey++)
+			{//キー数繰り返す
+				//フレームの取得
+				if (fscanf(pFile, "%d", &pPlayer->aMotionInfo[nCntMotion].aKeyInfo[nCntKey].nFrame) == EOF)break;
+				for (int nCntModel = 0; nCntModel < pPlayer->nNumModel; nCntModel++)
+				{//モデル数繰り返す
+
+					//キー情報取得
+					if (fscanf(pFile, "%f", &pPlayer->aMotionInfo[nCntMotion].aKeyInfo[nCntKey].aKey[nCntModel].fPosX) == EOF)break;
+					if (fscanf(pFile, "%f", &pPlayer->aMotionInfo[nCntMotion].aKeyInfo[nCntKey].aKey[nCntModel].fPosY) == EOF)break;
+					if (fscanf(pFile, "%f", &pPlayer->aMotionInfo[nCntMotion].aKeyInfo[nCntKey].aKey[nCntModel].fPosZ) == EOF)break;
+					if (fscanf(pFile, "%f", &pPlayer->aMotionInfo[nCntMotion].aKeyInfo[nCntKey].aKey[nCntModel].fRotX) == EOF)break;
+					if (fscanf(pFile, "%f", &pPlayer->aMotionInfo[nCntMotion].aKeyInfo[nCntKey].aKey[nCntModel].fRotY) == EOF)break;
+					if (fscanf(pFile, "%f", &pPlayer->aMotionInfo[nCntMotion].aKeyInfo[nCntKey].aKey[nCntModel].fRotZ) == EOF)break;
+				}
+			}
+		}
+
 		fclose(pFile);//ファイルを閉じる
 	}
 	else

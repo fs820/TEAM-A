@@ -435,11 +435,11 @@ void EditPlayerManagerObject()
 			g_editPlayer.move.y += g_editPlayer.jumpment;
 		}
 
-		if (GetKeyboradTrigger(DIK_RIGHT))
+		if (GetKeyboradTrigger(DIK_RIGHT) || GetMouseTrigger(MOUSE_B1))
 		{// オブジェクト切替
 			g_nNumber++;
 		}
-		else if (GetKeyboradTrigger(DIK_LEFT))
+		else if (GetKeyboradTrigger(DIK_LEFT) || GetMouseTrigger(MOUSE_B2))
 		{// オブジェクト切替
 			g_nNumber--;
 		}
@@ -583,22 +583,22 @@ void EditPlayerManagerObject()
 		scale.y = max(STAGE_SCALE_MIN, min(STAGE_SCALE_MAX, scale.y));
 		scale.z = max(STAGE_SCALE_MIN, min(STAGE_SCALE_MAX, scale.z));
 
-		if (GetKeyboradTrigger(DIK_RSHIFT) || GetJoykeyTrigger(JOYKEY_RB, CONTROLLER_1))
+		if (GetKeyboradTrigger(DIK_RSHIFT)|| GetMouseTrigger(MOUSE_LEFT) || GetJoykeyTrigger(JOYKEY_RB, CONTROLLER_1))
 		{// 押したとき
 			EndNumber = -1;
 		}
-		if (GetKeyboradPress(DIK_RSHIFT) || GetJoykeyPress(JOYKEY_RB, CONTROLLER_1))
+		if (GetKeyboradPress(DIK_RSHIFT) || GetMousePress(MOUSE_LEFT) || GetJoykeyPress(JOYKEY_RB, CONTROLLER_1))
 		{// 押している間
 			EndStage(EndNumber);
 			EndNumber=SetStage(g_nNumber, g_editPlayer.pos + pos, g_editPlayer.rot + rot, scale);
 		}
 
-		if (GetKeyboradTrigger(DIK_BACK) || GetJoykeyTrigger(JOYKEY_L3, CONTROLLER_1))
+		if (GetKeyboradTrigger(DIK_BACK) || GetMouseTrigger(MOUSE_RIGHT) || GetJoykeyTrigger(JOYKEY_L3, CONTROLLER_1))
 		{// 押している間
 			EndStage(EndNumber);
 		}
 
-		if (GetKeyboradTrigger(DIK_F8))
+		if (GetKeyboradTrigger(DIK_F8) || GetMouseTrigger(MOUSE_SENTER))
 		{// セーブ
 			SaveStage();
 		}

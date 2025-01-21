@@ -20,6 +20,6 @@ int* LoadFile(void);//ロード処理
 void LoadStageManager(void);//ロード処理
 void LoadStage(void);//ロード処理
 void SaveStage(void);//セーブ処理
-void LoadModel(void);//ロード処理
+void LoadPlayer(void);//ロード処理
 
 #endif _DATA_H_

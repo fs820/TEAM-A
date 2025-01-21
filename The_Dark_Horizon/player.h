@@ -12,26 +12,9 @@
 #include"stage.h"
 #include"model.h"
 
-#define PLAYER_BODY_NAME "data\\MODEL\\PlayerParts\\00_body.x"
-#define PLAYER_HEAD_NAME "data\\MODEL\\PlayerParts\\01_head.x"
-#define PLAYER_RIGHTUPPERARM_NAME "data\\MODEL\\PlayerParts\\02_RightUpperArm.x"
-#define PLAYER_RIGHTARM_NAME "data\\MODEL\\PlayerParts\\03_RightArm.x"
-#define PLAYER_RIGHTHAND_NAME "data\\MODEL\\PlayerParts\\04_RightHand.x"
-#define PLAYER_LEFTUPPERARM_NAME "data\\MODEL\\PlayerParts\\05_LeftUpperArm.x"
-#define PLAYER_LEFTARM_NAME "data\\MODEL\\PlayerParts\\06_LeftArm.x"
-#define PLAYER_LEFTHAND_NAME "data\\MODEL\\PlayerParts\\07_LeftHand.x"
-#define PLAYER_RIGHTLEG_NAME "data\\MODEL\\PlayerParts\\08_RightLeg.x"
-#define PLAYER_RIGHTFOOT_NAME "data\\MODEL\\PlayerParts\\09_RightFoot.x"
-#define PLAYER_RIGHTFEET_NAME "data\\MODEL\\PlayerParts\\10_RightFeet.x"
-#define PLAYER_LEFTLEG_NAME "data\\MODEL\\PlayerParts\\11_LeftLeg.x"
-#define PLAYER_LEFTFOOT_NAME "data\\MODEL\\PlayerParts\\12_LeftFoot.x"
-#define PLAYER_LEFTFEET_NAME "data\\MODEL\\PlayerParts\\13_LeftFeet.x"
 #define MAX_MODEL (16)
-#define NUM_MODEL (14)
 #define MAX_KEY (16)
-#define NUM_KEY (2)
 #define MAX_MOTION (16)
-#define NUM_MOTION (1)
 #define SPEED (1.0f)
 #define SPEED_DEF (0.0f)
 #define JUMP (20.0f)
@@ -108,6 +91,7 @@ typedef struct
 	D3DXMATRIX mtxWorld;
 	int nIdxShadow;
 	int nIdxLife;
+	String Xname[MAX_MODEL];
 	Model aModel[MAX_MODEL];
 	int nNumModel;
 	MOTION_INFO aMotionInfo[MAX_MOTION];
