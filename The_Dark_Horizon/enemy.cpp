@@ -16,7 +16,11 @@ void InitEnemy(void)
 		g_aEnemy[nCntEnemy].pos = D3DXVECTOR3(0.0f,0.0f,0.0f);		// 位置
 		g_aEnemy[nCntEnemy].rot = D3DXVECTOR3(0.0f, 0.0f, 0.0f);	// 向き
 		g_aEnemy[nCntEnemy].move = D3DXVECTOR3(0.0f, 0.0f, 0.0f);	// 移動量
+
+		g_aEnemy[nCntEnemy].charParam.bUse = false;
 	}
+
+	g_aEnemy[0].charParam.bUse = true;
 
 	// スクリプト読み込み
 	ReadScript("data\\tetsuji\\text\\motion.txt", &g_aEnemy[0].motion, &g_aEnemy[0].aModelEnemy[0], &g_aEnemy[0].charParam);
@@ -31,7 +35,7 @@ void UninitEnemy(void)
 {
 	for (int nCntEnemy = 0; nCntEnemy < MAX_ENEMY; nCntEnemy++)
 	{// 最大エネミー分回す
-		for (int nCntModel = 0; nCntModel < MAX_MODELE_PARTS_ENEMY; nCntEnemy++)
+		for (int nCntModel = 0; nCntModel < MAX_MODELE_PARTS_ENEMY; nCntModel++)
 		{// モデルパーツ数分回す
 			for (int nCntTex = 0; nCntTex < MAX_MODEL_TEXTURE; nCntTex++)
 			{// モデルパーツ数分回す
@@ -40,18 +44,18 @@ void UninitEnemy(void)
 					g_aEnemy[nCntEnemy].aModelEnemy[nCntModel].apTexture[nCntTex]->Release();
 					g_aEnemy[nCntEnemy].aModelEnemy[nCntModel].apTexture[nCntTex] = NULL;
 				}
+			}
 
-				if (g_aEnemy[nCntEnemy].aModelEnemy[nCntModel].pBuffMat != NULL)
-				{// マテリアルがあれば破棄
-					g_aEnemy[nCntEnemy].aModelEnemy[nCntModel].pBuffMat->Release();
-					g_aEnemy[nCntEnemy].aModelEnemy[nCntModel].pBuffMat = NULL;
-				}
+			if (g_aEnemy[nCntEnemy].aModelEnemy[nCntModel].pBuffMat != NULL)
+			{// マテリアルがあれば破棄
+				g_aEnemy[nCntEnemy].aModelEnemy[nCntModel].pBuffMat->Release();
+				g_aEnemy[nCntEnemy].aModelEnemy[nCntModel].pBuffMat = NULL;
+			}
 
-				if (g_aEnemy[nCntEnemy].aModelEnemy[nCntModel].pMesh != NULL)
-				{// メッシュがあれば破棄
-					g_aEnemy[nCntEnemy].aModelEnemy[nCntModel].pMesh->Release();
-					g_aEnemy[nCntEnemy].aModelEnemy[nCntModel].pMesh = NULL;
-				}
+			if (g_aEnemy[nCntEnemy].aModelEnemy[nCntModel].pMesh != NULL)
+			{// メッシュがあれば破棄
+				g_aEnemy[nCntEnemy].aModelEnemy[nCntModel].pMesh->Release();
+				g_aEnemy[nCntEnemy].aModelEnemy[nCntModel].pMesh = NULL;
 			}
 		}
 	}

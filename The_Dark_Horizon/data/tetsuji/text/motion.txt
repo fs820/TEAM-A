@@ -18,7 +18,7 @@ NUM_MODEL = 10
 #------------------------------------------------------------------------------
 # モデルファイル名
 #------------------------------------------------------------------------------
-MODEL_FILENAME = data/tetsuji/model/SnowMan\body.x		# [0]体
+MODEL_FILENAME = data/tetsuji/model/SnowMan/body.x		# [0]体
 MODEL_FILENAME = data/tetsuji/model/SnowMan/head.x		# [1]頭
 MODEL_FILENAME = date/tetsuji/model/SnowMan/armR.x		# [2]右腕
 MODEL_FILENAME = date/tetsuji/model/SnowMan/handR.x		# [3]右手
